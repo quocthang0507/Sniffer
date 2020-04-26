@@ -1,0 +1,22 @@
+﻿<Window x:Class="Sniffer.Forms.WelcomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sniffer.Forms"
+        mc:Ignorable="d"
+		Icon="/Images/icon.ico"
+        Title="Welcome to Sniffer Network Analyzer" MinHeight="500" MinWidth="750" FontSize="14">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="150"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<StackPanel Grid.Row="0" VerticalAlignment="Bottom" Orientation="Vertical" Margin="50, 0, 50, 0">
+			<Label x:Name="label" Content="Welcome to Sniffer Network Analyzer" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGreen"/>
+			<Label x:Name="label1" Content="Capture" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Foreground="DimGray"/>
+			<Label x:Name="label2" Content="Double click an interface network below to continue:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+		</StackPanel>
+		<ListBox Grid.Row="1" x:Name="listInterface" HorizontalAlignment="Stretch" Margin="50, 20, 50, 25"/>
+	</Grid>
+</Window>
