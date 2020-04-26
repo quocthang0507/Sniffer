@@ -24,5 +24,20 @@ namespace Sniffer
 		{
 			InitializeComponent();
 		}
+
+		private void btnExit_Click(object sender, RoutedEventArgs e)
+		{
+			Environment.Exit(1);
+		}
+
+		private void btnAbout_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void btnDoc_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
 	}
 }

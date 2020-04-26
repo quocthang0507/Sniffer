@@ -16,8 +16,13 @@
 			<RowDefinition Height="27"/>
 		</Grid.RowDefinitions>
 		<Menu x:Name="menuBar" VerticalAlignment="Top" FontSize="14" Background="Transparent" Grid.Row="0">
-			<MenuItem Header="File" Name="btnFile"/>
-			<MenuItem Header="Help" Name="btnHelp"/>
+			<MenuItem Header="_File" Name="btnFile">
+				<MenuItem Header="_Exit" Name="btnExit" Click="btnExit_Click"/>
+			</MenuItem>
+			<MenuItem Header="_Help" Name="btnHelp">
+				<MenuItem Header="_Documentation" Name="btnDoc" Click="btnDoc_Click"/>
+				<MenuItem Header="_About" Name="btnAbout" Click="btnAbout_Click"/>
+			</MenuItem>
 		</Menu>
 		<StackPanel x:Name="menuAction" Orientation="Horizontal" Height="25" Margin="3" Grid.Row="1">
 			<Button x:Name="btnStart" ToolTip="Start capturing packets" Background="Transparent" BorderThickness="0" >
