@@ -6,16 +6,21 @@
         xmlns:local="clr-namespace:Sniffer"
         mc:Ignorable="d"
 		Icon="/Images/icon.ico"
-        Title="Sniffer Network Analyzer" MinHeight="550" MinWidth="850" FontSize="14">
+        Title="The Sniffer Network Analyzer" MinHeight="500" MinWidth="750" FontSize="14">
 	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="59*"/>
+			<ColumnDefinition Width="701*"/>
+		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="20"/>
+			<RowDefinition Height="22"/>
 			<RowDefinition Height="30"/>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="200"/>
-			<RowDefinition Height="27"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="28"/>
 		</Grid.RowDefinitions>
-		<Menu x:Name="menuBar" VerticalAlignment="Top" FontSize="14" Background="Transparent" Grid.Row="0">
+		<Menu x:Name="menuBar" VerticalAlignment="Top" FontSize="14" Background="Transparent" Grid.ColumnSpan="2">
 			<MenuItem Header="_File" Name="btnFile">
 				<MenuItem Header="_Exit" Name="btnExit" Click="btnExit_Click"/>
 			</MenuItem>
@@ -24,7 +29,7 @@
 				<MenuItem Header="_About" Name="btnAbout" Click="btnAbout_Click"/>
 			</MenuItem>
 		</Menu>
-		<StackPanel x:Name="menuAction" Orientation="Horizontal" Height="25" Margin="3" Grid.Row="1">
+		<StackPanel x:Name="menuAction" Orientation="Horizontal" Margin="3" Grid.Row="1" Grid.ColumnSpan="2">
 			<Button x:Name="btnStart" ToolTip="Start capturing packets" Background="Transparent" BorderThickness="0" >
 				<Image Source="/Images/play.png"/>
 			</Button>
@@ -41,11 +46,11 @@
 			<Button x:Name="btnSave" ToolTip="Save this capture file" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
 				<Image Source="/Images/save.png"/>
 			</Button>
-			<Button x:Name="btnClose" ToolTip="Close this capture file" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
+			<Button x:Name="btnClose" ToolTip="Close this capture file and return to welcome window" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
 				<Image Source="/Images/close.png"/>
 			</Button>
 			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
-			<TextBox x:Name="tbxFindWhat" Width="150" Margin="5, 0, 0, 0" ToolTip="Enter a display filter" TextAlignment="Center"></TextBox>
+			<TextBox x:Name="tbxFindWhat" Width="150" Margin="5, 0, 0, 0" ToolTip="Enter a display filter"></TextBox>
 			<Button x:Name="btnFind" ToolTip="Find a packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
 				<Image Source="/Images/find.png"/>
 			</Button>
@@ -70,18 +75,19 @@
 				<Image Source="/Images/scroll.png"/>
 			</Button>
 		</StackPanel>
-		<DataGrid x:Name="dataPackets" Grid.Row="2"/>
-		<StackPanel Grid.Row="3"></StackPanel>
-		<StackPanel Orientation="Horizontal" Grid.Row="4">
+		<DataGrid x:Name="dataPackets" Grid.Row="2" Grid.ColumnSpan="2"/>
+		<GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="true" ResizeDirection="Rows" Grid.ColumnSpan="2"/>
+		<StackPanel Grid.Row="4" Grid.ColumnSpan="2"></StackPanel>
+		<StackPanel Orientation="Horizontal" Grid.Row="5" Background="LightGray" Grid.ColumnSpan="2">
 			<Label Content="Adapter: "/>
 			<Label x:Name="tbxAdapter" Content="Wifi"/>
-			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
+			<Button Background="Gray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
 			<Label Content="Total Packets: " Margin="5, 0, 0, 0"/>
 			<Label x:Name="tbxTotalPackets" Content="200"/>
-			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
+			<Button Background="Gray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
 			<Label Content="Displayed: " Margin="5, 0, 0, 0"/>
 			<Label x:Name="tbxTotalDisPackets" Content="200"/>
-			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
+			<Button Background="Gray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
 			<Label Content="Computer: " Margin="5, 0, 0, 0"/>
 			<Label x:Name="tbxComputerName" Content="La Quoc Thang"/>
 		</StackPanel>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sniffer.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,8 @@ namespace Sniffer
 
 		private void btnExit_Click(object sender, RoutedEventArgs e)
 		{
-			Environment.Exit(1);
+			QuitWindow quitWindow = new QuitWindow();
+			quitWindow.ShowDialog();
 		}
 
 		private void btnAbout_Click(object sender, RoutedEventArgs e)
