@@ -13,9 +13,9 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<StackPanel Grid.Row="0" VerticalAlignment="Bottom" Orientation="Vertical" Margin="50, 0, 50, 0">
-			<Label x:Name="label" Content="Welcome to Sniffer Network Analyzer" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGreen"/>
-			<Label x:Name="label1" Content="Capture" Margin="0, 5" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Foreground="DimGray"/>
-			<Label x:Name="label2" Content="Double click an interface network below to continue:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			<Label Content="Welcome to Sniffer Network Analyzer" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGreen" Padding="7"/>
+			<Label Content="Capture" Margin="0, 5" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Foreground="DimGray"/>
+			<Label Content="Double click an interface network below to continue:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 		</StackPanel>
 		<ListBox Grid.Row="1" x:Name="listInterface" HorizontalAlignment="Stretch" Margin="50, 20, 50, 25"/>
 	</Grid>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Sniffer"
         mc:Ignorable="d"
 		Icon="/Images/icon.ico"
-        Title="The Sniffer Network Analyzer" MinHeight="500" MinWidth="750" FontSize="14">
+        Title="The Sniffer Network Analyzer" MinHeight="500" MinWidth="750" FontSize="14" Closing="Window_Closing">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="59*"/>
@@ -22,7 +22,7 @@
 		</Grid.RowDefinitions>
 		<Menu x:Name="menuBar" VerticalAlignment="Top" FontSize="14" Background="Transparent" Grid.ColumnSpan="2">
 			<MenuItem Header="_File" Name="btnFile">
-				<MenuItem Header="_Exit" Name="btnExit" Click="btnExit_Click"/>
+				<MenuItem Header="_Exit" Name="btnExit" Click="btnExit_Click" InputGestureText="Alt + F4"/>
 			</MenuItem>
 			<MenuItem Header="_Help" Name="btnHelp">
 				<MenuItem Header="_Documentation" Name="btnDoc" Click="btnDoc_Click"/>

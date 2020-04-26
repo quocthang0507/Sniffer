@@ -7,6 +7,7 @@
         mc:Ignorable="d"
 		Icon="/Images/icon.ico"
         Title="Unsaved packets" Height="200" Width="500" FontSize="14" ResizeMode="NoResize"
+		ShowInTaskbar="False"
 		WindowStartupLocation="CenterScreen">
     <Grid>
 		<Grid.ColumnDefinitions>
@@ -18,13 +19,13 @@
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
-		<Image Source="/Images/question.png" Width="64" Height="64" Grid.RowSpan="2" Margin="20, 20" />
+		<Image Source="/Images/question.png" Width="64" Height="64" Grid.RowSpan="2" Margin="20" />
 		<Label Grid.Column="1" Margin="0, 20, 0, 0" Content="Do you want to save the captured packets before quitting?"/>
 		<Label Grid.Column="1" Grid.Row="1" Content="Your captured packets will be lost if you don't save them."/>
 		<WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,15,0,0">
-			<Button x:Name="btnSave" Content="Save" Width="75" IsDefault="True" Click="btnSave_Click" BorderBrush="LightGray"/>
-			<Button x:Name="btnExitWithoutSave" Content="Quit without Saving" Margin="10, 0, 0, 0" Padding="10, 2, 10, 2" Click="btnExitWithoutSave_Click" BorderBrush="LightGray"/>
-			<Button x:Name="btnCancel" Content="Cancel" Margin="10, 0, 20, 0" Width="75" Click="btnCancel_Click" BorderBrush="LightGray"/>
+			<Button x:Name="btnSave" Content="Save" Width="75" IsDefault="True" Click="btnSave_Click" BorderBrush="LightGray" ToolTip="Stop capturing (if needed) and save the captured packets before quitting"/>
+			<Button x:Name="btnExitWithoutSave" Content="Quit without Saving" Margin="10, 0, 0, 0" Padding="10, 2, 10, 2" Click="btnExitWithoutSave_Click" BorderBrush="LightGray" ToolTip="Stop capturing (if needed) and don't save the captured packets before quitting"/>
+			<Button x:Name="btnCancel" Content="Cancel" Margin="10, 0, 20, 0" Width="75" Click="btnCancel_Click" BorderBrush="LightGray" IsCancel="True" ToolTip="Return to the main window"/>
 		</WrapPanel>
 	</Grid>
 </Window>
