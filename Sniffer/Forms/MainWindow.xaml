@@ -14,7 +14,7 @@
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="22"/>
-			<RowDefinition Height="30"/>
+			<RowDefinition Height="32"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
@@ -29,7 +29,7 @@
 				<MenuItem Header="_About" Name="btnAbout" Click="btnAbout_Click"/>
 			</MenuItem>
 		</Menu>
-		<StackPanel x:Name="menuAction" Orientation="Horizontal" Margin="3" Grid.Row="1" Grid.ColumnSpan="2">
+		<StackPanel x:Name="menuAction" Orientation="Horizontal" Margin="2, 5" Grid.Row="1" Grid.ColumnSpan="2" >
 			<Button x:Name="btnStart" ToolTip="Start capturing packets" Background="Transparent" BorderThickness="0" >
 				<Image Source="/Images/play.png"/>
 			</Button>
@@ -75,9 +75,23 @@
 				<Image Source="/Images/scroll.png"/>
 			</Button>
 		</StackPanel>
-		<DataGrid x:Name="dataPackets" Grid.Row="2" Grid.ColumnSpan="2"/>
+		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="No." Binding="{Binding No}"/>
+				<DataGridTextColumn Header="Time" Binding="{Binding Time}"/>
+				<DataGridTextColumn Header="Source" Binding="{Binding Source}"/>
+				<DataGridTextColumn Header="Destination" Binding="{Binding Destination}"/>
+				<DataGridTextColumn Header="Protocol" Binding="{Binding Protocol}"/>
+				<DataGridTextColumn Header="Info" Binding="{Binding Info}"/>
+			</DataGrid.Columns>
+		</DataGrid>
 		<GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="true" ResizeDirection="Rows" Grid.ColumnSpan="2"/>
-		<StackPanel Grid.Row="4" Grid.ColumnSpan="2"></StackPanel>
+		<DataGrid Grid.Row="4" Grid.ColumnSpan="2" x:Name="dgBuff" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" ColumnWidth="*">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Hexadecimal" Binding="{Binding Hex}"/>
+				<DataGridTextColumn Header="ASCII" Binding="{Binding ASCII}"/>
+			</DataGrid.Columns>
+		</DataGrid>
 		<StackPanel Orientation="Horizontal" Grid.Row="5" Background="LightGray" Grid.ColumnSpan="2">
 			<Label Content="Adapter: "/>
 			<Label x:Name="tbxAdapter" Content="Wifi"/>
