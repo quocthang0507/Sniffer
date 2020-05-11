@@ -1,4 +1,5 @@
 ﻿using Sniffer.Forms;
+using SnifferLib;
 using System.Windows;
 
 namespace Sniffer
@@ -8,8 +9,16 @@ namespace Sniffer
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		SnifferClass snifferClass;
+
 		public MainWindow()
 		{
+			InitializeComponent();
+		}
+
+		public MainWindow(SnifferClass snifferClass)
+		{
+			this.snifferClass = snifferClass;
 			InitializeComponent();
 		}
 
@@ -37,6 +46,14 @@ namespace Sniffer
 			quitWindow.ShowDialog();
 			if (quitWindow.Mode == QuitMode.Cancel)
 				e.Cancel = true;
+			else if (quitWindow.Mode== QuitMode.ExitWithoutSave)
+			{
+				Application.Current.Shutdown();
+			}
+			else
+			{
+				Application.Current.Shutdown();
+			}
 		}
 	}
 }
