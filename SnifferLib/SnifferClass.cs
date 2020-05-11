@@ -5,18 +5,24 @@ namespace SnifferLib
 {
     public class SnifferClass
     {
-        public static List<string> GetInterfaces()
+        private PacketDevice selectedDevice;
+        private IList<LivePacketDevice> devices;
+
+        public List<string> GetInterfaces()
         {
-            var devices=  LivePacketDevice.AllLocalMachine;
+            devices = LivePacketDevice.AllLocalMachine;
             List<string> result = new List<string>();
             foreach (var device in devices)
             {
                 string name = device.Description;
-               
                 string[] array=  name.Split('\'');
                 result.Add(array[1]);
             }
             return result;
+        }
+        public void GetInterface(int index)
+        {
+            selectedDevice = devices[index];
         }
 
 

@@ -8,14 +8,26 @@ namespace Sniffer.Forms
     /// </summary>
     public partial class WelcomeWindow : Window
     {
+        SnifferClass snifferClass;
+
         public WelcomeWindow()
         {
             InitializeComponent();
+            snifferClass = new SnifferClass();
             ShowInterfaces();
         }
+
         private void ShowInterfaces()
         {
-            listInterface.ItemsSource = SnifferClass.GetInterfaces();
+            listInterface.ItemsSource = snifferClass.GetInterfaces();
+        }
+
+        private void listInterface_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            snifferClass.GetInterface(this.listInterface.SelectedIndex);
+            this.Hide();
+            MainWindow mainWindow = new MainWindow(snifferClass);
+            mainWindow.Show();
         }
     }
 }
