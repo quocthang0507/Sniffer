@@ -25,6 +25,9 @@ namespace SnifferLib
             selectedDevice = devices[index];
         }
 
-
+        public string GetNameInterface()
+        {
+            return selectedDevice.Description.Split('\'')[1];
+        }
     }
 }
