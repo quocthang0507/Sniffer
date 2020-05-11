@@ -12,7 +12,8 @@ namespace SnifferLib
             foreach (var device in devices)
             {
                 string name = device.Description;
-               string[] array=  name.Split('\'');
+               
+                string[] array=  name.Split('\'');
                 result.Add(array[1]);
             }
             return result;
