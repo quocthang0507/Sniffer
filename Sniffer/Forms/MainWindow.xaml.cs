@@ -10,7 +10,7 @@ namespace Sniffer
     /// </summary>
     public partial class MainWindow : Window
     {
-        SnifferClass snifferClass;
+        private SnifferClass snifferClass;
 
         public MainWindow()
         {
@@ -61,22 +61,22 @@ namespace Sniffer
             }
         }
 
-        public void GetInterface()
+        private void GetInterface()
         {
             tbxAdapter.Content = snifferClass.GetNameInterface();
         }
 
-        public void GetComputerName()
+        private void GetComputerName()
         {
             tbxComputerName.Content = Environment.MachineName.ToString();
         }
 
-        public void GetTotalPackets()
+        private void GetTotalPackets()
         {
             tbxTotalPackets.Content = dgPackets.Items.Count;
         }
 
-        public void GetTotalDisplayedPackets()
+        private void GetTotalDisplayedPackets()
         {
             tbxTotalDisPackets.Content = dgPackets.Items.Count;
         }

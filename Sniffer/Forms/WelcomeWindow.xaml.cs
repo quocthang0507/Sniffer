@@ -8,7 +8,7 @@ namespace Sniffer.Forms
     /// </summary>
     public partial class WelcomeWindow : Window
     {
-        SnifferClass snifferClass;
+        private SnifferClass snifferClass;
 
         public WelcomeWindow()
         {
