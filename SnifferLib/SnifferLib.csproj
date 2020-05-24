@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PacketBuff.cs" />
     <Compile Include="PacketInfo.cs" />
     <Compile Include="SnifferClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

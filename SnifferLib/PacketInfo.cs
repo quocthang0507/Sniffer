@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SnifferLib
+﻿namespace SnifferLib
 {
 	public class PacketInfo
 	{
@@ -31,12 +25,11 @@ namespace SnifferLib
 		/// <summary>
 		/// Nội dung gói tin
 		/// </summary>
-		public byte[] Buffer { get; set; } 
-		
+		public PacketBuff Buffer { get; set; }
 		/// <summary>
 		/// Chiều dài
 		/// </summary>
-		public int Length { get; set;}
+		public int Length { get; set; }
 		/// <summary>
 		/// Thông tin
 		/// </summary>

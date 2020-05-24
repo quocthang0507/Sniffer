@@ -5,7 +5,7 @@ using PcapDotNet.Packets.Transport;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Timers;
+using System.Text;
 
 namespace SnifferLib
 {
@@ -16,7 +16,7 @@ namespace SnifferLib
         private IList<LivePacketDevice> devices;
         private Stopwatch stopwatch;
         public List<PacketInfo> packets { get; set; }
-        
+
         /// <summary>
         /// Gets list of interfaces in computer
         /// </summary>
@@ -28,7 +28,7 @@ namespace SnifferLib
             foreach (var device in devices)
             {
                 string name = device.Description;
-                string[] array=  name.Split('\'');
+                string[] array = name.Split('\'');
                 result.Add(array[1]);
             }
             return result;
@@ -77,13 +77,14 @@ namespace SnifferLib
             info.Time = stopwatch.Elapsed.TotalSeconds;
             IpV4Datagram ip = packet.Ethernet.IpV4;
             UdpDatagram udp = ip.Udp; //TCP với UDP ra thông tin như nhau
-            if( udp !=null)
+            if (udp != null)
             {
                 info.Source = ip.Source.ToString();
                 info.Destination = ip.Destination.ToString();
                 info.Protocol = packet.Ethernet.EtherType.ToString();
                 info.Length = packet.Length;
-                info.Buffer = packet.Buffer;
+                UTF8Encoding encoding = new UTF8Encoding();
+                info.Buffer = new PacketBuff(BitConverter.ToString(packet.Buffer), encoding.GetString(packet.Buffer));// doi tuong
                 info.Info = "";
             }
             packets.Add(info);

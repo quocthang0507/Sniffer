@@ -268,6 +268,7 @@ namespace PCap.Net
 				// print ip addresses and udp ports
 				// Console.WriteLine("\tSource: " + ip.Source + "\t:" + udp.SourcePort + " \tDest: \t " + ip.Destination + "\t:\t" + udp.DestinationPort);
 				Console.WriteLine($"Source {ip.Source,-16}:{tcp.SourcePort, -6}Dest {ip.Destination, -16}:{tcp.DestinationPort, -6} Protocol: {packet.Ethernet.EtherType} {ip.Protocol}");
+				Console.WriteLine(Encoding.UTF8.GetString(packet.Buffer));
 			}
 			else
 			{

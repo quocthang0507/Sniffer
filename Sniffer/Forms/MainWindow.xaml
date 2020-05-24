@@ -33,10 +33,10 @@
 			<Button x:Name="btnStart" ToolTip="Start capturing packets" Background="Transparent" BorderThickness="0" Click="btnStart_Click">
 				<Image Source="/Images/play.png"/>
 			</Button>
-			<Button x:Name="btnStop" ToolTip="Stop capturing packets" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
+			<Button x:Name="btnStop" ToolTip="Stop capturing packets" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnStop_Click">
 				<Image Source="/Images/stop.png"/>
 			</Button>
-			<Button x:Name="btnRestart" ToolTip="Restart current capture" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
+			<Button x:Name="btnRestart" ToolTip="Restart current capture" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnRestart_Click">
 				<Image Source="/Images/restart.png"/>
 			</Button>
 			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
@@ -46,7 +46,7 @@
 			<Button x:Name="btnSave" ToolTip="Save this capture file" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
 				<Image Source="/Images/save.png"/>
 			</Button>
-			<Button x:Name="btnClose" ToolTip="Close this capture file and return to welcome window" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
+			<Button x:Name="btnClose" ToolTip="Close this capture file and return to welcome window" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0"  Click="btnClose_Click">
 				<Image Source="/Images/close.png"/>
 			</Button>
 			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
@@ -62,20 +62,20 @@
 				<Image Source="/Images/right.png"/>
 			</Button>
 			<TextBox x:Name="tbxGoTo" Width="50" Margin="5, 0, 0, 0" ToolTip="Enter packet index" TextAlignment="Center"></TextBox>
-			<Button x:Name="btnGoTo" ToolTip="Go to specified packet index" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
+			<Button x:Name="btnGoTo" ToolTip="Go to specified packet index" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnGoTo_Click">
 				<Image Source="/Images/goto.png"/>
 			</Button>
-			<Button x:Name="btnGoToFirst" ToolTip="Go to the first packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
+			<Button x:Name="btnGoToFirst" ToolTip="Go to the first packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnGoToFirst_Click">
 				<Image Source="/Images/first.png"/>
 			</Button>
-			<Button x:Name="btnGoToEnd" ToolTip="Go to the end packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
+			<Button x:Name="btnGoToEnd" ToolTip="Go to the end packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnGoToEnd_Click">
 				<Image Source="/Images/end.png"/>
 			</Button>
-			<Button x:Name="btnAutoScroll" ToolTip="Automatically scroll to the last packet during the live capture" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
+			<Button x:Name="btnAutoScroll" ToolTip="Automatically scroll to the last packet during the live capture" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnAutoScroll_Click" >
 				<Image Source="/Images/scroll.png"/>
 			</Button>
 		</StackPanel>
-		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding snifferClass.packets}">
+		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding snifferClass.packets}" SelectionChanged="dgPackets_SelectionChanged">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="No." Binding="{Binding ID}"/>
 				<DataGridTextColumn Header="Time" Binding="{Binding Time}"/>
@@ -86,10 +86,10 @@
 			</DataGrid.Columns>
 		</DataGrid>
 		<GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="true" ResizeDirection="Rows" Grid.ColumnSpan="2"/>
-		<DataGrid Grid.Row="4" Grid.ColumnSpan="2" x:Name="dgBuff" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" ColumnWidth="*">
+        <DataGrid Grid.Row="4" Grid.ColumnSpan="2" x:Name="dgBuff" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" ColumnWidth="*" ItemsSource="{Binding packetInfo.Buffer}">
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="Hexadecimal" Binding="{Binding Hex}"/>
-				<DataGridTextColumn Header="ASCII" Binding="{Binding ASCII}"/>
+				<DataGridTextColumn Header="Hexadecimal" Binding="{Binding Buffer}"/>
+				<DataGridTextColumn Header="Content" Binding="{Binding UTF8}"/>
 			</DataGrid.Columns>
 		</DataGrid>
 		<StackPanel Orientation="Horizontal" Grid.Row="5" Background="LightGray" Grid.ColumnSpan="2">
