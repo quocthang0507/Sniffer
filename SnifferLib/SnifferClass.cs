@@ -15,8 +15,8 @@ namespace SnifferLib
         private PacketDevice selectedDevice;
         private IList<LivePacketDevice> devices;
         private Stopwatch stopwatch;
-        public List<PacketInfo> packets;
-
+        public List<PacketInfo> packets { get; set; }
+        
         /// <summary>
         /// Gets list of interfaces in computer
         /// </summary>
@@ -51,6 +51,7 @@ namespace SnifferLib
         {
             return selectedDevice.Description.Split('\'')[1];
         }
+
         public void Start()
         {
             if (devices.Count == 0)
@@ -68,6 +69,7 @@ namespace SnifferLib
                 communicator.ReceivePackets(0, PacketHandler);
             }
         }
+
         private void PacketHandler(Packet packet)
         {
             PacketInfo info = new PacketInfo();
