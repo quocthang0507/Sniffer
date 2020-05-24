@@ -80,5 +80,10 @@ namespace Sniffer
         {
             tbxTotalDisPackets.Content = dgPackets.Items.Count;
         }
+
+        private void btnStart_Click(object sender, RoutedEventArgs e)
+        {
+            snifferClass.Start(); 
+        }
     }
 }

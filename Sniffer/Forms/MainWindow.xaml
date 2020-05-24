@@ -30,7 +30,7 @@
 			</MenuItem>
 		</Menu>
 		<StackPanel x:Name="menuAction" Orientation="Horizontal" Margin="2, 5" Grid.Row="1" Grid.ColumnSpan="2" >
-			<Button x:Name="btnStart" ToolTip="Start capturing packets" Background="Transparent" BorderThickness="0" >
+			<Button x:Name="btnStart" ToolTip="Start capturing packets" Background="Transparent" BorderThickness="0" Click="btnStart_Click" >
 				<Image Source="/Images/play.png"/>
 			</Button>
 			<Button x:Name="btnStop" ToolTip="Stop capturing packets" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
@@ -75,14 +75,16 @@
 				<Image Source="/Images/scroll.png"/>
 			</Button>
 		</StackPanel>
-		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Margin="2,5,-2.4,209" Grid.RowSpan="3">
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="No." Binding="{Binding No}"/>
+				<DataGridTextColumn Header="No." Binding="{Binding ID}"/>
 				<DataGridTextColumn Header="Time" Binding="{Binding Time}"/>
 				<DataGridTextColumn Header="Source" Binding="{Binding Source}"/>
 				<DataGridTextColumn Header="Destination" Binding="{Binding Destination}"/>
 				<DataGridTextColumn Header="Protocol" Binding="{Binding Protocol}"/>
+                <DataGridTextColumn Header="Lenght" Binding="{Binding Lenght}"/>
 				<DataGridTextColumn Header="Info" Binding="{Binding Info}"/>
+                
 			</DataGrid.Columns>
 		</DataGrid>
 		<GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="true" ResizeDirection="Rows" Grid.ColumnSpan="2"/>

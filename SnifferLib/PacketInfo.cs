@@ -15,7 +15,7 @@ namespace SnifferLib
 		/// <summary>
 		/// Thời gian
 		/// </summary>
-		public float Time { get; set; }
+		public double Time { get; set; }
 		/// <summary>
 		/// IP nguồn
 		/// </summary>
@@ -29,11 +29,20 @@ namespace SnifferLib
 		/// </summary>
 		public string Protocol { get; set; }
 		/// <summary>
+		/// Nội dung gói tin
+		/// </summary>
+		public byte[] Buffer { get; set; } 
+		
+		/// <summary>
+		/// Chiều dài
+		/// </summary>
+		public int Length { get; set;}
+		/// <summary>
 		/// Thông tin
 		/// </summary>
 		public string Info { get; set; }
 
-		public PacketInfo(int iD, float time, string source, string destination, string protocol, string info)
+		public PacketInfo(int iD, double time, string source, string destination, string protocol, string info)
 		{
 			ID = iD;
 			Time = time;
@@ -41,6 +50,10 @@ namespace SnifferLib
 			Destination = destination;
 			Protocol = protocol;
 			Info = info;
+		}
+
+		public PacketInfo()
+		{
 		}
 	}
 }
