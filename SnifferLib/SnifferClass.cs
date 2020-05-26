@@ -17,12 +17,19 @@ namespace SnifferLib
 		private IList<LivePacketDevice> devices;
 		private Stopwatch stopwatch;
 
+		/// <summary>
+		/// Danh sách các gói tin đã bắt được
+		/// </summary>
 		public BindingList<PacketInfo> packets { get; set; }
+		/// <summary>
+		/// Hàm ủy quyền thêm gói tin vào data grid
+		/// </summary>
+		/// <param name="packet"></param>
 		public delegate void AddItemToDataGrid(PacketInfo packet);
 		public AddItemToDataGrid UpdateDataGrid;
 
 		/// <summary>
-		/// Gets list of interfaces in computer
+		/// Lấy danh sách card mạng trong máy tính
 		/// </summary>
 		/// <returns></returns>
 		public List<string> GetInterfaces()
@@ -39,7 +46,7 @@ namespace SnifferLib
 		}
 
 		/// <summary>
-		/// Gets the interface by index
+		/// Lựa chọn card mạng theo số thứ tự
 		/// </summary>
 		/// <param name="index"></param>
 		public void GetInterface(int index)
@@ -48,7 +55,7 @@ namespace SnifferLib
 		}
 
 		/// <summary>
-		/// Gets the name of selected interface
+		/// Lấy tên của card mạng đang được lựa chọn
 		/// </summary>
 		/// <returns></returns>
 		public string GetNameInterface()
@@ -56,6 +63,9 @@ namespace SnifferLib
 			return selectedDevice.Description.Split('\'')[1];
 		}
 
+		/// <summary>
+		/// Thêm sự kiện khi một gói tin đã thêm vào danh sách
+		/// </summary>
 		private void AddEventWhenNewItemAdded()
 		{
 			packets.ListChanged += (sender, e) =>
@@ -64,6 +74,9 @@ namespace SnifferLib
 			  };
 		}
 
+		/// <summary>
+		/// Bắt đầu quá trình bắt gói tin
+		/// </summary>
 		public void Start()
 		{
 			if (devices.Count == 0)
@@ -89,6 +102,10 @@ namespace SnifferLib
 			}
 		}
 
+		/// <summary>
+		/// Phân tích gói tin và cho vào danh sách gói tin đã bắt được
+		/// </summary>
+		/// <param name="packet">Gói tin đang được xử lý</param>
 		private void PacketHandler(Packet packet)
 		{
 			PacketInfo info = new PacketInfo();

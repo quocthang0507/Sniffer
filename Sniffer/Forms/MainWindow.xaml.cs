@@ -145,15 +145,6 @@ namespace Sniffer
 
 		private void btnAutoScroll_Click(object sender, RoutedEventArgs e)
 		{
-			//if (dgPackets.Items.Count > 0)
-			//{
-			//	var border = VisualTreeHelper.GetChild(dgPackets, 0) as Decorator;
-			//	if (border != null)
-			//	{
-			//		var scroll = border.Child as ScrollViewer;
-			//		if (scroll != null) scroll.ScrollToEnd();
-			//	}
-			//}
 			autoScroll = !autoScroll;
 			dgPackets.ScrollIntoView(dgPackets.Items[dgPackets.Items.Count - 1]);
 		}
