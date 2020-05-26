@@ -31,10 +31,30 @@
 		</Menu>
 		<StackPanel x:Name="menuAction" Orientation="Horizontal" Margin="2, 5" Grid.Row="1" Grid.ColumnSpan="2" >
 			<Button x:Name="btnStart" ToolTip="Start capturing packets" Background="Transparent" BorderThickness="0" Click="btnStart_Click">
-				<Image Source="/Images/play.png"/>
+				<Image Source="/Images/play.png">
+					<Image.Style>
+						<Style TargetType="Image">
+							<Style.Triggers>
+								<Trigger Property="IsEnabled" Value="False">
+									<Setter Property="Opacity" Value="0.2" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</Image.Style>
+				</Image>
 			</Button>
-			<Button x:Name="btnStop" ToolTip="Stop capturing packets" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnStop_Click">
-				<Image Source="/Images/stop.png"/>
+			<Button x:Name="btnStop" ToolTip="Stop capturing packets" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnStop_Click" IsEnabled="False">
+				<Image Source="/Images/stop.png">
+					<Image.Style>
+						<Style TargetType="Image">
+							<Style.Triggers>
+								<Trigger Property="IsEnabled" Value="False">
+									<Setter Property="Opacity" Value="0.2" />
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</Image.Style>
+				</Image>
 			</Button>
 			<Button x:Name="btnRestart" ToolTip="Restart current capture" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnRestart_Click">
 				<Image Source="/Images/restart.png"/>
@@ -75,7 +95,7 @@
 				<Image Source="/Images/scroll.png"/>
 			</Button>
 		</StackPanel>
-		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding snifferClass.packets}" SelectionChanged="dgPackets_SelectionChanged">
+		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding snifferClass.packets}" SelectionChanged="dgPackets_SelectionChanged" ScrollViewer.ScrollChanged="dgPackets_ScrollChanged">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="No." Binding="{Binding ID}"/>
 				<DataGridTextColumn Header="Time" Binding="{Binding Time}"/>
@@ -86,10 +106,22 @@
 			</DataGrid.Columns>
 		</DataGrid>
 		<GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="true" ResizeDirection="Rows" Grid.ColumnSpan="2"/>
-        <DataGrid Grid.Row="4" Grid.ColumnSpan="2" x:Name="dgBuff" AutoGenerateColumns="False" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" ColumnWidth="*" ItemsSource="{Binding packetInfo.Buffer}">
+		<DataGrid Grid.Row="4" Grid.ColumnSpan="2" x:Name="dgBuff" AutoGenerateColumns="False" IsReadOnly="True" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ColumnWidth="*" ItemsSource="{Binding packetInfo.Buffer}">
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="Hexadecimal" Binding="{Binding Buffer}"/>
-				<DataGridTextColumn Header="Content" Binding="{Binding UTF8}"/>
+				<DataGridTextColumn Header="Hexadecimal" Binding="{Binding Buffer}">
+					<DataGridTextColumn.ElementStyle>
+						<Style TargetType="TextBlock">
+							<Setter Property="TextWrapping" Value="Wrap" />
+						</Style>
+					</DataGridTextColumn.ElementStyle>
+				</DataGridTextColumn>
+				<DataGridTextColumn Header="Content" Binding="{Binding UTF8}">
+					<DataGridTextColumn.ElementStyle>
+						<Style TargetType="TextBlock">
+							<Setter Property="TextWrapping" Value="Wrap" />
+						</Style>
+					</DataGridTextColumn.ElementStyle>
+				</DataGridTextColumn>
 			</DataGrid.Columns>
 		</DataGrid>
 		<StackPanel Orientation="Horizontal" Grid.Row="5" Background="LightGray" Grid.ColumnSpan="2">
