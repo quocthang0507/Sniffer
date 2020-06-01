@@ -56,6 +56,8 @@ namespace Sniffer
                     return true;//đúng thì hiện lên màn hình chỉ thực hiện khi nào có chữ bên trong nó
                 };
             });
+            Dispatcher.Invoke(() => UpdateDisplayedPackets());
+            Dispatcher.Invoke(() => UpadateTotalPackets());
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -226,7 +228,7 @@ namespace Sniffer
         {
             if (dgPackets.SelectedIndex > 0)
             {
-                int index = dgPackets.SelectedIndex; 
+                int index = dgPackets.SelectedIndex;
                 GoTo(index - 1);// sử dụng hàm Goto khi click mũi tên trái thì lùi 1
             }
         }
@@ -238,6 +240,22 @@ namespace Sniffer
                 int index = dgPackets.SelectedIndex;
                 GoTo(index + 1);// sử dụng hàm Goto khi click mũi tên trái thì tiến 1
             }
+        }
+        
+       /// <summary>
+       /// Cập nhập hiển thị số lượng packet hiển thị trên màn hình.
+       /// </summary>
+        private void UpdateDisplayedPackets()
+        {
+            tbxTotalDisPackets.Content = dgPackets.Items.Count;
+        }
+
+        /// <summary>
+        /// Cập nhập số lượng packets trong danh sách ban đầu.
+        /// </summary>
+        private void UpadateTotalPackets()
+        {
+            tbxTotalPackets.Content = snifferClass.packets.Count;
         }
     }
 }
