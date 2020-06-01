@@ -26,7 +26,7 @@ namespace Sniffer
 
         public MainWindow(SnifferClass snifferClass)
         {
-            this.snifferClass = snifferClass;
+            this.snifferClass = snifferClass; 
             InitializeComponent();
             GetInterface();
             GetComputerName();
@@ -35,19 +35,25 @@ namespace Sniffer
             snifferClass.UpdateDataGrid = new SnifferClass.AddItemToDataGrid(UpdateDataGrid);
         }
 
+        /// <summary>
+        /// 
+        /// Cập nhật datagrid mỗi khi snifferclass bắt được một gói tin
+        /// </summary>
+        /// <param name="packet"></param>
         private void UpdateDataGrid(PacketInfo packet)
         {
-            Dispatcher.Invoke(() => dgPackets.Items.Add(packet));
+            Dispatcher.Invoke(() => dgPackets.Items.Add(packet));//bắt được gói tin thì bắt cập nhật vào list
             Dispatcher.Invoke(() =>
             {
-                dgPackets.Items.Filter = item =>
+                //gọi là snifferclass, dưới là một hàm cho snifferclass sử dụng,sniffercl ở bên ngoài form nên phải dùng dispatcher mới truy cập được control trong form
+                dgPackets.Items.Filter = item => //lọc phải đưa 1 hàm, tìm theo kiểu bao trùm, 
                 {
                     string filter = tbxFindWhat.Text;
-                    if (filter != "")
+                    if (filter != "")//mặc dịnh là hiển thị tất cả
                     {
-                        return (item as PacketInfo).Protocol == filter;
+                        return (item as PacketInfo).Protocol.Contains(filter);//chỉ cần chứa 1 kí tự
                     }
-                    return true;
+                    return true;//đúng thì hiện lên màn hình chỉ thực hiện khi nào có chữ bên trong nó
                 };
                             });
         }
@@ -108,7 +114,7 @@ namespace Sniffer
             tbxTotalDisPackets.Content = dgPackets.Items.Count;
         }
 
-        private void btnStart_Click(object sender, RoutedEventArgs e)
+        private void btnStart_Click(object sender, RoutedEventArgs e)//snifferclass nằm gọn trong 1 threat khác form nên sẽ dùng dispatcher.info 
         {
             thread = new Thread(() => snifferClass.Start());
             thread.Start();
