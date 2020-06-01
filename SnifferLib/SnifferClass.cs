@@ -64,7 +64,7 @@ namespace SnifferLib
 		}
 
 		/// <summary>
-		/// Thêm sự kiện khi một gói tin đã thêm vào danh sách
+		/// Thêm sự kiện khi một gói tin đã thêm vào danh sách. Bắt form cập nhập từ bên này. Bên kia k thể chủ động , mình chu
 		/// </summary>
 		private void AddEventWhenNewItemAdded()
 		{
@@ -124,6 +124,7 @@ namespace SnifferLib
 				info.Info = "";
 				packets.Add(info);
 			}
+			
 		}
 
 	}

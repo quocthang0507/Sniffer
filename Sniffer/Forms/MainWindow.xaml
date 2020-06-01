@@ -71,7 +71,7 @@
 			</Button>
 			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
 			<TextBox x:Name="tbxFindWhat" Width="150" Margin="5, 0, 0, 0" ToolTip="Enter a display filter"></TextBox>
-			<Button x:Name="btnFind" ToolTip="Find a packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
+			<Button x:Name="btnFind" ToolTip="Find a packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnFind_Click">
 				<Image Source="/Images/find.png"/>
 			</Button>
 			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
@@ -95,7 +95,7 @@
 				<Image Source="/Images/scroll.png"/>
 			</Button>
 		</StackPanel>
-		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding snifferClass.packets}" SelectionChanged="dgPackets_SelectionChanged" ScrollViewer.ScrollChanged="dgPackets_ScrollChanged">
+		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding snifferClass.packets}" SelectionChanged="dgPackets_SelectionChanged" ScrollViewer.ScrollChanged="dgPackets_ScrollChanged" >
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="No." Binding="{Binding ID}"/>
 				<DataGridTextColumn Header="Time" Binding="{Binding Time}"/>
