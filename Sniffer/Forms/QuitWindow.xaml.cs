@@ -4,8 +4,7 @@ namespace Sniffer.Forms
 {
 	public enum QuitMode
 	{
-		Save,
-		ExitWithoutSave,
+		Exit,
 		Cancel
 	}
 
@@ -22,15 +21,9 @@ namespace Sniffer.Forms
 			InitializeComponent();
 		}
 
-		private void btnSave_Click(object sender, RoutedEventArgs e)
+		private void btnExit_Click(object sender, RoutedEventArgs e)
 		{
-			mode = QuitMode.Save;
-			this.Close();
-		}
-
-		private void btnExitWithoutSave_Click(object sender, RoutedEventArgs e)
-		{
-			mode = QuitMode.ExitWithoutSave;
+			mode = QuitMode.Exit;
 			this.Close();
 		}
 

@@ -60,12 +60,6 @@
 				<Image Source="/Images/restart.png"/>
 			</Button>
 			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
-			<Button x:Name="btnOpen" ToolTip="Open a capture file" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
-				<Image Source="/Images/open.png"/>
-			</Button>
-			<Button x:Name="btnSave" ToolTip="Save this capture file" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
-				<Image Source="/Images/save.png"/>
-			</Button>
 			<Button x:Name="btnClose" ToolTip="Close this capture file and return to welcome window" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0"  Click="btnClose_Click">
 				<Image Source="/Images/close.png"/>
 			</Button>
