@@ -26,7 +26,7 @@ namespace Sniffer
 
         public MainWindow(SnifferClass snifferClass)
         {
-            this.snifferClass = snifferClass; 
+            this.snifferClass = snifferClass;
             InitializeComponent();
             GetInterface();
             GetComputerName();
@@ -55,7 +55,7 @@ namespace Sniffer
                     }
                     return true;//đúng thì hiện lên màn hình chỉ thực hiện khi nào có chữ bên trong nó
                 };
-                            });
+            });
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -150,9 +150,12 @@ namespace Sniffer
 
         private void GoTo(int index)
         {
-            object item = dgPackets.Items[index];
-            dgPackets.SelectedItem = item;
-            dgPackets.ScrollIntoView(item);
+            if (index != -1)
+            {
+                object item = dgPackets.Items[index];
+                dgPackets.SelectedItem = item;
+                dgPackets.ScrollIntoView(item);
+            }
         }
 
         private void btnGoToEnd_Click(object sender, RoutedEventArgs e)
@@ -217,6 +220,24 @@ namespace Sniffer
         private void btnFind_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnPreviousPacket_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgPackets.SelectedIndex > 0)
+            {
+                int index = dgPackets.SelectedIndex; 
+                GoTo(index - 1);// sử dụng hàm Goto khi click mũi tên trái thì lùi 1
+            }
+        }
+
+        private void btnNextPacket_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgPackets.SelectedIndex < dgPackets.Items.Count)
+            {
+                int index = dgPackets.SelectedIndex;
+                GoTo(index + 1);// sử dụng hàm Goto khi click mũi tên trái thì tiến 1
+            }
         }
     }
 }

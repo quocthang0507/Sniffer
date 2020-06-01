@@ -71,14 +71,12 @@
 			</Button>
 			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
 			<TextBox x:Name="tbxFindWhat" Width="150" Margin="5, 0, 0, 0" ToolTip="Enter a display filter"></TextBox>
-			<Button x:Name="btnFind" ToolTip="Find a packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnFind_Click">
-				<Image Source="/Images/find.png"/>
-			</Button>
+			
 			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
-			<Button x:Name="btnPreviousPacket" ToolTip="Go to the previous packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
+			<Button x:Name="btnPreviousPacket" ToolTip="Go to the previous packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnPreviousPacket_Click">
 				<Image Source="/Images/left.png"/>
 			</Button>
-			<Button x:Name="btnNextPacket" ToolTip="Go to the next packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" >
+			<Button x:Name="btnNextPacket" ToolTip="Go to the next packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnNextPacket_Click">
 				<Image Source="/Images/right.png"/>
 			</Button>
 			<TextBox x:Name="tbxGoTo" Width="50" Margin="5, 0, 0, 0" ToolTip="Enter packet index" TextAlignment="Center"></TextBox>
