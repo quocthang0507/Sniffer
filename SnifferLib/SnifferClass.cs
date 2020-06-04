@@ -1,4 +1,5 @@
-﻿using PcapDotNet.Core;
+﻿using PcapDotNet.Base;
+using PcapDotNet.Core;
 using PcapDotNet.Packets;
 using PcapDotNet.Packets.IpV4;
 using PcapDotNet.Packets.Transport;
@@ -86,7 +87,6 @@ namespace SnifferLib
 			packets = new BindingList<PacketInfo>();
 			AddEventWhenNewItemAdded();
 			stopwatch = new Stopwatch();
-			stopwatch.Start();
 			using (PacketCommunicator communicator =
 				selectedDevice.Open(65536,                                  // 2^16byte, 64kb, max size của gói tin
 									PacketDeviceOpenAttributes.Promiscuous, // Chế độ bắt tất cả gói tin đang truyền trên mạng
@@ -94,6 +94,7 @@ namespace SnifferLib
 			{
 				try
 				{
+					stopwatch.Start();
 					communicator.ReceivePackets(0, PacketHandler);
 				}
 				catch (Exception)
@@ -112,20 +113,121 @@ namespace SnifferLib
 			info.ID = packets.Count + 1; // ban đầu là 0 id =1
 			info.Time = stopwatch.Elapsed.TotalSeconds;
 			IpV4Datagram ip = packet.Ethernet.IpV4;
-			UdpDatagram udp = ip.Udp; //TCP với UDP ra thông tin như nhau
-			if (udp != null)
+			TcpDatagram tcp = ip.Tcp; // TCP với UDP ra thông tin như nhau
+			if (tcp != null)
 			{
 				info.Source = ip.Source.ToString();
 				info.Destination = ip.Destination.ToString();
 				info.Protocol = packet.Ethernet.IpV4.Protocol.ToString();
 				info.Length = packet.Length;
-				UTF8Encoding encoding = new UTF8Encoding();
-				info.Buffer = new PacketBuff(BitConverter.ToString(packet.Buffer), encoding.GetString(packet.Buffer));// doi tuong
+				string hex = packet.BytesSequenceToHexadecimalString();
+				info.Buffer = new PacketBuff(ProcessString(hex), HextoString(hex));
 				info.Info = "";
 				packets.Add(info);
 			}
-			
+			if (packet.Ethernet.EtherType == PcapDotNet.Packets.Ethernet.EthernetType.Arp)
+			{
+				var t = packet;
+			}
 		}
 
+		private string HextoString(string hex)
+		{
+			byte[] raw = new byte[hex.Length / 2];
+			for (int i = 0; i < raw.Length; i++)
+			{
+				raw[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
+			}
+			return Encoding.UTF8.GetString(raw);
+		}
+
+		private string ProcessString(string hex)
+		{
+			string formatted = "";
+			int splitter = 0;
+			for (var i = 0; i < hex.Length; i += 2)
+			{
+				formatted += hex.Substring(i, 2) + "  ";
+				splitter++;
+				if (splitter % 16 == 0)
+					formatted += "\n";
+			}
+			return formatted;
+		}
+
+		private void DoSomething(PcapDotNet.Packets.Ethernet.EthernetType type)
+		{
+			switch (type)
+			{
+				case PcapDotNet.Packets.Ethernet.EthernetType.None:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.IpV4:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.Arp:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.ReverseArp:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.AppleTalk:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.AppleTalkArp:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.VLanTaggedFrame:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.NovellInternetworkPacketExchange:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.Novell:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.IpV6:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.MacControl:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.PointToPointProtocol:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.CobraNet:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.MultiprotocolLabelSwitchingUnicast:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.MultiprotocolLabelSwitchingMulticast:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.PointToPointProtocolOverEthernetDiscoveryStage:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.PointToPointProtocolOverEthernetSessionStage:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.ExtensibleAuthenticationProtocolOverLan:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.HyperScsi:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.AtaOverEthernet:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.EtherCatProtocol:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.ProviderBridging:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.AvbTransportProtocol:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.SerialRealTimeCommunicationSystemIii:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.CircuitEmulationServicesOverEthernet:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.HomePlug:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.MacSecurity:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.PrecisionTimeProtocol:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.ConnectivityFaultManagementOrOperationsAdministrationManagement:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.FibreChannelOverEthernet:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.FibreChannelOverEthernetInitializationProtocol:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.QInQ:
+					break;
+				case PcapDotNet.Packets.Ethernet.EthernetType.VeritasLowLatencyTransport:
+					break;
+				default:
+					break;
+			}
+		}
 	}
 }

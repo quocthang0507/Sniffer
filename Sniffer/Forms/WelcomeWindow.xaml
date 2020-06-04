@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Sniffer.Forms"
         mc:Ignorable="d"
 		Icon="/Images/icon.ico"
-        Title="The Sniffer Network Analyzer" MinHeight="500" MinWidth="750" FontSize="14">
+        Title="The Sniffer Network Analyzer" MinHeight="500" MinWidth="700" FontSize="14" ResizeMode="NoResize">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="150"/>

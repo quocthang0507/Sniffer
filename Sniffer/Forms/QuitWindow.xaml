@@ -23,7 +23,7 @@
 		<Label Grid.Column="1" Margin="0, 20, 0, 0" Content="Do you want to stop and quit?"/>
 		<Label Grid.Column="1" Grid.Row="1" Content="Your captured packets will be lost."/>
 		<WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,15,0,0">
-			<Button x:Name="btnExit" Content="Quit" Margin="10, 0, 0, 0" Width="75" Padding="10, 2, 10, 2" Click="btnExit_Click" BorderBrush="LightGray" ToolTip="Stop capturing (if needed) and quit"/>
+			<Button x:Name="btnExit" Content="Quit" Margin="10, 0, 0, 0" Width="75" Padding="10, 2, 10, 2" Click="btnExit_Click" BorderBrush="LightGray" ToolTip="Stop capturing (if needed) and quit" IsDefault="True"/>
 			<Button x:Name="btnCancel" Content="Cancel" Margin="10, 0, 20, 0" Width="75" Click="btnCancel_Click" BorderBrush="LightGray" IsCancel="True" ToolTip="Return to the main window"/>
 		</WrapPanel>
 	</Grid>

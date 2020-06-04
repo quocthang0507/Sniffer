@@ -8,13 +8,9 @@
 		Icon="/Images/icon.ico"
         Title="The Sniffer Network Analyzer" MinHeight="500" MinWidth="750" FontSize="14" Closing="Window_Closing">
 	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="59*"/>
-			<ColumnDefinition Width="701*"/>
-		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="22"/>
-			<RowDefinition Height="32"/>
+			<RowDefinition Height="25"/>
+			<RowDefinition Height="35"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
@@ -65,7 +61,7 @@
 			</Button>
 			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
 			<TextBox x:Name="tbxFindWhat" Width="150" Margin="5, 0, 0, 0" ToolTip="Enter a display filter"></TextBox>
-			
+
 			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
 			<Button x:Name="btnPreviousPacket" ToolTip="Go to the previous packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnPreviousPacket_Click">
 				<Image Source="/Images/left.png"/>
@@ -87,7 +83,7 @@
 				<Image Source="/Images/scroll.png"/>
 			</Button>
 		</StackPanel>
-		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding snifferClass.packets}" SelectionChanged="dgPackets_SelectionChanged" ScrollViewer.ScrollChanged="dgPackets_ScrollChanged" >
+		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="Auto" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding snifferClass.packets}" SelectionChanged="dgPackets_SelectionChanged" ScrollViewer.ScrollChanged="dgPackets_ScrollChanged" >
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="No." Binding="{Binding ID}"/>
 				<DataGridTextColumn Header="Time" Binding="{Binding Time}"/>
@@ -98,24 +94,20 @@
 			</DataGrid.Columns>
 		</DataGrid>
 		<GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="true" ResizeDirection="Rows" Grid.ColumnSpan="2"/>
-		<DataGrid Grid.Row="4" Grid.ColumnSpan="2" x:Name="dgBuff" AutoGenerateColumns="False" IsReadOnly="True" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ColumnWidth="*" ItemsSource="{Binding packetInfo.Buffer}">
-			<DataGrid.Columns>
-				<DataGridTextColumn Header="Hexadecimal" Binding="{Binding Buffer}">
-					<DataGridTextColumn.ElementStyle>
-						<Style TargetType="TextBlock">
-							<Setter Property="TextWrapping" Value="Wrap" />
-						</Style>
-					</DataGridTextColumn.ElementStyle>
-				</DataGridTextColumn>
-				<DataGridTextColumn Header="Content" Binding="{Binding UTF8}">
-					<DataGridTextColumn.ElementStyle>
-						<Style TargetType="TextBlock">
-							<Setter Property="TextWrapping" Value="Wrap" />
-						</Style>
-					</DataGridTextColumn.ElementStyle>
-				</DataGridTextColumn>
-			</DataGrid.Columns>
-		</DataGrid>
+		<Grid Grid.Row="4" >
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="5"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<ScrollViewer>
+				<TextBlock x:Name="tbxBuffer" TextWrapping="Wrap" FontFamily="Consolas"/>
+			</ScrollViewer>
+			<GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
+			<ScrollViewer Grid.Column="2">
+				<TextBlock x:Name="tbxDecode" TextWrapping="Wrap"/>
+			</ScrollViewer>
+		</Grid>
 		<StackPanel Orientation="Horizontal" Grid.Row="5" Background="LightGray" Grid.ColumnSpan="2">
 			<Label Content="Adapter: "/>
 			<Label x:Name="tbxAdapter" Content=""/>
