@@ -7,7 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SnifferLib
 {
@@ -109,26 +113,20 @@ namespace SnifferLib
 		/// <param name="packet">Gói tin đang được xử lý</param>
 		private void PacketHandler(Packet packet)
 		{
+			// Lấy thông tin cơ bản
 			PacketInfo info = new PacketInfo();
 			info.ID = packets.Count + 1; // ban đầu là 0 id =1
 			info.Time = stopwatch.Elapsed.TotalSeconds;
 			IpV4Datagram ip = packet.Ethernet.IpV4;
-			TcpDatagram tcp = ip.Tcp; // TCP với UDP ra thông tin như nhau
-			if (tcp != null)
-			{
-				info.Source = ip.Source.ToString();
-				info.Destination = ip.Destination.ToString();
-				info.Protocol = packet.Ethernet.IpV4.Protocol.ToString();
-				info.Length = packet.Length;
-				string hex = packet.BytesSequenceToHexadecimalString();
-				info.Buffer = new PacketBuff(ProcessString(hex), HextoString(hex));
-				info.Info = "";
-				packets.Add(info);
-			}
-			if (packet.Ethernet.EtherType == PcapDotNet.Packets.Ethernet.EthernetType.Arp)
-			{
-				var t = packet;
-			}
+			TcpDatagram tcp = ip.Tcp;
+			info.Source = ip.Source.ToString();
+			info.Destination = ip.Destination.ToString();
+			info.Protocol = packet.Ethernet.IpV4.Protocol.ToString();
+			info.Length = packet.Length;
+			string hex = packet.BytesSequenceToHexadecimalString();
+			info.Buffer = new PacketBuff(ProcessString(hex), HextoString(hex));
+			GetMoreInfo(packet, info);
+			packets.Add(info);
 		}
 
 		private string HextoString(string hex)
@@ -155,15 +153,32 @@ namespace SnifferLib
 			return formatted;
 		}
 
-		private void DoSomething(PcapDotNet.Packets.Ethernet.EthernetType type)
+		/// <summary>
+		/// Lấy thêm thông tin cho từng loại giao thức
+		/// </summary>
+		/// <param name="packet"></param>
+		/// <param name="info"></param>
+		private void GetMoreInfo(Packet packet, PacketInfo info)
 		{
-			switch (type)
+			switch (packet.Ethernet.EtherType)
 			{
 				case PcapDotNet.Packets.Ethernet.EthernetType.None:
 					break;
 				case PcapDotNet.Packets.Ethernet.EthernetType.IpV4:
 					break;
 				case PcapDotNet.Packets.Ethernet.EthernetType.Arp:
+					info.Protocol = "ARP";
+					var arp = packet.Ethernet.Arp;
+					info.Source = packet.Ethernet.Source.ToString();
+					var senderIP = arp.SenderProtocolIpV4Address;
+					info.Destination = packet.Ethernet.Destination.ToString();
+					var targetIP = arp.TargetProtocolIpV4Address;
+					if (info.Destination == "FF:FF:FF:FF:FF:FF")
+					{
+						info.Info = $"Who has {targetIP}? Tell {senderIP}";
+						info.Destination = "Broadcast";
+					}
+					info.Info = $"{senderIP} is at {info.Source}";
 					break;
 				case PcapDotNet.Packets.Ethernet.EthernetType.ReverseArp:
 					break;
@@ -229,5 +244,6 @@ namespace SnifferLib
 					break;
 			}
 		}
+
 	}
 }
