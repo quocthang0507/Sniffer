@@ -17,6 +17,6 @@
 			<Label Content="Capture" Margin="0, 5" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Foreground="DimGray"/>
 			<Label Content="Double click an interface network below to continue:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 		</StackPanel>
-		<ListBox Grid.Row="1" x:Name="listInterface" HorizontalAlignment="Stretch" Margin="50, 20, 50, 25" MouseDoubleClick="listInterface_MouseDoubleClick"/>
+		<ListBox Grid.Row="1" x:Name="listInterface" HorizontalAlignment="Stretch" Margin="50, 20, 50, 25" MouseDoubleClick="listInterface_MouseDoubleClick" TabIndex="1" IsTabStop="True" KeyDown="listInterface_KeyDown"/>
 	</Grid>
 </Window>

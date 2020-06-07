@@ -52,15 +52,15 @@ namespace Sniffer
 			{
 				Dispatcher.Invoke(() =>
 				{
-					//gọi là snifferclass, dưới là một hàm cho snifferclass sử dụng,sniffercl ở bên ngoài form nên phải dùng dispatcher mới truy cập được control trong form
+					// gọi là snifferclass, dưới là một hàm cho snifferclass sử dụng,sniffercl ở bên ngoài form nên phải dùng dispatcher mới truy cập được control trong form
 					dgPackets.Items.Filter = item => //lọc phải đưa 1 hàm, tìm theo kiểu bao trùm, 
 					{
 						string filter = tbxFindWhat.Text;
-						if (filter != "")//mặc dịnh là hiển thị tất cả
+						if (filter != "")// mặc dịnh là hiển thị tất cả
 						{
-							return (item as PacketInfo).Protocol.Contains(filter);//chỉ cần chứa 1 kí tự
+							return (item as PacketInfo).Protocol.Contains(filter);// chỉ cần chứa 1 kí tự
 						}
-						return true;//đúng thì hiện lên màn hình chỉ thực hiện khi nào có chữ bên trong nó
+						return true;// đúng thì hiện lên màn hình chỉ thực hiện khi nào có chữ bên trong nó
 					};
 				});
 				Dispatcher.Invoke(() => UpdateDisplayedPackets());
@@ -263,7 +263,7 @@ namespace Sniffer
 		/// </summary>
 		private void UpadateTotalPackets()
 		{
-			tbxTotalPackets.Content = snifferClass.packets.Count;
+			tbxTotalPackets.Content = snifferClass.Packets.Count;
 		}
 	}
 }
