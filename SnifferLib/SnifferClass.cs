@@ -35,15 +35,22 @@ namespace SnifferLib
 		/// <returns></returns>
 		public List<string> GetInterfaces()
 		{
-			devices = LivePacketDevice.AllLocalMachine;
-			List<string> result = new List<string>();
-			foreach (var device in devices)
+			try
 			{
-				string name = device.Description;
-				string[] array = name.Split('\'');
-				result.Add(array[1]);
+				devices = LivePacketDevice.AllLocalMachine;
+				List<string> result = new List<string>();
+				foreach (var device in devices)
+				{
+					string name = device.Description;
+					string[] array = name.Split('\'');
+					result.Add(array[1]);
+				}
+				return result;
 			}
-			return result;
+			catch (Exception)
+			{
+				throw new AggregateException("WinPcap not found! You must install WinPcap on your computer before running Sniffer");
+			}
 		}
 
 		/// <summary>

@@ -1,4 +1,5 @@
 ﻿using SnifferLib;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -20,7 +21,16 @@ namespace Sniffer.Forms
 
 		private void ShowInterfaces()
 		{
-			listInterface.ItemsSource = snifferClass.GetInterfaces();
+			try
+			{
+				listInterface.ItemsSource = snifferClass.GetInterfaces();
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show(e.Message, "Có lỗi xảy ra!", MessageBoxButton.OK, MessageBoxImage.Error);
+				this.Close();
+			}
+
 		}
 
 		private void listInterface_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
