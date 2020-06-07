@@ -7,11 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Net;
-using System.Net.Http;
-using System.Net.NetworkInformation;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SnifferLib
 {
@@ -118,7 +114,6 @@ namespace SnifferLib
 			info.ID = packets.Count + 1; // ban đầu là 0 id =1
 			info.Time = stopwatch.Elapsed.TotalSeconds;
 			IpV4Datagram ip = packet.Ethernet.IpV4;
-			TcpDatagram tcp = ip.Tcp;
 			info.Source = ip.Source.ToString();
 			info.Destination = ip.Destination.ToString();
 			info.Protocol = packet.Ethernet.IpV4.Protocol.ToString();
@@ -165,6 +160,9 @@ namespace SnifferLib
 				case PcapDotNet.Packets.Ethernet.EthernetType.None:
 					break;
 				case PcapDotNet.Packets.Ethernet.EthernetType.IpV4:
+					var tcp = packet.Ethernet.IpV4.Tcp;
+					info.Protocol = "TCP";
+					info.Info = $"{tcp.SourcePort} → {tcp.DestinationPort} [{GetFlags(tcp)}] Seq={tcp.SequenceNumber} Win={tcp.Window} Len={tcp.Length}";
 					break;
 				case PcapDotNet.Packets.Ethernet.EthernetType.Arp:
 					info.Protocol = "ARP";
@@ -178,7 +176,7 @@ namespace SnifferLib
 						info.Info = $"Who has {targetIP}? Tell {senderIP}";
 						info.Destination = "Broadcast";
 					}
-					info.Info = $"{senderIP} is at {info.Source}";
+					else info.Info = $"{senderIP} is at {info.Source}";
 					break;
 				case PcapDotNet.Packets.Ethernet.EthernetType.ReverseArp:
 					break;
@@ -193,6 +191,7 @@ namespace SnifferLib
 				case PcapDotNet.Packets.Ethernet.EthernetType.Novell:
 					break;
 				case PcapDotNet.Packets.Ethernet.EthernetType.IpV6:
+					info.Protocol = "IPv6";
 					break;
 				case PcapDotNet.Packets.Ethernet.EthernetType.MacControl:
 					break;
@@ -245,5 +244,27 @@ namespace SnifferLib
 			}
 		}
 
+		/// <summary>
+		/// https://www.geeksforgeeks.org/tcp-flags/?ref=lbp
+		/// </summary>
+		/// <param name="tcp"></param>
+		/// <returns></returns>
+		private string GetFlags(TcpDatagram tcp)
+		{
+			string flags = "";
+			if (tcp.IsAcknowledgment)
+				flags += " ACK ";
+			if (tcp.IsFin)
+				flags += " FIN ";
+			if (tcp.IsSynchronize)
+				flags += " SYN ";
+			if (tcp.IsReset)
+				flags += " RST ";
+			if (tcp.IsPush)
+				flags += " PSH ";
+			if (tcp.IsUrgent) // Gói khẩn cấp
+				flags += " URG ";
+			return flags.Replace("  ", ", ").Trim();
+		}
 	}
 }
