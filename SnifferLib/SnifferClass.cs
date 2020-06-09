@@ -11,7 +11,9 @@ using System.Text;
 
 namespace SnifferLib
 {
-
+	/// <summary>
+	/// Tầng Business: Xử lý các thao tác Sniffer
+	/// </summary>
 	public class SnifferClass
 	{
 		private PacketDevice selectedDevice;
@@ -66,7 +68,7 @@ namespace SnifferLib
 		/// Lấy tên của card mạng đang được lựa chọn
 		/// </summary>
 		/// <returns></returns>
-		public string GetNameInterface()
+		public string GetNameSelectedInterface()
 		{
 			return selectedDevice.Description.Split('\'')[1];
 		}

@@ -19,32 +19,32 @@ namespace Sniffer
 		public MainWindow()
 		{
 			InitializeComponent();
-			btnStop.IsEnabled = false;
 		}
 
 		public MainWindow(SnifferClass snifferClass)
 		{
 			this.snifferClass = snifferClass;
 			InitializeComponent();
-			GetInterface();
+			// Lấy thông tin interface đã chọn từ WelcomeWindow
+			GetSelectedInterface();
+			// Lấy tên của máy tính
 			GetComputerName();
-			GetTotalPackets();
-			GetTotalDisplayedPackets();
+			// Ủy quyền cập nhật DataGrid cho một lớp bên ngoài
 			snifferClass.UpdateDataGrid = new SnifferClass.AddItemToDataGrid(UpdateDataGrid);
 		}
 
 		/// <summary>
-		/// Cập nhật datagrid mỗi khi snifferclass bắt được một gói tin
+		/// Cập nhật datagrid mỗi khi bắt được một gói tin, hàm này được gọi bởi một lớp bên ngoài nên phải dùng Dispatcher.Invoke
 		/// </summary>
 		/// <param name="packet"></param>
 		private void UpdateDataGrid(PacketInfo packet)
 		{
-			Dispatcher.Invoke(() => dgPackets.Items.Add(packet));//bắt được gói tin thì bắt cập nhật vào list
+			Dispatcher.Invoke(() => dgPackets.Items.Add(packet)); // bắt được gói tin thì cập nhật vào list
 			UpdateOthers();
 		}
 
 		/// <summary>
-		/// Cập nhật thông tin lên các control, đồng thời làm cho thao tác trên Form mượt hơn
+		/// Cập nhật thông tin lên các control, đồng thời làm cho thao tác trên form mượt hơn nhờ vào thread
 		/// </summary>
 		private void UpdateOthers()
 		{
@@ -52,19 +52,18 @@ namespace Sniffer
 			{
 				Dispatcher.Invoke(() =>
 				{
-					// gọi là snifferclass, dưới là một hàm cho snifferclass sử dụng,sniffercl ở bên ngoài form nên phải dùng dispatcher mới truy cập được control trong form
-					dgPackets.Items.Filter = item => //lọc phải đưa 1 hàm, tìm theo kiểu bao trùm, 
+					dgPackets.Items.Filter = item => // Tùy chỉnh phương thức lọc nội dung cho DataGrid 
 					{
 						string filter = tbxFindWhat.Text;
-						if (filter != "")// mặc dịnh là hiển thị tất cả
+						if (filter != "") // Mặc định là hiển thị tất cả
 						{
-							return (item as PacketInfo).Protocol.Contains(filter);// chỉ cần chứa 1 kí tự
+							return (item as PacketInfo).Protocol.Contains(filter); // Chỉ xuất những cái thỏa điều kiện
 						}
-						return true;// đúng thì hiện lên màn hình chỉ thực hiện khi nào có chữ bên trong nó
+						return true; // Còn không thì xuất tất cả lên DataGrid
 					};
 				});
-				Dispatcher.Invoke(() => UpdateDisplayedPackets());
-				Dispatcher.Invoke(() => UpadateTotalPackets());
+				Dispatcher.Invoke(() => UpdateDisplayedPackets()); // Cập nhật số lượng packet hiển thị trên DataGrid
+				Dispatcher.Invoke(() => UpadateTotalPackets()); // Cập nhật số lượng packet đã bắt được
 			}).Start();
 		}
 
@@ -78,12 +77,16 @@ namespace Sniffer
 
 		private void btnAbout_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Thành viên trong nhóm: \r\n 1. La Quốc Thắng 1610207 (Thiết kế giao diện) \r\n 2. Nguyễn Thị Bích Ngọc 1610171 (Thiết kế chức năng) \r\n 3. Nguyễn Thị Linh 1610156 (Thiết kế chức năng)", "Giới thiệu!", MessageBoxButton.OK, MessageBoxImage.Information);
+			MessageBox.Show("Thành viên trong nhóm: \r\n " +
+				"1. La Quốc Thắng 1610207 (Thiết kế giao diện) \r\n " +
+				"2. Nguyễn Thị Bích Ngọc 1610171 (Thiết kế chức năng) \r\n " +
+				"3. Nguyễn Thị Linh 1610156 (Thiết kế chức năng)", "Giới thiệu!", MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 
 		private void btnDoc_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial", "Tài liệu tham khảo!", MessageBoxButton.OK, MessageBoxImage.Information);
+			MessageBox.Show("https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial", 
+				"Tài liệu tham khảo!", MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -100,9 +103,9 @@ namespace Sniffer
 			}
 		}
 
-		private void GetInterface()
+		private void GetSelectedInterface()
 		{
-			tbxAdapter.Content = snifferClass.GetNameInterface();
+			tbxAdapter.Content = snifferClass.GetNameSelectedInterface();
 		}
 
 		private void GetComputerName()
@@ -110,44 +113,35 @@ namespace Sniffer
 			tbxComputerName.Content = Environment.MachineName.ToString();
 		}
 
-		private void GetTotalPackets()
+		private void btnStart_Click(object sender, RoutedEventArgs e)
 		{
-			tbxTotalPackets.Content = dgPackets.Items.Count;
-		}
-
-		private void GetTotalDisplayedPackets()
-		{
-			tbxTotalDisPackets.Content = dgPackets.Items.Count;
-		}
-
-		private void btnStart_Click(object sender, RoutedEventArgs e)//snifferclass nằm gọn trong 1 thread khác form nên sẽ dùng dispatcher.info 
-		{
+			dgPackets.Items.Clear(); // Xóa dữ liệu trong DataGrid
+			// Tạo một thread mới thực hiện công việc là bắt gói tin
 			thread = new Thread(() => snifferClass.Start());
 			thread.Start();
-			btnStart.IsEnabled = false;//Chỉ cho Start một lần
-			btnStop.IsEnabled = true;
-			dgPackets.Items.Clear();
+			btnStart.IsEnabled = false; // Chỉ cho Start một lần
+			btnStop.IsEnabled = true; // Nút Stop sáng lên ngay sau khi Start
 		}
 
 		private void btnStop_Click(object sender, RoutedEventArgs e)
 		{
+			// Stop thread
 			thread.Abort();
-			//Stop tắt, start mở 
 			btnStop.IsEnabled = false;
 			btnStart.IsEnabled = true;
 		}
 
 		private void btnRestart_Click(object sender, RoutedEventArgs e)
 		{
+			// Stop công việc và bắt đầu lại
 			btnStop_Click(sender, e);
-			dgPackets.Items.Clear();
 			btnStart_Click(sender, e);
 		}
 
 		private void btnClose_Click(object sender, RoutedEventArgs e)
 		{
+			// Stop công việc và xóa sạch DataGrid
 			btnStop_Click(sender, e);
-			dgPackets.ItemsSource = null;
 			dgPackets.Items.Clear();
 		}
 
@@ -156,6 +150,27 @@ namespace Sniffer
 			GoTo(0);
 		}
 
+		private void btnGoToEnd_Click(object sender, RoutedEventArgs e)
+		{
+			// Đến dòng cuối cùng trong DataGrid
+			GoTo(dgPackets.Items.Count - 1);
+		}
+
+		private void btnGoTo_Click(object sender, RoutedEventArgs e)
+		{
+			if (int.TryParse(tbxGoTo.Text, out int id))
+			{
+				if (id >= 1 && id < dgPackets.Items.Count) // Chỉ cho phép nhập trong phạm vi từ 1 đến hết danh sách
+				{
+					GoTo(id - 1); // Chuyển cách đếm số từ 1 về cách đếm số từ 0 (cách máy tính lưu trữ)
+				}
+			}
+		}
+
+		/// <summary>
+		/// Đi đến một packet có thứ tự index trong DataGrid
+		/// </summary>
+		/// <param name="index"></param>`
 		private void GoTo(int index)
 		{
 			if (index != -1)
@@ -166,30 +181,16 @@ namespace Sniffer
 			}
 		}
 
-		private void btnGoToEnd_Click(object sender, RoutedEventArgs e)
-		{
-			GoTo(dgPackets.Items.Count - 1);
-		}
-
 		private void btnAutoScroll_Click(object sender, RoutedEventArgs e)
 		{
+			// Cho phép bật/tắt tự động lăn xuống dưới cùng
 			autoScroll = !autoScroll;
 			dgPackets.ScrollIntoView(dgPackets.Items[dgPackets.Items.Count - 1]);
 		}
 
-		private void btnGoTo_Click(object sender, RoutedEventArgs e)
-		{
-			if (int.TryParse(tbxGoTo.Text, out int id))
-			{
-				if (id >= 1 && id < dgPackets.Items.Count)//Cho phép nhập từ 1 đến số cuối cùng. tuy nhiên lập trình thì cho phép bắt đầu từ 0
-				{
-					GoTo(id - 1);
-				}
-			}
-		}
-
 		private void dgPackets_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			// Lấy thông tin của gói tin đang được chọn trong DataGrid hiển thị chi tiết buffer
 			PacketInfo packetInfo = (PacketInfo)dgPackets.SelectedItem;
 			if (packetInfo != null)
 			{
@@ -199,59 +200,52 @@ namespace Sniffer
 			}
 		}
 
+		/// <summary>
+		/// https://stackoverflow.com/a/33045967
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void dgPackets_ScrollChanged(object sender, ScrollChangedEventArgs e)
 		{
+			// Nếu đang bật AutoScroll
 			if (autoScroll)
 			{
-				// If the entire contents fit on the screen, ignore this event
+				// Nếu trong DataGrid, các dòng nằm đủ trong một view thì bỏ qua
 				if (e.ExtentHeight < e.ViewportHeight)
 					return;
-
-				// If no items are available to display, ignore this event
+				// Nếu không có gì trong DataGrid thì bỏ qua
 				if (dgPackets.Items.Count <= 0)
 					return;
-
-				// If the ExtentHeight and ViewportHeight haven't changed, ignore this event
+				// Nếu trong DataGrid không thay đổi thì bỏ qua
 				if (e.ExtentHeightChange == 0.0 && e.ViewportHeightChange == 0.0)
 					return;
-
-				// If we were close to the bottom when a new item appeared,
-				// scroll the new item into view.  We pick a threshold of 5
-				// items since issues were seen when resizing the window with
-				// smaller threshold values.
-				var oldExtentHeight = e.ExtentHeight - e.ExtentHeightChange;
-				var oldVerticalOffset = e.VerticalOffset - e.VerticalChange;
-				var oldViewportHeight = e.ViewportHeight - e.ViewportHeightChange;
-				if (oldVerticalOffset + oldViewportHeight + 5 >= oldExtentHeight)
-					dgPackets.ScrollIntoView(dgPackets.Items[dgPackets.Items.Count - 1]);
+				// Lăn đến dòng cuối cùng
+				dgPackets.ScrollIntoView(dgPackets.Items[dgPackets.Items.Count - 1]);
 			}
-		}
-
-		private void btnFind_Click(object sender, RoutedEventArgs e)
-		{
-
 		}
 
 		private void btnPreviousPacket_Click(object sender, RoutedEventArgs e)
 		{
+			// Đi đến packet nằm trước nó
 			if (dgPackets.SelectedIndex > 0)
 			{
 				int index = dgPackets.SelectedIndex;
-				GoTo(index - 1);// sử dụng hàm Goto khi click mũi tên trái thì lùi 1
+				GoTo(index - 1);
 			}
 		}
 
 		private void btnNextPacket_Click(object sender, RoutedEventArgs e)
 		{
+			// Đi đến packet nằm sau nó
 			if (dgPackets.SelectedIndex < dgPackets.Items.Count)
 			{
 				int index = dgPackets.SelectedIndex;
-				GoTo(index + 1);// sử dụng hàm Goto khi click mũi tên trái thì tiến 1
+				GoTo(index + 1);
 			}
 		}
 
 		/// <summary>
-		/// Cập nhập hiển thị số lượng packet hiển thị trên màn hình.
+		/// Cập nhập hiển thị số lượng packet hiển thị trên DataGrid
 		/// </summary>
 		private void UpdateDisplayedPackets()
 		{
@@ -259,7 +253,7 @@ namespace Sniffer
 		}
 
 		/// <summary>
-		/// Cập nhập số lượng packets trong danh sách ban đầu.
+		/// Cập nhập số lượng packet đã bắt được
 		/// </summary>
 		private void UpadateTotalPackets()
 		{
