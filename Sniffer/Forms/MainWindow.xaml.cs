@@ -257,7 +257,7 @@ namespace Sniffer
 		/// </summary>
 		private void UpadateTotalPackets()
 		{
-			tbxTotalPackets.Content = snifferClass.Packets.Count;
+			tbxTotalPackets.Content = snifferClass.CapturedPackets.Count;
 		}
 	}
 }

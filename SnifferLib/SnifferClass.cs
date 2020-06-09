@@ -17,13 +17,13 @@ namespace SnifferLib
 	public class SnifferClass
 	{
 		private PacketDevice selectedDevice;
-		private IList<LivePacketDevice> devices;
+		private IList<LivePacketDevice> allDevices;
 		private Stopwatch stopwatch;
 
 		/// <summary>
 		/// Danh sách các gói tin đã bắt được
 		/// </summary>
-		public BindingList<PacketInfo> Packets { get; set; }
+		public BindingList<PacketInfo> CapturedPackets { get; set; }
 		/// <summary>
 		/// Hàm ủy quyền thêm gói tin vào data grid
 		/// </summary>
@@ -39,9 +39,9 @@ namespace SnifferLib
 		{
 			try
 			{
-				devices = LivePacketDevice.AllLocalMachine;
+				allDevices = LivePacketDevice.AllLocalMachine;
 				List<string> result = new List<string>();
-				foreach (var device in devices)
+				foreach (var device in allDevices)
 				{
 					string name = device.Description;
 					string[] array = name.Split('\'');
@@ -61,7 +61,7 @@ namespace SnifferLib
 		/// <param name="index"></param>
 		public void GetInterface(int index)
 		{
-			selectedDevice = devices[index];
+			selectedDevice = allDevices[index];
 		}
 
 		/// <summary>
@@ -74,13 +74,13 @@ namespace SnifferLib
 		}
 
 		/// <summary>
-		/// Thêm sự kiện khi một gói tin đã thêm vào danh sách. Bắt form cập nhập từ bên này. Bên kia k thể chủ động , mình chu
+		/// Thêm sự kiện khi một gói tin đã thêm vào danh sách
 		/// </summary>
 		private void AddEventWhenNewItemAdded()
 		{
-			Packets.ListChanged += (sender, e) =>
+			CapturedPackets.ListChanged += (sender, e) =>
 			  {
-				  UpdateDataGrid(Packets[Packets.Count - 1]);
+				  UpdateDataGrid(CapturedPackets[CapturedPackets.Count - 1]);
 			  };
 		}
 
@@ -89,17 +89,17 @@ namespace SnifferLib
 		/// </summary>
 		public void Start()
 		{
-			if (devices.Count == 0)
+			if (allDevices.Count == 0)
 			{
 				throw new AggregateException("No interfaces found! Make sure WinPcap is installed.");
 			}
-			Packets = new BindingList<PacketInfo>();
+			CapturedPackets = new BindingList<PacketInfo>();
 			AddEventWhenNewItemAdded();
 			stopwatch = new Stopwatch();
 			using (PacketCommunicator communicator =
 				selectedDevice.Open(65536,                                  // 2^16byte, 64kb, max size của gói tin
 									PacketDeviceOpenAttributes.Promiscuous, // Chế độ bắt tất cả gói tin đang truyền trên mạng
-									1000))                                  // Thời gian chờ tối đa
+									1000))                                  // read timeout
 			{
 				try
 				{
@@ -120,7 +120,7 @@ namespace SnifferLib
 		{
 			// Lấy thông tin cơ bản
 			PacketInfo info = new PacketInfo();
-			info.ID = Packets.Count + 1; // ban đầu là 0 id =1
+			info.ID = CapturedPackets.Count + 1; // ban đầu là 0 id =1
 			info.Time = stopwatch.Elapsed.TotalSeconds;
 			IpV4Datagram ip = packet.Ethernet.IpV4;
 			info.Source = ip.Source.ToString();
@@ -130,7 +130,7 @@ namespace SnifferLib
 			string hex = packet.BytesSequenceToHexadecimalString();
 			info.Buffer = new PacketBuff(ProcessString(hex), HextoString(hex));
 			GetMoreInfo(packet, info);
-			Packets.Add(info);
+			CapturedPackets.Add(info);
 		}
 
 		private string HextoString(string hex)
