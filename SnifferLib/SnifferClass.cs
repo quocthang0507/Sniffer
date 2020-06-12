@@ -76,7 +76,7 @@ namespace SnifferLib
 		/// <summary>
 		/// Thêm sự kiện khi một gói tin đã thêm vào danh sách
 		/// </summary>
-		private void AddEventWhenNewItemAdded()
+		private void AddListChangedEvent()
 		{
 			ListCapturedPackets.ListChanged += (sender, e) =>
 			  {
@@ -94,6 +94,7 @@ namespace SnifferLib
 				throw new AggregateException("No interfaces found! Make sure WinPcap is installed.");
 			}
 			ListCapturedPackets = new BindingList<PacketInfo>();
+			AddListChangedEvent();
 			stopwatch = new Stopwatch();
 			using (PacketCommunicator communicator =
 				selectedDevice.Open(65536,                                  // 2^16byte, 64kb, max size của gói tin
