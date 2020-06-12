@@ -143,6 +143,8 @@ namespace Sniffer
 			// Stop công việc và xóa sạch DataGrid
 			btnStop_Click(sender, e);
 			dgPackets.Items.Clear();
+			tbxBuffer.Text = "";
+			tbxDecode.Text = "";
 		}
 
 		private void btnGoToFirst_Click(object sender, RoutedEventArgs e)
@@ -257,7 +259,7 @@ namespace Sniffer
 		/// </summary>
 		private void UpadateTotalPackets()
 		{
-			tbxTotalPackets.Content = snifferClass.CapturedPackets.Count;
+			tbxTotalPackets.Content = snifferClass.ListCapturedPackets.Count;
 		}
 	}
 }

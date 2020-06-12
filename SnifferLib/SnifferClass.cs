@@ -23,7 +23,7 @@ namespace SnifferLib
 		/// <summary>
 		/// Danh sách các gói tin đã bắt được
 		/// </summary>
-		public BindingList<PacketInfo> CapturedPackets { get; set; }
+		public BindingList<PacketInfo> ListCapturedPackets { get; set; }
 		/// <summary>
 		/// Hàm ủy quyền thêm gói tin vào data grid
 		/// </summary>
@@ -78,9 +78,9 @@ namespace SnifferLib
 		/// </summary>
 		private void AddEventWhenNewItemAdded()
 		{
-			CapturedPackets.ListChanged += (sender, e) =>
+			ListCapturedPackets.ListChanged += (sender, e) =>
 			  {
-				  UpdateDataGrid(CapturedPackets[CapturedPackets.Count - 1]);
+				  UpdateDataGrid(ListCapturedPackets[ListCapturedPackets.Count - 1]);
 			  };
 		}
 
@@ -93,7 +93,7 @@ namespace SnifferLib
 			{
 				throw new AggregateException("No interfaces found! Make sure WinPcap is installed.");
 			}
-			CapturedPackets = new BindingList<PacketInfo>();
+			ListCapturedPackets = new BindingList<PacketInfo>();
 			AddEventWhenNewItemAdded();
 			stopwatch = new Stopwatch();
 			using (PacketCommunicator communicator =
@@ -120,7 +120,7 @@ namespace SnifferLib
 		{
 			// Lấy thông tin cơ bản
 			PacketInfo info = new PacketInfo();
-			info.ID = CapturedPackets.Count + 1; // ban đầu là 0 id =1
+			info.ID = ListCapturedPackets.Count + 1; // ban đầu là 0 id =1
 			info.Time = stopwatch.Elapsed.TotalSeconds;
 			IpV4Datagram ip = packet.Ethernet.IpV4;
 			info.Source = ip.Source.ToString();
@@ -130,7 +130,7 @@ namespace SnifferLib
 			string hex = packet.BytesSequenceToHexadecimalString();
 			info.Buffer = new PacketBuff(ProcessString(hex), HextoString(hex));
 			GetMoreInfo(packet, info);
-			CapturedPackets.Add(info);
+			ListCapturedPackets.Add(info);
 		}
 
 		private string HextoString(string hex)
