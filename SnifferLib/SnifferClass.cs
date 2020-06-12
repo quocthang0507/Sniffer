@@ -94,7 +94,6 @@ namespace SnifferLib
 				throw new AggregateException("No interfaces found! Make sure WinPcap is installed.");
 			}
 			ListCapturedPackets = new BindingList<PacketInfo>();
-			AddEventWhenNewItemAdded();
 			stopwatch = new Stopwatch();
 			using (PacketCommunicator communicator =
 				selectedDevice.Open(65536,                                  // 2^16byte, 64kb, max size của gói tin
