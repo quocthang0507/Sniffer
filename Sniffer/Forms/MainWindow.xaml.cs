@@ -52,15 +52,7 @@ namespace Sniffer
 			{
 				Dispatcher.Invoke(() =>
 				{
-					dgPackets.Items.Filter = item => // Tùy chỉnh phương thức lọc nội dung cho DataGrid 
-					{
-						string filter = tbxFindWhat.Text;
-						if (filter != "") // Mặc định là hiển thị tất cả
-						{
-							return (item as PacketInfo).Protocol.Contains(filter); // Chỉ xuất những cái thỏa điều kiện
-						}
-						return true; // Còn không thì xuất tất cả lên DataGrid
-					};
+					tbxFindWhat_TextChanged(null, null);
 				});
 				Dispatcher.Invoke(() => UpdateDisplayedPackets()); // Cập nhật số lượng packet hiển thị trên DataGrid
 				Dispatcher.Invoke(() => UpadateTotalPackets()); // Cập nhật số lượng packet đã bắt được
@@ -85,7 +77,7 @@ namespace Sniffer
 
 		private void btnDoc_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial", 
+			MessageBox.Show("https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial",
 				"Tài liệu tham khảo!", MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 
@@ -116,7 +108,7 @@ namespace Sniffer
 		private void btnStart_Click(object sender, RoutedEventArgs e)
 		{
 			dgPackets.Items.Clear(); // Xóa dữ liệu trong DataGrid
-			// Tạo một thread mới thực hiện công việc là bắt gói tin
+									 // Tạo một thread mới thực hiện công việc là bắt gói tin
 			thread = new Thread(() => snifferClass.Start());
 			thread.Start();
 			btnStart.IsEnabled = false; // Chỉ cho Start một lần
@@ -260,6 +252,19 @@ namespace Sniffer
 		private void UpadateTotalPackets()
 		{
 			tbxTotalPackets.Content = snifferClass.ListCapturedPackets.Count;
+		}
+
+		private void tbxFindWhat_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			dgPackets.Items.Filter = item => // Tùy chỉnh phương thức lọc nội dung cho DataGrid 
+			{
+				string filter = tbxFindWhat.Text;
+				if (filter != "") // Mặc định là hiển thị tất cả
+				{
+					return (item as PacketInfo).Protocol.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0;  // Chỉ xuất những cái thỏa điều kiện
+				}
+				return true; // Còn không thì xuất tất cả lên DataGrid
+			};
 		}
 	}
 }

@@ -14,6 +14,8 @@
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
 			<RowDefinition Height="28"/>
 		</Grid.RowDefinitions>
 		<Menu x:Name="menuBar" VerticalAlignment="Top" FontSize="14" Background="Transparent" Grid.ColumnSpan="2">
@@ -60,7 +62,7 @@
 				<Image Source="/Images/close.png"/>
 			</Button>
 			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
-			<TextBox x:Name="tbxFindWhat" Width="150" Margin="5, 0, 0, 0" ToolTip="Enter a display filter"></TextBox>
+			<TextBox x:Name="tbxFindWhat" Width="150" Margin="5, 0, 0, 0" ToolTip="Enter a display filter" TextChanged="tbxFindWhat_TextChanged"></TextBox>
 
 			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
 			<Button x:Name="btnPreviousPacket" ToolTip="Go to the previous packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnPreviousPacket_Click">
@@ -94,7 +96,11 @@
 			</DataGrid.Columns>
 		</DataGrid>
 		<GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="true" ResizeDirection="Rows" Grid.ColumnSpan="2"/>
-		<Grid Grid.Row="4" >
+		<ScrollViewer Grid.Row="4">
+			<TextBlock x:Name="tbxLayerInfo" TextWrapping="Wrap" FontFamily="Consolas"></TextBlock>
+		</ScrollViewer>
+		<GridSplitter Grid.Row="5" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="true" ResizeDirection="Rows" Grid.ColumnSpan="2"/>
+		<Grid Grid.Row="6" >
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="5"/>
@@ -108,7 +114,7 @@
 				<TextBlock x:Name="tbxDecode" TextWrapping="Wrap"/>
 			</ScrollViewer>
 		</Grid>
-		<StackPanel Orientation="Horizontal" Grid.Row="5" Background="LightGray" Grid.ColumnSpan="2">
+		<StackPanel Orientation="Horizontal" Grid.Row="7" Background="LightGray" Grid.ColumnSpan="2">
 			<Label Content="Adapter: "/>
 			<Label x:Name="tbxAdapter" Content=""/>
 			<Button Background="Gray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
