@@ -105,7 +105,7 @@ namespace Sniffer
 
 		private void GetSelectedInterface()
 		{
-			tbxAdapter.Content = snifferClass.GetNameSelectedInterface();
+			tbxAdapter.Content = snifferClass.SelectedNameDevice;
 		}
 
 		private void GetComputerName()

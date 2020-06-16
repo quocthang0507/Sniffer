@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 
 namespace SnifferLib
@@ -16,61 +18,62 @@ namespace SnifferLib
 	/// </summary>
 	public class SnifferClass
 	{
-		private PacketDevice selectedDevice;
-		private IList<LivePacketDevice> allDevices;
+		private IList<LivePacketDevice> winpcapDevices;
+		private PacketDevice selectedWinpcapDevice;
+		private List<NetworkInterface> devices;
+		private NetworkInterface selectedDevice;
 		private Stopwatch stopwatch;
+		private static SnifferClass instance;
 
 		/// <summary>
 		/// Danh sách các gói tin đã bắt được
 		/// </summary>
 		public BindingList<PacketInfo> ListCapturedPackets { get; set; }
+
 		/// <summary>
 		/// Hàm ủy quyền thêm gói tin vào data grid
 		/// </summary>
 		/// <param name="packet"></param>
 		public delegate void AddItemToDataGrid(PacketInfo packet);
+
 		public AddItemToDataGrid UpdateDataGrid;
+
+		public List<string> ListNameDevices { get { return GetInterfaces(); } }
+
+		public string SelectedNameDevice { get; set; }
+
+		private SnifferClass()
+		{
+			winpcapDevices = LivePacketDevice.AllLocalMachine;
+		}
+
+		/// <summary>
+		/// Singleton Pattern
+		/// </summary>
+		/// <returns></returns>
+		public static SnifferClass getInstance()
+		{
+			if (instance == null)
+			{
+				instance = new SnifferClass();
+			}
+			return instance;
+		}
 
 		/// <summary>
 		/// Lấy danh sách card mạng trong máy tính
 		/// </summary>
 		/// <returns></returns>
-		public List<string> GetInterfaces()
+		private List<string> GetInterfaces()
 		{
-			try
+			List<string> values = new List<String>();
+			devices = NetworkInterface.GetAllNetworkInterfaces().ToList();
+			foreach (NetworkInterface @interface in devices)
 			{
-				allDevices = LivePacketDevice.AllLocalMachine;
-				List<string> result = new List<string>();
-				foreach (var device in allDevices)
-				{
-					string name = device.Description;
-					string[] array = name.Split('\'');
-					result.Add(array[1]);
-				}
-				return result;
+				if (!@interface.Name.Contains("Loopback"))
+					values.Add($"{@interface.Description} - {@interface.Name} - {@interface.Id}");
 			}
-			catch (Exception)
-			{
-				throw new AggregateException("WinPcap not found! You must install WinPcap on your computer before running Sniffer");
-			}
-		}
-
-		/// <summary>
-		/// Lựa chọn card mạng theo số thứ tự
-		/// </summary>
-		/// <param name="index"></param>
-		public void GetInterface(int index)
-		{
-			selectedDevice = allDevices[index];
-		}
-
-		/// <summary>
-		/// Lấy tên của card mạng đang được lựa chọn
-		/// </summary>
-		/// <returns></returns>
-		public string GetNameSelectedInterface()
-		{
-			return selectedDevice.Description.Split('\'')[1];
+			return values;
 		}
 
 		/// <summary>
@@ -82,34 +85,6 @@ namespace SnifferLib
 			  {
 				  UpdateDataGrid(ListCapturedPackets[ListCapturedPackets.Count - 1]);
 			  };
-		}
-
-		/// <summary>
-		/// Bắt đầu quá trình bắt gói tin
-		/// </summary>
-		public void Start()
-		{
-			if (allDevices.Count == 0)
-			{
-				throw new AggregateException("No interfaces found! Make sure WinPcap is installed.");
-			}
-			ListCapturedPackets = new BindingList<PacketInfo>();
-			AddListChangedEvent();
-			stopwatch = new Stopwatch();
-			using (PacketCommunicator communicator =
-				selectedDevice.Open(65536,                                  // 2^16byte, 64kb, max size của gói tin
-									PacketDeviceOpenAttributes.Promiscuous, // Chế độ bắt tất cả gói tin đang truyền trên mạng
-									1000))                                  // read timeout
-			{
-				try
-				{
-					stopwatch.Start();
-					communicator.ReceivePackets(0, PacketHandler);
-				}
-				catch (Exception)
-				{
-				}
-			}
 		}
 
 		/// <summary>
@@ -275,5 +250,46 @@ namespace SnifferLib
 				flags += " URG ";
 			return flags.Replace("  ", ", ").Trim();
 		}
+
+		/// <summary>
+		/// Lựa chọn card mạng theo số thứ tự
+		/// </summary>
+		/// <param name="index"></param>
+		public void SetSelectedInterface(int index)
+		{
+			selectedDevice = devices[index];
+			SelectedNameDevice = selectedDevice.Description;
+			string id = selectedDevice.Id.Replace("{", "").Replace("}", "");
+			selectedWinpcapDevice = winpcapDevices.First(d => d.Name.Contains(id));
+		}
+
+		/// <summary>
+		/// Bắt đầu quá trình bắt gói tin
+		/// </summary>
+		public void Start()
+		{
+			if (winpcapDevices.Count == 0)
+			{
+				throw new AggregateException("No interfaces found! Make sure WinPcap is installed.");
+			}
+			ListCapturedPackets = new BindingList<PacketInfo>();
+			AddListChangedEvent();
+			stopwatch = new Stopwatch();
+			using (PacketCommunicator communicator =
+				selectedWinpcapDevice.Open(65536,                                  // 2^16byte, 64kb, max size của gói tin
+									PacketDeviceOpenAttributes.Promiscuous, // Chế độ bắt tất cả gói tin đang truyền trên mạng
+									1000))                                  // read timeout
+			{
+				try
+				{
+					stopwatch.Start();
+					communicator.ReceivePackets(0, PacketHandler);
+				}
+				catch (Exception)
+				{
+				}
+			}
+		}
+
 	}
 }
