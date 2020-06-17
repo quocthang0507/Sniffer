@@ -9,6 +9,10 @@ namespace SnifferLib
 	public class PacketLayer
 	{
 		/// <summary>
+		/// Thông tin ICMP trong gói tin
+		/// </summary>
+		public string ICMPInfo { get; set; }
+		/// <summary>
 		/// Thông tin tầng HTTP trong gói tin
 		/// </summary>
 		public string HTTPInfo { get; set; }
@@ -32,15 +36,6 @@ namespace SnifferLib
 		public PacketLayer()
 		{
 
-		}
-
-		public PacketLayer(string hTTPInfo, string tCPInfo, string uDPInfo, string iPInfo, string ethernetInfo)
-		{
-			HTTPInfo = hTTPInfo;
-			TCPInfo = tCPInfo;
-			UDPInfo = uDPInfo;
-			IPInfo = iPInfo;
-			EthernetInfo = ethernetInfo;
 		}
 	}
 }

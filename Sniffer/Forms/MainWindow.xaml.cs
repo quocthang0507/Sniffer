@@ -201,6 +201,7 @@ namespace Sniffer
 
 		private void HideLayersWhenNotClicked()
 		{
+			isIcmp.Visibility = Visibility.Collapsed;
 			isHttp.Visibility = Visibility.Collapsed;
 			isTcp.Visibility = Visibility.Collapsed;
 			isUdp.Visibility = Visibility.Collapsed;
@@ -225,6 +226,11 @@ namespace Sniffer
 				{
 					isUdp.Visibility = Visibility.Visible;
 					tbxUdp.Text = layers.UDPInfo;
+				}
+				if (layers.ICMPInfo != null)
+				{
+					isIcmp.Visibility = Visibility.Visible;
+					tbxIcmp.Text = layers.ICMPInfo;
 				}
 				tbxEthernet.Text = layers.EthernetInfo;
 				tbxIp.Text = layers.IPInfo;

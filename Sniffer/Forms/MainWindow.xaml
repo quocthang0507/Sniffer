@@ -97,6 +97,26 @@
 		</DataGrid>
 		<GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="true" ResizeDirection="Rows" Grid.ColumnSpan="2"/>
 		<TreeView Grid.Row="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+			<TreeViewItem IsExpanded="False" x:Name="isIcmp" >
+				<TreeViewItem.Header>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Text="Internet Control Message Protocol (ICMP)" TextWrapping="Wrap" Margin="0 0 25 0"/>
+					</Grid>
+				</TreeViewItem.Header>
+				<TreeViewItem>
+					<TreeViewItem.Header>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock TextWrapping="Wrap" x:Name="tbxIcmp" Margin="0 0 50 0"/>
+						</Grid>
+					</TreeViewItem.Header>
+				</TreeViewItem>
+			</TreeViewItem>
 			<TreeViewItem IsExpanded="False" x:Name="isHttp" >
 				<TreeViewItem.Header>
 					<Grid>
