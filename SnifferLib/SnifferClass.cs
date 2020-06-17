@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 
 namespace SnifferLib
@@ -93,7 +94,7 @@ namespace SnifferLib
 		/// <param name="packet">Gói tin đang được xử lý</param>
 		private void PacketHandler(Packet packet)
 		{
-			// Lấy thông tin cơ bản
+			///////////////////Lấy thông tin cơ bản///////////////////////
 			PacketInfo info = new PacketInfo();
 			info.ID = ListCapturedPackets.Count + 1; // ban đầu là 0 id =1
 			info.Time = stopwatch.Elapsed.TotalSeconds;
@@ -104,7 +105,10 @@ namespace SnifferLib
 			info.Length = packet.Length;
 			string hex = packet.BytesSequenceToHexadecimalString();
 			info.Buffer = new PacketBuff(ProcessString(hex), HextoString(hex));
+			///////////////////Lấy thông tin ở các tầng trong TCP/IP///////////////////////
+			info.Layers = new PacketLayer();
 			GetEthernetType(packet, info);
+			///////////////////Thêm vào danh sách///////////////////////
 			ListCapturedPackets.Add(info);
 		}
 
@@ -132,7 +136,7 @@ namespace SnifferLib
 			return formatted;
 		}
 
-		private void GetIPv4Info(Packet packet, PacketInfo info)
+		private void GetIpProtocol(Packet packet, PacketInfo info)
 		{
 			switch (packet.Ethernet.IpV4.Protocol)
 			{
@@ -153,6 +157,13 @@ namespace SnifferLib
 					var tcp = packet.Ethernet.IpV4.Tcp;
 					info.Protocol = "TCP";
 					info.Info = $"{tcp.SourcePort} → {tcp.DestinationPort} [{GetFlags(tcp)}] Seq={tcp.SequenceNumber} Win={tcp.Window} Len={tcp.Length}";
+					///////////////FOR HTTP Request//////////////////
+					var header = tcp.Http.Header;
+					if (header != null)
+					{
+						info.Protocol = "HTTP";
+						info.Layers.HTTPInfo = "Header: " + header;
+					}
 					break;
 				case IpV4Protocol.Cbt:
 					break;
@@ -223,7 +234,6 @@ namespace SnifferLib
 				case IpV4Protocol.Il:
 					break;
 				case IpV4Protocol.IpV6:
-					info.Protocol = "IPv6";
 					break;
 				case IpV4Protocol.SourceDemandRoutingProtocol:
 					break;
@@ -258,6 +268,7 @@ namespace SnifferLib
 				case IpV4Protocol.Skip:
 					break;
 				case IpV4Protocol.InternetControlMessageProtocolForIpV6:
+					info.Protocol = "ICMPv6";
 					break;
 				case IpV4Protocol.NoNextHeaderForIpV6:
 					break;
@@ -428,20 +439,20 @@ namespace SnifferLib
 
 		private void GetEthernetType(Packet packet, PacketInfo info)
 		{
-			GetIPv4Info(packet, info);
 			switch (packet.Ethernet.EtherType)
 			{
 				case PcapDotNet.Packets.Ethernet.EthernetType.None:
 					break;
 				case PcapDotNet.Packets.Ethernet.EthernetType.IpV4:
+					GetIpProtocol(packet, info);
 					break;
 				case PcapDotNet.Packets.Ethernet.EthernetType.Arp:
 					info.Protocol = "ARP";
 					var arp = packet.Ethernet.Arp;
-					info.Source = packet.Ethernet.Source.ToString();
 					var senderIP = arp.SenderProtocolIpV4Address;
-					info.Destination = packet.Ethernet.Destination.ToString();
 					var targetIP = arp.TargetProtocolIpV4Address;
+					info.Source = packet.Ethernet.Source.ToString();
+					info.Destination = packet.Ethernet.Destination.ToString();
 					if (info.Destination == "FF:FF:FF:FF:FF:FF")
 					{
 						info.Info = $"Who has {targetIP}? Tell {senderIP}";
@@ -449,70 +460,13 @@ namespace SnifferLib
 					}
 					else info.Info = $"{senderIP} is at {info.Source}";
 					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.ReverseArp:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.AppleTalk:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.AppleTalkArp:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.VLanTaggedFrame:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.NovellInternetworkPacketExchange:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.Novell:
-					break;
 				case PcapDotNet.Packets.Ethernet.EthernetType.IpV6:
-					info.Protocol = "IPv6";
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.MacControl:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.PointToPointProtocol:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.CobraNet:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.MultiprotocolLabelSwitchingUnicast:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.MultiprotocolLabelSwitchingMulticast:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.PointToPointProtocolOverEthernetDiscoveryStage:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.PointToPointProtocolOverEthernetSessionStage:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.ExtensibleAuthenticationProtocolOverLan:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.HyperScsi:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.AtaOverEthernet:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.EtherCatProtocol:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.ProviderBridging:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.AvbTransportProtocol:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.SerialRealTimeCommunicationSystemIii:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.CircuitEmulationServicesOverEthernet:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.HomePlug:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.MacSecurity:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.PrecisionTimeProtocol:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.ConnectivityFaultManagementOrOperationsAdministrationManagement:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.FibreChannelOverEthernet:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.FibreChannelOverEthernetInitializationProtocol:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.QInQ:
-					break;
-				case PcapDotNet.Packets.Ethernet.EthernetType.VeritasLowLatencyTransport:
+					GetIpProtocol(packet, info);
 					break;
 				default:
 					break;
 			}
+			info.Layers.EthernetInfo = $"Source: {packet.Ethernet.Source}\nDestination: {packet.Ethernet.Destination}";
 		}
 
 		/// <summary>

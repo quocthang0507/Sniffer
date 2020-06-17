@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Sniffer"
         mc:Ignorable="d"
 		Icon="/Images/icon.ico"
-        Title="The Sniffer Network Analyzer" MinHeight="500" MinWidth="750" FontSize="14" Closing="Window_Closing">
+        Title="The Sniffer Network Analyzer" MinHeight="500" MinWidth="750" FontSize="14" Closing="Window_Closing" Loaded="Window_Loaded">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="25"/>
@@ -96,9 +96,110 @@
 			</DataGrid.Columns>
 		</DataGrid>
 		<GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="true" ResizeDirection="Rows" Grid.ColumnSpan="2"/>
-		<ScrollViewer Grid.Row="4">
-			<TextBlock x:Name="tbxLayerInfo" TextWrapping="Wrap" FontFamily="Consolas"></TextBlock>
-		</ScrollViewer>
+		<TreeView Grid.Row="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+			<TreeViewItem IsExpanded="False" x:Name="isHttp" >
+				<TreeViewItem.Header>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Text="Hypertext Transfer Protocol (HTTP)" TextWrapping="Wrap" Margin="0 0 25 0"/>
+					</Grid>
+				</TreeViewItem.Header>
+				<TreeViewItem>
+					<TreeViewItem.Header>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock TextWrapping="Wrap" x:Name="tbxHttp" Margin="0 0 50 0"/>
+						</Grid>
+					</TreeViewItem.Header>
+				</TreeViewItem>
+			</TreeViewItem>
+			<TreeViewItem IsExpanded="False" x:Name="isTcp">
+				<TreeViewItem.Header>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Text="Transmission Control Protocol (TCP)" TextWrapping="Wrap" Margin="0 0 25 0"/>
+					</Grid>
+				</TreeViewItem.Header>
+				<TreeViewItem>
+					<TreeViewItem.Header>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock TextWrapping="Wrap" x:Name="tbxTcp" Margin="0 0 50 0"/>
+						</Grid>
+					</TreeViewItem.Header>
+				</TreeViewItem>
+			</TreeViewItem>
+			<TreeViewItem IsExpanded="False" x:Name="isUdp">
+				<TreeViewItem.Header>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Text="User Datagram Protocol (UDP)" TextWrapping="Wrap" Margin="0 0 25 0"/>
+					</Grid>
+				</TreeViewItem.Header>
+				<TreeViewItem>
+					<TreeViewItem.Header>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock TextWrapping="Wrap" x:Name="tbxUdp" Margin="0 0 50 0"/>
+						</Grid>
+					</TreeViewItem.Header>
+				</TreeViewItem>
+			</TreeViewItem>
+			<TreeViewItem IsExpanded="False">
+				<TreeViewItem.Header>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Text="Internet Protocol (IP)" TextWrapping="Wrap" Margin="0 0 25 0"/>
+					</Grid>
+				</TreeViewItem.Header>
+				<TreeViewItem>
+					<TreeViewItem.Header>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock TextWrapping="Wrap" x:Name="tbxIp" Margin="0 0 50 0"/>
+						</Grid>
+					</TreeViewItem.Header>
+				</TreeViewItem>
+			</TreeViewItem>
+			<TreeViewItem IsExpanded="False">
+				<TreeViewItem.Header>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="82"/>
+							<ColumnDefinition Width="26"/>
+							<ColumnDefinition Width="652"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Text="Ethernet II" TextWrapping="Wrap" Margin="0,0,25,0" Grid.ColumnSpan="3"/>
+					</Grid>
+				</TreeViewItem.Header>
+				<TreeViewItem>
+					<TreeViewItem.Header>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
+							</Grid.ColumnDefinitions>
+							<TextBlock TextWrapping="Wrap" x:Name="tbxEthernet" Margin="0 0 50 0"/>
+						</Grid>
+					</TreeViewItem.Header>
+				</TreeViewItem>
+			</TreeViewItem>
+		</TreeView>
 		<GridSplitter Grid.Row="5" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="true" ResizeDirection="Rows" Grid.ColumnSpan="2"/>
 		<Grid Grid.Row="6" >
 			<Grid.ColumnDefinitions>

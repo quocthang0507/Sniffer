@@ -25,12 +25,17 @@ namespace Sniffer
 		{
 			this.snifferClass = snifferClass;
 			InitializeComponent();
+		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
 			// Lấy thông tin interface đã chọn từ WelcomeWindow
 			GetSelectedInterface();
 			// Lấy tên của máy tính
 			GetComputerName();
 			// Ủy quyền cập nhật DataGrid cho một lớp bên ngoài
 			snifferClass.UpdateDataGrid = new SnifferClass.AddItemToDataGrid(UpdateDataGrid);
+			HideLayersWhenNotClicked();
 		}
 
 		/// <summary>
@@ -188,9 +193,41 @@ namespace Sniffer
 			PacketInfo packetInfo = (PacketInfo)dgPackets.SelectedItem;
 			if (packetInfo != null)
 			{
-				var buff = packetInfo.Buffer;
-				tbxBuffer.Text = buff.Buffer;
-				tbxDecode.Text = buff.Content;
+				tbxBuffer.Text = packetInfo.Buffer.Buffer;
+				tbxDecode.Text = packetInfo.Buffer.Content;
+				UpdateLayers(packetInfo.Layers);
+			}
+		}
+
+		private void HideLayersWhenNotClicked()
+		{
+			isHttp.Visibility = Visibility.Collapsed;
+			isTcp.Visibility = Visibility.Collapsed;
+			isUdp.Visibility = Visibility.Collapsed;
+		}
+
+		private void UpdateLayers(PacketLayer layers)
+		{
+			HideLayersWhenNotClicked();
+			if (layers != null)
+			{
+				if (layers.HTTPInfo != null)
+				{
+					isHttp.Visibility = Visibility.Visible;
+					tbxHttp.Text = layers.HTTPInfo;
+				}
+				if (layers.TCPInfo != null)
+				{
+					isTcp.Visibility = Visibility.Visible;
+					tbxTcp.Text = layers.TCPInfo;
+				}
+				if (layers.UDPInfo != null)
+				{
+					isUdp.Visibility = Visibility.Visible;
+					tbxUdp.Text = layers.UDPInfo;
+				}
+				tbxEthernet.Text = layers.EthernetInfo;
+				tbxIp.Text = layers.IPInfo;
 			}
 		}
 

@@ -34,19 +34,27 @@
 		/// Thông tin
 		/// </summary>
 		public string Info { get; set; }
+		/// <summary>
+		/// Thông tin các tầng trong gói tin
+		/// </summary>
+		public PacketLayer Layers { get; set; }
 
-		public PacketInfo(int iD, double time, string source, string destination, string protocol, string info)
+		public PacketInfo()
+		{
+
+		}
+
+		public PacketInfo(int iD, double time, string source, string destination, string protocol, PacketBuff buffer, int length, string info, PacketLayer layers)
 		{
 			ID = iD;
 			Time = time;
 			Source = source;
 			Destination = destination;
 			Protocol = protocol;
+			Buffer = buffer;
+			Length = length;
 			Info = info;
-		}
-
-		public PacketInfo()
-		{
+			Layers = layers;
 		}
 	}
 }
