@@ -142,7 +142,6 @@ namespace SnifferLib
 			switch (packet.Ethernet.IpV4.Protocol)
 			{
 				case IpV4Protocol.InternetControlMessageProtocol:
-					
 					IcmpDatagram icmp = packet.Ethernet.IpV4.Icmp;
 					info.Protocol = "ICMP";
 					info.Info = "Echo (ping)";
