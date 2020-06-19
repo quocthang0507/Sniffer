@@ -72,8 +72,7 @@ namespace SnifferLib
 			devices = NetworkInterface.GetAllNetworkInterfaces().ToList();
 			foreach (NetworkInterface @interface in devices)
 			{
-				if (!@interface.Name.Contains("Loopback"))
-					values.Add($"{@interface.Description} - {@interface.Name} - {@interface.Id}");
+				values.Add($"{@interface.Description} - {@interface.Name} - {@interface.Id}");
 			}
 			return values;
 		}
@@ -160,8 +159,8 @@ namespace SnifferLib
 					}
 					/////////////// TCP Layer//////////////////
 					info.Layers.TCPInfo = $"Source Port: {tcp.SourcePort}\nDestination Port: {tcp.DestinationPort}" +
-						$"\nSequence number: {tcp.SequenceNumber}\nNext sequence number: {tcp.NextSequenceNumber}" + 
-						$"\nAcknowledgement number: {tcp.AcknowledgmentNumber}\nHeader Length: {tcp.HeaderLength}" + 
+						$"\nSequence number: {tcp.SequenceNumber}\nNext sequence number: {tcp.NextSequenceNumber}" +
+						$"\nAcknowledgement number: {tcp.AcknowledgmentNumber}\nHeader Length: {tcp.HeaderLength}" +
 						$"\nWindow size value: {tcp.Window}\nChecksum: {tcp.Checksum}";
 					break;
 				case IpV4Protocol.Udp:
@@ -249,7 +248,14 @@ namespace SnifferLib
 			selectedDevice = devices[index];
 			SelectedNameDevice = selectedDevice.Description;
 			string id = selectedDevice.Id.Replace("{", "").Replace("}", "");
-			selectedWinpcapDevice = winpcapDevices.First(d => d.Name.Contains(id));
+			try
+			{
+				selectedWinpcapDevice = winpcapDevices.First(d => d.Name.Contains(id));
+			}
+			catch (Exception)
+			{
+				throw new Exception("The interface that you have selected does not support to capture packets, please try other again");
+			}
 		}
 
 		/// <summary>

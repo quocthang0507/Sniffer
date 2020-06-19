@@ -42,7 +42,15 @@ namespace Sniffer.Forms
 		{
 			if (this.listInterface.SelectedIndex != -1)
 			{
-				snifferClass.SetSelectedInterface(this.listInterface.SelectedIndex);
+				try
+				{
+					snifferClass.SetSelectedInterface(this.listInterface.SelectedIndex);
+				}
+				catch (Exception e)
+				{
+					MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					return;
+				}
 				this.Hide();
 				MainWindow mainWindow = new MainWindow(snifferClass);
 				mainWindow.Show();
