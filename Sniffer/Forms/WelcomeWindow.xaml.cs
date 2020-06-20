@@ -53,6 +53,7 @@ namespace Sniffer.Forms
 				}
 				this.Hide();
 				MainWindow mainWindow = new MainWindow(snifferClass);
+				mainWindow.Closed += (s, args) => this.Show();
 				mainWindow.Show();
 			}
 		}

@@ -4,6 +4,7 @@ using System;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interop;
 
 namespace Sniffer
 {
@@ -15,6 +16,7 @@ namespace Sniffer
 		private SnifferClass snifferClass;
 		private Thread thread;
 		private bool autoScroll = false;
+		private bool goBack = false;
 
 		public MainWindow()
 		{
@@ -29,6 +31,7 @@ namespace Sniffer
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
+			goBack = false;
 			// Lấy thông tin interface đã chọn từ WelcomeWindow
 			GetSelectedInterface();
 			// Lấy tên của máy tính
@@ -64,8 +67,24 @@ namespace Sniffer
 			}).Start();
 		}
 
+		private void btnBack_Click(object sender, RoutedEventArgs e)
+		{
+			if (thread != null && thread.IsAlive)
+			{
+				var msgBox = MessageBox.Show("The current task is working! Do you want to stop capturing packets and go back to the welcome window?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+				if (msgBox == MessageBoxResult.Yes)
+					thread.Abort();
+				else
+					return;
+			}
+			goBack = true;
+			this.Close();
+		}
+
 		private void btnExit_Click(object sender, RoutedEventArgs e)
 		{
+			if (!goBack)
+				return;
 			QuitWindow quitWindow = new QuitWindow();
 			quitWindow.ShowDialog();
 			if (quitWindow.Mode != QuitMode.Cancel)
@@ -88,6 +107,8 @@ namespace Sniffer
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
+			if (goBack)
+				return;
 			QuitWindow quitWindow = new QuitWindow();
 			quitWindow.ShowDialog();
 			if (quitWindow.Mode == QuitMode.Cancel)
