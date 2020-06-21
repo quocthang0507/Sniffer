@@ -10,7 +10,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 
 namespace SnifferLib
@@ -20,11 +19,29 @@ namespace SnifferLib
 	/// </summary>
 	public class SnifferClass
 	{
-		private IList<LivePacketDevice> winpcapDevices;
-		private PacketDevice selectedWinpcapDevice;
+		/// <summary>
+		/// Danh sách interface có trong máy tính
+		/// </summary>
 		private List<NetworkInterface> devices;
+		/// <summary>
+		/// Danh sách interface mà WinPcap có thể bắt gói tin được
+		/// </summary>
+		private IList<LivePacketDevice> winpcapDevices;
+		/// <summary>
+		/// Interface được chọn
+		/// </summary>
 		private NetworkInterface selectedDevice;
+		/// <summary>
+		/// Interface tương ứng trong WinPcap
+		/// </summary>
+		private PacketDevice selectedWinpcapDevice;
+		/// <summary>
+		/// Đo thời gian của từng gói tin
+		/// </summary>
 		private Stopwatch stopwatch;
+		/// <summary>
+		/// Thể hiện tĩnh của lớp (dùng Singleton)
+		/// </summary>
 		private static SnifferClass instance;
 
 		/// <summary>
@@ -78,6 +95,26 @@ namespace SnifferLib
 		}
 
 		/// <summary>
+		/// Lựa chọn card mạng theo số thứ tự
+		/// </summary>
+		/// <param name="index"></param>
+		public void SetSelectedInterface(int index)
+		{
+			selectedDevice = devices[index];
+			SelectedNameDevice = selectedDevice.Description;
+			string id = selectedDevice.Id.Replace("{", "").Replace("}", "");
+			try
+			{
+				selectedWinpcapDevice = winpcapDevices.First(d => d.Name.Contains(id));
+			}
+			catch (Exception)
+			{
+				throw new Exception("The interface that you have selected does not support to capture packets, please try other again");
+			}
+		}
+
+
+		/// <summary>
 		/// Thêm sự kiện khi một gói tin đã thêm vào danh sách
 		/// </summary>
 		private void AddListChangedEvent()
@@ -86,6 +123,34 @@ namespace SnifferLib
 			  {
 				  UpdateDataGrid(ListCapturedPackets[ListCapturedPackets.Count - 1]);
 			  };
+		}
+
+		/// <summary>
+		/// Bắt đầu quá trình bắt gói tin
+		/// </summary>
+		public void Start()
+		{
+			if (winpcapDevices.Count == 0)
+			{
+				throw new AggregateException("No interfaces found! Make sure WinPcap is installed.");
+			}
+			ListCapturedPackets = new BindingList<PacketInfo>();
+			AddListChangedEvent();
+			stopwatch = new Stopwatch();
+			using (PacketCommunicator communicator =
+				selectedWinpcapDevice.Open(65536,                           // 2^16byte, 64kb, max size của gói tin
+									PacketDeviceOpenAttributes.Promiscuous, // Chế độ bắt tất cả gói tin đang truyền trên mạng
+									1000))                                  // read timeout
+			{
+				try
+				{
+					stopwatch.Start();
+					communicator.ReceivePackets(0, PacketHandler);
+				}
+				catch (Exception)
+				{
+				}
+			}
 		}
 
 		/// <summary>
@@ -136,48 +201,6 @@ namespace SnifferLib
 			return formatted;
 		}
 
-		private void GetIpProtocol(Packet packet, PacketInfo info)
-		{
-			switch (packet.Ethernet.IpV4.Protocol)
-			{
-				case IpV4Protocol.InternetControlMessageProtocol:
-					IcmpDatagram icmp = packet.Ethernet.IpV4.Icmp;
-					info.Protocol = "ICMP";
-					info.Info = "Echo (ping)";
-					info.Layers.ICMPInfo = $"Checksum: {icmp.Checksum}";
-					break;
-				case IpV4Protocol.Tcp:
-					var tcp = packet.Ethernet.IpV4.Tcp;
-					info.Protocol = "TCP";
-					info.Info = $"{tcp.SourcePort} → {tcp.DestinationPort} [{GetFlags(tcp)}] Seq={tcp.SequenceNumber} Win={tcp.Window} Len={tcp.Length}";
-					/////////////// HTTP Request//////////////////
-					var header = tcp.Http.Header;
-					if (header != null)
-					{
-						info.Protocol = "HTTP";
-						info.Layers.HTTPInfo = "Header: " + header;
-					}
-					/////////////// TCP Layer//////////////////
-					info.Layers.TCPInfo = $"Source Port: {tcp.SourcePort}\nDestination Port: {tcp.DestinationPort}" +
-						$"\nSequence number: {tcp.SequenceNumber}\nNext sequence number: {tcp.NextSequenceNumber}" +
-						$"\nAcknowledgement number: {tcp.AcknowledgmentNumber}\nHeader Length: {tcp.HeaderLength}" +
-						$"\nWindow size value: {tcp.Window}\nChecksum: {tcp.Checksum}";
-					break;
-				case IpV4Protocol.Udp:
-					UdpDatagram udp = packet.Ethernet.IpV4.Udp;
-					info.Protocol = "UDP";
-					info.Info = $"{udp.SourcePort} → {udp.DestinationPort} Len={udp.Length}";
-					info.Layers.UDPInfo = $"Source Port: {udp.SourcePort}\nDestination Port: {udp.DestinationPort}" +
-						$"\nLength: {udp.TotalLength}\nChecksum: {udp.Checksum}";
-					break;
-				case IpV4Protocol.InternetControlMessageProtocolForIpV6:
-					info.Protocol = "ICMPv6";
-					break;
-				default:
-					break;
-			}
-		}
-
 		private void GetEthernetType(Packet packet, PacketInfo info)
 		{
 			switch (packet.Ethernet.EtherType)
@@ -216,6 +239,52 @@ namespace SnifferLib
 			info.Layers.EthernetInfo = $"Source: {packet.Ethernet.Source}\nDestination: {packet.Ethernet.Destination}";
 		}
 
+		private void GetIpProtocol(Packet packet, PacketInfo info)
+		{
+			switch (packet.Ethernet.IpV4.Protocol)
+			{
+				case IpV4Protocol.InternetControlMessageProtocol:
+					IcmpDatagram icmp = packet.Ethernet.IpV4.Icmp;
+					if (icmp != null)
+					{
+						info.Protocol = "ICMP";
+						info.Info = "Echo (ping)";
+						info.Layers.ICMPInfo = $"Checksum: {icmp.Checksum}";
+					}
+					break;
+				case IpV4Protocol.Tcp:
+					var tcp = packet.Ethernet.IpV4.Tcp;
+					info.Protocol = "TCP";
+					info.Info = $"{tcp.SourcePort} → {tcp.DestinationPort} [{GetFlags(tcp)}] " +
+						$"Seq={tcp.SequenceNumber} Win={tcp.Window} Len={tcp.Length}";
+					/////////////// HTTP Request//////////////////
+					var header = tcp.Http.Header;
+					if (header != null)
+					{
+						info.Protocol = "HTTP";
+						info.Layers.HTTPInfo = "Header: " + header;
+					}
+					/////////////// TCP Layer//////////////////
+					info.Layers.TCPInfo = $"Source Port: {tcp.SourcePort}\nDestination Port: {tcp.DestinationPort}" +
+						$"\nSequence number: {tcp.SequenceNumber}\nNext sequence number: {tcp.NextSequenceNumber}" +
+						$"\nAcknowledgement number: {tcp.AcknowledgmentNumber}\nHeader Length: {tcp.HeaderLength}" +
+						$"\nWindow size value: {tcp.Window}\nChecksum: {tcp.Checksum}";
+					break;
+				case IpV4Protocol.Udp:
+					UdpDatagram udp = packet.Ethernet.IpV4.Udp;
+					info.Protocol = "UDP";
+					info.Info = $"{udp.SourcePort} → {udp.DestinationPort} Len={udp.Length}";
+					info.Layers.UDPInfo = $"Source Port: {udp.SourcePort}\nDestination Port: {udp.DestinationPort}" +
+						$"\nLength: {udp.TotalLength}\nChecksum: {udp.Checksum}";
+					break;
+				case IpV4Protocol.InternetControlMessageProtocolForIpV6:
+					info.Protocol = "ICMPv6";
+					break;
+				default:
+					break;
+			}
+		}
+
 		/// <summary>
 		/// https://www.geeksforgeeks.org/tcp-flags/?ref=lbp
 		/// </summary>
@@ -239,51 +308,5 @@ namespace SnifferLib
 			return flags.Replace("  ", ", ").Trim();
 		}
 
-		/// <summary>
-		/// Lựa chọn card mạng theo số thứ tự
-		/// </summary>
-		/// <param name="index"></param>
-		public void SetSelectedInterface(int index)
-		{
-			selectedDevice = devices[index];
-			SelectedNameDevice = selectedDevice.Description;
-			string id = selectedDevice.Id.Replace("{", "").Replace("}", "");
-			try
-			{
-				selectedWinpcapDevice = winpcapDevices.First(d => d.Name.Contains(id));
-			}
-			catch (Exception)
-			{
-				throw new Exception("The interface that you have selected does not support to capture packets, please try other again");
-			}
-		}
-
-		/// <summary>
-		/// Bắt đầu quá trình bắt gói tin
-		/// </summary>
-		public void Start()
-		{
-			if (winpcapDevices.Count == 0)
-			{
-				throw new AggregateException("No interfaces found! Make sure WinPcap is installed.");
-			}
-			ListCapturedPackets = new BindingList<PacketInfo>();
-			AddListChangedEvent();
-			stopwatch = new Stopwatch();
-			using (PacketCommunicator communicator =
-				selectedWinpcapDevice.Open(65536,                                  // 2^16byte, 64kb, max size của gói tin
-									PacketDeviceOpenAttributes.Promiscuous, // Chế độ bắt tất cả gói tin đang truyền trên mạng
-									1000))                                  // read timeout
-			{
-				try
-				{
-					stopwatch.Start();
-					communicator.ReceivePackets(0, PacketHandler);
-				}
-				catch (Exception)
-				{
-				}
-			}
-		}
 	}
 }

@@ -4,7 +4,6 @@ namespace Sniffer.Forms
 {
 	public enum QuitMode
 	{
-		Back,
 		Exit,
 		Cancel
 	}

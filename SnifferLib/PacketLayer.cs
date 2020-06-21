@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SnifferLib
+﻿namespace SnifferLib
 {
 	public class PacketLayer
 	{
@@ -13,7 +7,7 @@ namespace SnifferLib
 		/// </summary>
 		public string ICMPInfo { get; set; }
 		/// <summary>
-		/// Thông tin tầng HTTP trong gói tin
+		/// Thông tin HTTP trong gói tin
 		/// </summary>
 		public string HTTPInfo { get; set; }
 		/// <summary>

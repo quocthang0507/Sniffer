@@ -4,7 +4,6 @@ using System;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interop;
 
 namespace Sniffer
 {
@@ -71,7 +70,9 @@ namespace Sniffer
 		{
 			if (thread != null && thread.IsAlive)
 			{
-				var msgBox = MessageBox.Show("The current task is working! Do you want to stop capturing packets and go back to the welcome window?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+				var msgBox = MessageBox.Show("The current task is working! " +
+					"Do you want to stop capturing packets and go back to the welcome window?", "Warning",
+					MessageBoxButton.YesNo, MessageBoxImage.Warning);
 				if (msgBox == MessageBoxResult.Yes)
 					thread.Abort();
 				else
