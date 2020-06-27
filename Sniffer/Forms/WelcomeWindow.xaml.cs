@@ -15,7 +15,7 @@ namespace Sniffer.Forms
 		public WelcomeWindow()
 		{
 			InitializeComponent();
-			snifferClass = new SnifferClass();
+			snifferClass = SnifferClass.getInstance();
 			ShowInterfaces();
 		}
 
@@ -23,7 +23,7 @@ namespace Sniffer.Forms
 		{
 			try
 			{
-				listInterface.ItemsSource = snifferClass.GetInterfaces();
+				listInterface.ItemsSource = snifferClass.ListNameDevices;
 			}
 			catch (Exception e)
 			{
@@ -42,9 +42,18 @@ namespace Sniffer.Forms
 		{
 			if (this.listInterface.SelectedIndex != -1)
 			{
-				snifferClass.GetInterface(this.listInterface.SelectedIndex);
+				try
+				{
+					snifferClass.SetSelectedInterface(this.listInterface.SelectedIndex);
+				}
+				catch (Exception e)
+				{
+					MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					return;
+				}
 				this.Hide();
 				MainWindow mainWindow = new MainWindow(snifferClass);
+				mainWindow.Closed += (s, args) => this.Show();
 				mainWindow.Show();
 			}
 		}
