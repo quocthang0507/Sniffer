@@ -1,4 +1,6 @@
-﻿namespace SnifferLib
+﻿using System.Net;
+
+namespace SnifferLib
 {
 	public class PacketInfo
 	{
@@ -38,6 +40,12 @@
 		/// Thông tin các tầng trong gói tin
 		/// </summary>
 		public PacketLayer Layers { get; set; } = new PacketLayer();
+		public CaptureRecord? Capture { get; set; }
+		public IPAddress? SourceAddress { get; set; }
+		public IPAddress? DestinationAddress { get; set; }
+		public ushort? SourcePort { get; set; }
+		public ushort? DestinationPort { get; set; }
+		public string? TransportProtocol { get; set; }
 
 		public PacketInfo()
 		{

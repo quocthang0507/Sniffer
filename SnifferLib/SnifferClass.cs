@@ -3,7 +3,6 @@ using SharpPcap;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 
@@ -18,7 +17,8 @@ namespace SnifferLib
 		private readonly IList<ILiveDevice> captureDevices;
 		private ILiveDevice? selectedCaptureDevice;
 		private ILiveDevice? activeCaptureDevice;
-		private Stopwatch stopwatch = new Stopwatch();
+		private DateTimeOffset? firstCapturedAt;
+		private readonly object packetsLock = new object();
 		private readonly Exception? captureDeviceInitializationError;
 		private static SnifferClass? instance;
 
@@ -120,8 +120,11 @@ namespace SnifferLib
 				throw new InvalidOperationException("Packet capture is already running.");
 			}
 
-			ListCapturedPackets = new BindingList<PacketInfo>();
-			stopwatch = Stopwatch.StartNew();
+			lock (packetsLock)
+			{
+				ListCapturedPackets = new BindingList<PacketInfo>();
+				firstCapturedAt = null;
+			}
 
 			ILiveDevice device = selectedCaptureDevice;
 			bool opened = false;
@@ -154,7 +157,6 @@ namespace SnifferLib
 						cause = new AggregateException(exception, closeException);
 					}
 				}
-				stopwatch.Stop();
 				throw new InvalidOperationException(
 					"Could not start packet capture. Verify that Npcap is installed and the selected adapter supports capture.",
 					cause);
@@ -194,11 +196,6 @@ namespace SnifferLib
 			{
 				failure = failure is null ? exception : new AggregateException(failure, exception);
 			}
-			finally
-			{
-				stopwatch.Stop();
-			}
-
 			if (failure is not null)
 				throw new InvalidOperationException("Could not stop packet capture cleanly.", failure);
 		}
@@ -206,11 +203,24 @@ namespace SnifferLib
 		private void PacketHandler(object sender, PacketCapture e)
 		{
 			RawCapture capture = e.GetPacket();
-			int id = ListCapturedPackets.Count + 1;
-			double elapsedSeconds = stopwatch.Elapsed.TotalSeconds;
-			PacketInfo packet = PacketParser.Parse(capture.Data, capture.LinkLayerType, id, elapsedSeconds);
-			ListCapturedPackets.Add(packet);
+			DateTimeOffset timestamp = new DateTimeOffset(capture.Timeval.Date);
+			var record = new CaptureRecord(capture.Data, capture.LinkLayerType,
+				timestamp, capture.PacketLength);
+			PacketInfo packet;
+			lock (packetsLock)
+			{
+				firstCapturedAt ??= timestamp;
+				double elapsedSeconds = (timestamp - firstCapturedAt.Value).TotalSeconds;
+				packet = PacketParser.Parse(record, ListCapturedPackets.Count + 1, elapsedSeconds);
+				ListCapturedPackets.Add(packet);
+			}
 			UpdateDataGrid?.Invoke(packet);
+		}
+
+		public PacketInfo[] GetCapturedPacketsSnapshot()
+		{
+			lock (packetsLock)
+				return ListCapturedPackets.ToArray();
 		}
 	}
 }

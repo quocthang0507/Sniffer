@@ -1,253 +1,117 @@
-﻿<Window x:Class="Sniffer.MainWindow"
+<Window x:Class="Sniffer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Sniffer"
-        mc:Ignorable="d"
-		Icon="/Images/icon.ico"
-        Title="The Sniffer Network Analyzer" MinHeight="500" MinWidth="750" FontSize="14" Closing="Window_Closing" Loaded="Window_Loaded">
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="25"/>
-			<RowDefinition Height="35"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="28"/>
-		</Grid.RowDefinitions>
-		<Menu x:Name="menuBar" VerticalAlignment="Top" FontSize="14" Background="Transparent" Grid.ColumnSpan="2">
-			<MenuItem Header="_File" Name="btnFile">
-				<MenuItem Header="_Back" Name="btnBack" Click="btnBack_Click" InputGestureText="Alt + B"/>
-				<MenuItem Header="_Exit" Name="btnExit" Click="btnExit_Click" InputGestureText="Alt + F4"/>
-			</MenuItem>
-			<MenuItem Header="_Help" Name="btnHelp">
-				<MenuItem Header="_Documentation" Name="btnDoc" Click="btnDoc_Click"/>
-				<MenuItem Header="_About" Name="btnAbout" Click="btnAbout_Click"/>
-			</MenuItem>
-		</Menu>
-		<StackPanel x:Name="menuAction" Orientation="Horizontal" Margin="2, 5" Grid.Row="1" Grid.ColumnSpan="2" >
-			<Button x:Name="btnStart" ToolTip="Start capturing packets" Background="Transparent" BorderThickness="0" Click="btnStart_Click">
-				<Image Source="/Images/play.png">
-					<Image.Style>
-						<Style TargetType="Image">
-							<Style.Triggers>
-								<Trigger Property="IsEnabled" Value="False">
-									<Setter Property="Opacity" Value="0.2" />
-								</Trigger>
-							</Style.Triggers>
-						</Style>
-					</Image.Style>
-				</Image>
-			</Button>
-			<Button x:Name="btnStop" ToolTip="Stop capturing packets" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnStop_Click" IsEnabled="False">
-				<Image Source="/Images/stop.png">
-					<Image.Style>
-						<Style TargetType="Image">
-							<Style.Triggers>
-								<Trigger Property="IsEnabled" Value="False">
-									<Setter Property="Opacity" Value="0.2" />
-								</Trigger>
-							</Style.Triggers>
-						</Style>
-					</Image.Style>
-				</Image>
-			</Button>
-			<Button x:Name="btnRestart" ToolTip="Restart current capture" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnRestart_Click">
-				<Image Source="/Images/restart.png"/>
-			</Button>
-			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
-			<Button x:Name="btnClose" ToolTip="Close this capture file and return to welcome window" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0"  Click="btnClose_Click">
-				<Image Source="/Images/close.png"/>
-			</Button>
-			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
-			<TextBox x:Name="tbxFindWhat" Width="150" Margin="5, 0, 0, 0" ToolTip="Enter a display filter" TextChanged="tbxFindWhat_TextChanged"></TextBox>
-
-			<Button Background="LightGray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
-			<Button x:Name="btnPreviousPacket" ToolTip="Go to the previous packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnPreviousPacket_Click">
-				<Image Source="/Images/left.png"/>
-			</Button>
-			<Button x:Name="btnNextPacket" ToolTip="Go to the next packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnNextPacket_Click">
-				<Image Source="/Images/right.png"/>
-			</Button>
-			<TextBox x:Name="tbxGoTo" Width="50" Margin="5, 0, 0, 0" ToolTip="Enter packet index" TextAlignment="Center"></TextBox>
-			<Button x:Name="btnGoTo" ToolTip="Go to specified packet index" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnGoTo_Click">
-				<Image Source="/Images/goto.png"/>
-			</Button>
-			<Button x:Name="btnGoToFirst" ToolTip="Go to the first packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnGoToFirst_Click">
-				<Image Source="/Images/first.png"/>
-			</Button>
-			<Button x:Name="btnGoToEnd" ToolTip="Go to the end packet" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnGoToEnd_Click">
-				<Image Source="/Images/end.png"/>
-			</Button>
-			<Button x:Name="btnAutoScroll" ToolTip="Automatically scroll to the last packet during the live capture" Background="Transparent" Margin="5, 0, 0, 0" BorderThickness="0" Click="btnAutoScroll_Click" >
-				<Image Source="/Images/scroll.png"/>
-			</Button>
-		</StackPanel>
-		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="Auto" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" SelectionChanged="dgPackets_SelectionChanged" ScrollViewer.ScrollChanged="dgPackets_ScrollChanged" >
-			<DataGrid.Columns>
-				<DataGridTextColumn Header="No." Binding="{Binding ID}"/>
-				<DataGridTextColumn Header="Time" Binding="{Binding Time}"/>
-				<DataGridTextColumn Header="Source" Binding="{Binding Source}"/>
-				<DataGridTextColumn Header="Destination" Binding="{Binding Destination}"/>
-				<DataGridTextColumn Header="Protocol" Binding="{Binding Protocol}"/>
-				<DataGridTextColumn Header="Info" Binding="{Binding Info}"/>
-			</DataGrid.Columns>
-		</DataGrid>
-		<GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="true" ResizeDirection="Rows" Grid.ColumnSpan="2"/>
-		<TreeView Grid.Row="4" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-			<TreeViewItem IsExpanded="False" x:Name="isIcmp" >
-				<TreeViewItem.Header>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
-						</Grid.ColumnDefinitions>
-						<TextBlock Text="Internet Control Message Protocol (ICMP)" TextWrapping="Wrap" Margin="0 0 25 0"/>
-					</Grid>
-				</TreeViewItem.Header>
-				<TreeViewItem>
-					<TreeViewItem.Header>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
-							</Grid.ColumnDefinitions>
-							<TextBlock TextWrapping="Wrap" x:Name="tbxIcmp" Margin="0 0 50 0"/>
-						</Grid>
-					</TreeViewItem.Header>
-				</TreeViewItem>
-			</TreeViewItem>
-			<TreeViewItem IsExpanded="False" x:Name="isHttp" >
-				<TreeViewItem.Header>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
-						</Grid.ColumnDefinitions>
-						<TextBlock Text="Hypertext Transfer Protocol (HTTP)" TextWrapping="Wrap" Margin="0 0 25 0"/>
-					</Grid>
-				</TreeViewItem.Header>
-				<TreeViewItem>
-					<TreeViewItem.Header>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
-							</Grid.ColumnDefinitions>
-							<TextBlock TextWrapping="Wrap" x:Name="tbxHttp" Margin="0 0 50 0"/>
-						</Grid>
-					</TreeViewItem.Header>
-				</TreeViewItem>
-			</TreeViewItem>
-			<TreeViewItem IsExpanded="False" x:Name="isTcp">
-				<TreeViewItem.Header>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
-						</Grid.ColumnDefinitions>
-						<TextBlock Text="Transmission Control Protocol (TCP)" TextWrapping="Wrap" Margin="0 0 25 0"/>
-					</Grid>
-				</TreeViewItem.Header>
-				<TreeViewItem>
-					<TreeViewItem.Header>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
-							</Grid.ColumnDefinitions>
-							<TextBlock TextWrapping="Wrap" x:Name="tbxTcp" Margin="0 0 50 0"/>
-						</Grid>
-					</TreeViewItem.Header>
-				</TreeViewItem>
-			</TreeViewItem>
-			<TreeViewItem IsExpanded="False" x:Name="isUdp">
-				<TreeViewItem.Header>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
-						</Grid.ColumnDefinitions>
-						<TextBlock Text="User Datagram Protocol (UDP)" TextWrapping="Wrap" Margin="0 0 25 0"/>
-					</Grid>
-				</TreeViewItem.Header>
-				<TreeViewItem>
-					<TreeViewItem.Header>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
-							</Grid.ColumnDefinitions>
-							<TextBlock TextWrapping="Wrap" x:Name="tbxUdp" Margin="0 0 50 0"/>
-						</Grid>
-					</TreeViewItem.Header>
-				</TreeViewItem>
-			</TreeViewItem>
-			<TreeViewItem IsExpanded="False">
-				<TreeViewItem.Header>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
-						</Grid.ColumnDefinitions>
-						<TextBlock Text="Internet Protocol (IP)" TextWrapping="Wrap" Margin="0 0 25 0"/>
-					</Grid>
-				</TreeViewItem.Header>
-				<TreeViewItem>
-					<TreeViewItem.Header>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
-							</Grid.ColumnDefinitions>
-							<TextBlock TextWrapping="Wrap" x:Name="tbxIp" Margin="0 0 50 0"/>
-						</Grid>
-					</TreeViewItem.Header>
-				</TreeViewItem>
-			</TreeViewItem>
-			<TreeViewItem IsExpanded="False">
-				<TreeViewItem.Header>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="82"/>
-							<ColumnDefinition Width="26"/>
-							<ColumnDefinition Width="652"/>
-						</Grid.ColumnDefinitions>
-						<TextBlock Text="Ethernet II" TextWrapping="Wrap" Margin="0,0,25,0" Grid.ColumnSpan="3"/>
-					</Grid>
-				</TreeViewItem.Header>
-				<TreeViewItem>
-					<TreeViewItem.Header>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=ActualWidth}"/>
-							</Grid.ColumnDefinitions>
-							<TextBlock TextWrapping="Wrap" x:Name="tbxEthernet" Margin="0 0 50 0"/>
-						</Grid>
-					</TreeViewItem.Header>
-				</TreeViewItem>
-			</TreeViewItem>
-		</TreeView>
-		<GridSplitter Grid.Row="5" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="true" ResizeDirection="Rows" Grid.ColumnSpan="2"/>
-		<Grid Grid.Row="6" >
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="5"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-			<ScrollViewer>
-				<TextBlock x:Name="tbxBuffer" TextWrapping="Wrap" FontFamily="Consolas"/>
-			</ScrollViewer>
-			<GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
-			<ScrollViewer Grid.Column="2">
-				<TextBlock x:Name="tbxDecode" TextWrapping="Wrap"/>
-			</ScrollViewer>
-		</Grid>
-		<StackPanel Orientation="Horizontal" Grid.Row="7" Background="LightGray" Grid.ColumnSpan="2">
-			<Label Content="Adapter: "/>
-			<Label x:Name="tbxAdapter" Content=""/>
-			<Button Background="Gray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
-			<Label Content="Total Packets: " Margin="5, 0, 0, 0"/>
-			<Label x:Name="tbxTotalPackets" Content="0"/>
-			<Button Background="Gray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
-			<Label Content="Displayed: " Margin="5, 0, 0, 0"/>
-			<Label x:Name="tbxTotalDisPackets" Content="0"/>
-			<Button Background="Gray" Width="2" Margin="5, 0, 0, 0" BorderThickness="0"/>
-			<Label Content="Computer: " Margin="5, 0, 0, 0"/>
-			<Label x:Name="tbxComputerName" Content=""/>
-		</StackPanel>
-	</Grid>
+        Title="Sniffer Network Analyzer" Icon="/Images/icon.ico"
+        MinHeight="500" MinWidth="750" Width="1200" Height="750"
+        Closing="Window_Closing" Loaded="Window_Loaded">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open capture..." Click="btnOpen_Click"/>
+                <MenuItem Header="_Save capture..." Click="btnSave_Click"/>
+                <Separator/>
+                <MenuItem Header="_Back" Click="btnBack_Click"/>
+                <MenuItem Header="E_xit" Click="btnExit_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Documentation" Click="btnDoc_Click"/>
+                <MenuItem Header="_About" Click="btnAbout_Click"/>
+            </MenuItem>
+        </Menu>
+        <ToolBar DockPanel.Dock="Top">
+            <ToolBar.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="Width" Value="18"/>
+                    <Setter Property="Height" Value="18"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.35"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ToolBar.Resources>
+            <Button x:Name="btnStart" ToolTip="Start capturing" AutomationProperties.Name="Start capturing" Click="btnStart_Click">
+                <StackPanel Orientation="Horizontal"><Image Source="/Images/play.png"/><TextBlock Text="Start" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
+            </Button>
+            <Button x:Name="btnStop" ToolTip="Stop capturing" AutomationProperties.Name="Stop capturing" Click="btnStop_Click" IsEnabled="False">
+                <StackPanel Orientation="Horizontal"><Image Source="/Images/stop.png"/><TextBlock Text="Stop" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
+            </Button>
+            <Button x:Name="btnRestart" ToolTip="Restart capture" AutomationProperties.Name="Restart capture" Click="btnRestart_Click">
+                <StackPanel Orientation="Horizontal"><Image Source="/Images/restart.png"/><TextBlock Text="Restart" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
+            </Button>
+            <Button ToolTip="Back to welcome screen" AutomationProperties.Name="Back to welcome screen" Click="btnClose_Click">
+                <StackPanel Orientation="Horizontal"><Image Source="/Images/left.png"/><TextBlock Text="Back" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
+            </Button>
+            <Separator/>
+            <Button ToolTip="First packet" AutomationProperties.Name="First packet" Click="btnGoToFirst_Click"><Image Source="/Images/first.png"/></Button>
+            <Button ToolTip="Previous packet" AutomationProperties.Name="Previous packet" Click="btnPreviousPacket_Click"><Image Source="/Images/left.png"/></Button>
+            <Button ToolTip="Next packet" AutomationProperties.Name="Next packet" Click="btnNextPacket_Click"><Image Source="/Images/right.png"/></Button>
+            <Button ToolTip="Last packet" AutomationProperties.Name="Last packet" Click="btnGoToEnd_Click"><Image Source="/Images/end.png"/></Button>
+            <TextBox x:Name="tbxGoTo" Width="55" ToolTip="Displayed packet number" TextAlignment="Center"/>
+            <Button ToolTip="Go to displayed packet" AutomationProperties.Name="Go to displayed packet" Click="btnGoTo_Click">
+                <StackPanel Orientation="Horizontal"><Image Source="/Images/goto.png"/><TextBlock Text="Go" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
+            </Button>
+            <ToggleButton ToolTip="Automatically scroll to the latest packet" AutomationProperties.Name="Auto-scroll" Click="btnAutoScroll_Click">
+                <StackPanel Orientation="Horizontal"><Image Source="/Images/scroll.png"/><TextBlock Text="Auto-scroll" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
+            </ToggleButton>
+        </ToolBar>
+        <DockPanel DockPanel.Dock="Top" Margin="6,3">
+            <TextBlock Text="Display filter:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <TextBox x:Name="tbxFindWhat" MinWidth="300" TextChanged="tbxFindWhat_TextChanged"
+                     ToolTip="Examples: tcp, ip.addr == 192.0.2.1, tcp.port == 443 &amp;&amp; ip"/>
+            <TextBlock x:Name="filterError" Foreground="DarkRed" Margin="8,0,0,0" VerticalAlignment="Center"/>
+        </DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="Adapter: "/><TextBlock x:Name="tbxAdapter" Margin="0,0,12,0"/>
+            <TextBlock Text="Captured: "/><TextBlock x:Name="tbxTotalPackets" Text="0" Margin="0,0,12,0"/>
+            <TextBlock Text="Displayed: "/><TextBlock x:Name="tbxTotalDisPackets" Text="0" Margin="0,0,12,0"/>
+            <TextBlock Text="Computer: "/><TextBlock x:Name="tbxComputerName"/>
+        </StatusBar>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <DataGrid x:Name="dgPackets" Grid.Row="0" AutoGenerateColumns="False" SelectionMode="Single"
+                      CanUserAddRows="False" IsReadOnly="True" EnableRowVirtualization="True"
+                      SelectionChanged="dgPackets_SelectionChanged">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Protocol}" Value="TCP"><Setter Property="Background" Value="#E8F0FF"/></DataTrigger>
+                            <DataTrigger Binding="{Binding Protocol}" Value="UDP"><Setter Property="Background" Value="#E8F8FF"/></DataTrigger>
+                            <DataTrigger Binding="{Binding Protocol}" Value="DNS"><Setter Property="Background" Value="#E8E4FF"/></DataTrigger>
+                            <DataTrigger Binding="{Binding Protocol}" Value="HTTP"><Setter Property="Background" Value="#DDF5DD"/></DataTrigger>
+                            <DataTrigger Binding="{Binding Protocol}" Value="ARP"><Setter Property="Background" Value="#FFF2CC"/></DataTrigger>
+                            <DataTrigger Binding="{Binding Protocol}" Value="ICMP"><Setter Property="Background" Value="#FCE4E4"/></DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="No." Binding="{Binding ID}" Width="60"/>
+                    <DataGridTextColumn Header="Time (s)" Binding="{Binding Time, StringFormat=F6}" Width="100"/>
+                    <DataGridTextColumn Header="Source" Binding="{Binding Source}" Width="160"/>
+                    <DataGridTextColumn Header="Destination" Binding="{Binding Destination}" Width="160"/>
+                    <DataGridTextColumn Header="Protocol" Binding="{Binding Protocol}" Width="85"/>
+                    <DataGridTextColumn Header="Length" Binding="{Binding Length}" Width="70"/>
+                    <DataGridTextColumn Header="Info" Binding="{Binding Info}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch"/>
+            <TreeView x:Name="tvDetails" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+            <GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch"/>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="3*"/><ColumnDefinition Width="2*"/></Grid.ColumnDefinitions>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="tbxBuffer" FontFamily="Consolas" TextWrapping="NoWrap"/>
+                </ScrollViewer>
+                <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="tbxDecode" FontFamily="Consolas" TextWrapping="NoWrap"/>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </DockPanel>
 </Window>

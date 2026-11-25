@@ -65,5 +65,14 @@ namespace Sniffer.Forms
 				HandleSelection();
 			}
 		}
+
+		private async void OpenCapture_Click(object sender, RoutedEventArgs e)
+		{
+			Hide();
+			var mainWindow = new MainWindow(snifferClass);
+			mainWindow.Closed += (s, args) => Show();
+			mainWindow.Show();
+			await mainWindow.OpenCaptureAsync();
+		}
 	}
 }

@@ -10,6 +10,7 @@
 		/// Thông tin HTTP trong gói tin
 		/// </summary>
 		public string? HTTPInfo { get; set; }
+		public string? DNSInfo { get; set; }
 		/// <summary>
 		/// Thông tin TCP trong gói tin
 		/// </summary>

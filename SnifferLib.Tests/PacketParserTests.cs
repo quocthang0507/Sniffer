@@ -1,5 +1,7 @@
 using PacketDotNet;
 using SnifferLib;
+using System;
+using System.Text;
 using Xunit;
 
 namespace SnifferLib.Tests;
@@ -119,5 +121,78 @@ public class PacketParserTests
 		PacketInfo packet = PacketParser.Parse(frame, LinkLayers.Ethernet, 1, 0);
 
 		Assert.StartsWith("Malformed", packet.Protocol);
+	}
+
+	[Fact]
+	public void Parse_DnsQuery_PreservesUdpLayerAndShowsQuestion()
+	{
+		byte[] frame =
+		[
+			0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0x08, 0x00,
+			0x45, 0, 0, 53, 0, 0, 0, 0, 64, 17, 0, 0,
+			192, 0, 2, 1, 192, 0, 2, 2,
+			0x30, 0x39, 0, 53, 0, 33, 0, 0,
+			0x12, 0x34, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+			3, (byte)'w', (byte)'w', (byte)'w', 3, (byte)'c', (byte)'o', (byte)'m',
+			0, 0, 1, 0, 1
+		];
+
+		var packet = PacketParser.Parse(frame, LinkLayers.Ethernet, 1, 0);
+
+		Assert.Equal("DNS", packet.Protocol);
+		Assert.Contains("www.com", packet.Info);
+		Assert.NotNull(packet.Layers.UDPInfo);
+		Assert.NotNull(packet.Layers.DNSInfo);
+		Assert.Equal((ushort)53, packet.DestinationPort);
+		Assert.StartsWith("0000  ", packet.Buffer.Buffer);
+		Assert.StartsWith("..............E.", packet.Buffer.Content);
+	}
+
+	[Fact]
+	public void Parse_HttpRequest_RetainsTcpLayer()
+	{
+		byte[] header =
+		[
+			0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0x08, 0x00,
+			0x45, 0, 0, 67, 0, 0, 0, 0, 64, 6, 0, 0,
+			192, 0, 2, 1, 192, 0, 2, 2,
+			0x30, 0x39, 0, 80, 0, 0, 0, 0, 0, 0, 0, 0,
+			0x50, 0x18, 0x10, 0, 0, 0, 0, 0
+		];
+		byte[] payload = Encoding.ASCII.GetBytes("GET / HTTP/1.1\r\nHost: x\r\n\r\n");
+		byte[] frame = new byte[header.Length + payload.Length];
+		header.CopyTo(frame, 0);
+		payload.CopyTo(frame, header.Length);
+
+		var packet = PacketParser.Parse(frame, LinkLayers.Ethernet, 1, 0);
+
+		Assert.Equal("HTTP", packet.Protocol);
+		Assert.Equal("GET / HTTP/1.1", packet.Info);
+		Assert.NotNull(packet.Layers.TCPInfo);
+		Assert.Contains("Host: x", packet.Layers.HTTPInfo);
+		Assert.True(DisplayFilter.Parse("http && tcp.port == 80")(packet));
+	}
+
+	[Fact]
+	public void Parse_TruncatedTransportAndArpFrames_DoesNotThrow()
+	{
+		byte[][] frames =
+		[
+			[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 8, 0,
+			 0x45, 0, 0, 40, 0, 0, 0, 0, 64, 6, 0, 0, 192, 0, 2, 1, 192, 0, 2, 2,
+			 0x30, 0x39, 0, 80, 0, 0, 0, 0, 0, 0, 0, 0, 0x50, 0x18, 0x10, 0, 0, 0, 0, 0],
+			[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 8, 6,
+			 0, 1, 8, 0, 6, 4, 0, 1, 0, 1, 2, 3, 4, 5, 192, 0, 2, 1,
+			 0, 0, 0, 0, 0, 0, 192, 0, 2, 2]
+		];
+		foreach (var frame in frames)
+		{
+			for (int length = 0; length < frame.Length; length++)
+			{
+				byte[] truncated = frame[..length];
+				Exception? exception = Record.Exception(() => PacketParser.Parse(truncated, LinkLayers.Ethernet, 1, 0));
+				Assert.True(exception is null, $"Length {length}: {exception}");
+			}
+		}
 	}
 }

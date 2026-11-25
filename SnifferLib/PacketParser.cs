@@ -5,8 +5,17 @@ using System.Text;
 
 namespace SnifferLib
 {
-	internal static class PacketParser
+	public static class PacketParser
 	{
+		public static PacketInfo Parse(CaptureRecord capture, int id, double time)
+		{
+			ArgumentNullException.ThrowIfNull(capture);
+			PacketInfo packet = Parse(capture.Data, capture.LinkLayer, id, time);
+			packet.Capture = capture;
+			packet.Length = capture.OriginalLength;
+			return packet;
+		}
+
 		public static PacketInfo Parse(byte[] bytes, LinkLayers linkLayer, int id, double time)
 		{
 			ArgumentNullException.ThrowIfNull(bytes);
@@ -18,7 +27,7 @@ namespace SnifferLib
 				Source = string.Empty,
 				Destination = string.Empty,
 				Protocol = "Unknown",
-				Buffer = new PacketBuff(FormatHex(bytes), Encoding.UTF8.GetString(bytes)),
+				Buffer = new PacketBuff(bytes),
 				Length = bytes.Length,
 				Info = string.Empty,
 				Layers = new PacketLayer()
@@ -120,6 +129,8 @@ namespace SnifferLib
 
 			info.Source = ip.SourceAddress.ToString();
 			info.Destination = ip.DestinationAddress.ToString();
+			info.SourceAddress = ip.SourceAddress;
+			info.DestinationAddress = ip.DestinationAddress;
 			info.Protocol = ip.Protocol.ToString().ToUpperInvariant();
 			info.Layers.IPInfo = $"Internet Protocol Version 4\nSource: {ip.SourceAddress}\nDestination: {ip.DestinationAddress}" +
 				$"\nHeader Length: {ip.HeaderLength * 4}" +
@@ -143,6 +154,8 @@ namespace SnifferLib
 
 			info.Source = ip.SourceAddress.ToString();
 			info.Destination = ip.DestinationAddress.ToString();
+			info.SourceAddress = ip.SourceAddress;
+			info.DestinationAddress = ip.DestinationAddress;
 			info.Protocol = ip.Protocol == PacketDotNet.ProtocolType.IcmpV6 ? "ICMPv6" : ip.Protocol.ToString().ToUpperInvariant();
 			info.Layers.IPInfo = $"Internet Protocol Version 6\nSource: {ip.SourceAddress}\nDestination: {ip.DestinationAddress}" +
 				$"\nPayload Length: {ip.PayloadLength}" +
@@ -160,18 +173,27 @@ namespace SnifferLib
 					if (icmp is not null)
 					{
 						info.Protocol = "ICMP";
-						info.Info = "Echo (ping)";
+						info.Info = $"Type/Code: {icmp.TypeCode}";
 						info.Layers.ICMPInfo = $"Checksum: {icmp.Checksum}";
 					}
 					break;
 				case PacketDotNet.ProtocolType.IcmpV6:
 					info.Protocol = "ICMPv6";
+					IcmpV6Packet? icmpv6 = ip.Extract<IcmpV6Packet>();
+					if (icmpv6 is not null)
+					{
+						info.Info = $"{icmpv6.Type}, code {icmpv6.Code}";
+						info.Layers.ICMPInfo = $"Type: {icmpv6.Type}\nCode: {icmpv6.Code}\nChecksum: {icmpv6.Checksum}";
+					}
 					break;
 				case PacketDotNet.ProtocolType.Tcp:
 					TcpPacket? tcp = ip.Extract<TcpPacket>();
 					if (tcp is not null)
 					{
 						info.Protocol = "TCP";
+						info.TransportProtocol = "TCP";
+						info.SourcePort = tcp.SourcePort;
+						info.DestinationPort = tcp.DestinationPort;
 						info.Info = $"{tcp.SourcePort} → {tcp.DestinationPort} [{GetFlags(tcp)}] " +
 							$"Seq={tcp.SequenceNumber} Win={tcp.WindowSize} Len={Math.Max(0, tcp.TotalPacketLength - tcp.DataOffset * 4)}";
 						info.Layers.TCPInfo = $"Source Port: {tcp.SourcePort}\nDestination Port: {tcp.DestinationPort}" +
@@ -179,6 +201,8 @@ namespace SnifferLib
 							$"\nAcknowledgement number: {tcp.AcknowledgmentNumber}\nHeader Length: {tcp.DataOffset * 4}" +
 							$"\nWindow size value: {tcp.WindowSize}\nChecksum: {tcp.Checksum}";
 						ParseHttp(tcp, info);
+						if (tcp.SourcePort == 53 || tcp.DestinationPort == 53)
+							ParseDns(tcp.PayloadData, info, true);
 					}
 					break;
 				case PacketDotNet.ProtocolType.Udp:
@@ -186,9 +210,14 @@ namespace SnifferLib
 					if (udp is not null)
 					{
 						info.Protocol = "UDP";
+						info.TransportProtocol = "UDP";
+						info.SourcePort = udp.SourcePort;
+						info.DestinationPort = udp.DestinationPort;
 						info.Info = $"{udp.SourcePort} → {udp.DestinationPort} Len={udp.Length}";
 						info.Layers.UDPInfo = $"Source Port: {udp.SourcePort}\nDestination Port: {udp.DestinationPort}" +
 							$"\nLength: {udp.Length}\nChecksum: {udp.Checksum}";
+						if (udp.SourcePort == 53 || udp.DestinationPort == 53)
+							ParseDns(udp.PayloadData, info, false);
 					}
 					break;
 			}
@@ -224,7 +253,44 @@ namespace SnifferLib
 
 			int headerEnd = text.IndexOf("\r\n\r\n", StringComparison.Ordinal);
 			info.Protocol = "HTTP";
+			info.Info = firstLine;
 			info.Layers.HTTPInfo = "Header: " + (headerEnd >= 0 ? text[..headerEnd] : text);
+		}
+
+		private static void ParseDns(byte[]? payload, PacketInfo info, bool tcp)
+		{
+			if (payload is null)
+				return;
+			int offset = tcp ? 2 : 0;
+			if (payload.Length - offset < 12)
+				return;
+			if (tcp && ((payload[0] << 8) | payload[1]) > payload.Length - 2)
+				return;
+
+			int id = (payload[offset] << 8) | payload[offset + 1];
+			bool response = (payload[offset + 2] & 0x80) != 0;
+			int questions = (payload[offset + 4] << 8) | payload[offset + 5];
+			int answers = (payload[offset + 6] << 8) | payload[offset + 7];
+			string description = $"{(response ? "response" : "query")} 0x{id:x4}";
+			int index = offset + 12;
+			if (questions > 0)
+			{
+				var labels = new List<string>();
+				while (index < payload.Length && payload[index] != 0)
+				{
+					int length = payload[index++];
+					if (length > 63 || index + length > payload.Length)
+						return;
+					labels.Add(Encoding.ASCII.GetString(payload, index, length));
+					index += length;
+				}
+				if (index + 5 > payload.Length)
+					return;
+				description += " " + string.Join(".", labels);
+			}
+			info.Protocol = "DNS";
+			info.Info = "Standard " + description;
+			info.Layers.DNSInfo = $"Transaction ID: 0x{id:x4}\nType: {(response ? "Response" : "Query")}\nQuestions: {questions}\nAnswers: {answers}\n{description}";
 		}
 
 		private static string GetFlags(TcpPacket tcp)
@@ -244,18 +310,6 @@ namespace SnifferLib
 				flags.Add("URG");
 
 			return string.Join(", ", flags);
-		}
-
-		private static string FormatHex(byte[] bytes)
-		{
-			StringBuilder builder = new StringBuilder(bytes.Length * 4);
-			for (int i = 0; i < bytes.Length; i++)
-			{
-				builder.Append(bytes[i].ToString("x2")).Append("  ");
-				if ((i + 1) % 16 == 0)
-					builder.Append('\n');
-			}
-			return builder.ToString();
 		}
 
 		private static string FormatMacAddress(byte[] address)
