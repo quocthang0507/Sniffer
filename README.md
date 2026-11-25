@@ -3,6 +3,8 @@
 
 ## Lưu ý
 
+Ứng dụng hiện nhắm tới .NET 10 trên Windows. Tính năng bắt gói tin sử dụng SharpPcap và yêu cầu cài [Npcap](https://npcap.com/#download); quyền truy cập adapter phụ thuộc cấu hình Npcap và quyền của người dùng.
+
 ## Hướng dẫn sử dụng
 
 ![Form đầu tiên cho phép ta chọn interface mạng từ danh sách](1.png?raw=true "Form đầu tiên cho phép ta chọn interface mạng từ danh sách")
@@ -19,8 +21,9 @@
 
 ## Yêu cầu
 
-- Tải về và cài đặt WinPcap tại địa chỉ sau [link](https://www.winpcap.org/install/bin/WinPcap_4_1_3.exe)
-- .NET Framwork 4.5+ (để Pcap.net hoạt động), ưu tiên phiên bản 4.7.1 vì chương trình được xây dựng từ phiên bản này.
+- Windows và .NET 10 Desktop Runtime.
+- .NET 10 SDK nếu cần build từ mã nguồn.
+- Npcap để bắt gói tin trực tiếp.
 - Máy tính có kết nối mạng.
 
 ## Tải về

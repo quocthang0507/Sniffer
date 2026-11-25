@@ -13,19 +13,19 @@
 		/// <summary>
 		/// IP nguồn
 		/// </summary>
-		public string Source { get; set; }
+		public string Source { get; set; } = string.Empty;
 		/// <summary>
 		/// Ip đích
 		/// </summary>
-		public string Destination { get; set; }
+		public string Destination { get; set; } = string.Empty;
 		/// <summary>
 		/// Giao thức
 		/// </summary>
-		public string Protocol { get; set; }
+		public string Protocol { get; set; } = string.Empty;
 		/// <summary>
 		/// Nội dung gói tin
 		/// </summary>
-		public PacketBuff Buffer { get; set; }
+		public PacketBuff Buffer { get; set; } = new PacketBuff(string.Empty, string.Empty);
 		/// <summary>
 		/// Chiều dài
 		/// </summary>
@@ -33,11 +33,11 @@
 		/// <summary>
 		/// Thông tin
 		/// </summary>
-		public string Info { get; set; }
+		public string Info { get; set; } = string.Empty;
 		/// <summary>
 		/// Thông tin các tầng trong gói tin
 		/// </summary>
-		public PacketLayer Layers { get; set; }
+		public PacketLayer Layers { get; set; } = new PacketLayer();
 
 		public PacketInfo()
 		{

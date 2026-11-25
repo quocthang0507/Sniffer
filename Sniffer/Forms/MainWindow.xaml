@@ -86,7 +86,7 @@
 				<Image Source="/Images/scroll.png"/>
 			</Button>
 		</StackPanel>
-		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="Auto" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding snifferClass.packets}" SelectionChanged="dgPackets_SelectionChanged" ScrollViewer.ScrollChanged="dgPackets_ScrollChanged" >
+		<DataGrid x:Name="dgPackets" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="Auto" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" SelectionChanged="dgPackets_SelectionChanged" ScrollViewer.ScrollChanged="dgPackets_ScrollChanged" >
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="No." Binding="{Binding ID}"/>
 				<DataGridTextColumn Header="Time" Binding="{Binding Time}"/>

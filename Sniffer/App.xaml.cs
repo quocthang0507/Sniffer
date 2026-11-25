@@ -8,17 +8,28 @@ namespace Sniffer
 	/// </summary>
 	public partial class App : Application
 	{
-		Mutex mutex;
+		private Mutex? mutex;
+		private bool ownsMutex;
 
 		protected override void OnStartup(StartupEventArgs e)
 		{
-			bool isNewInstance = false;
-			mutex = new Mutex(true, "Sniffer Network Analyzer", out isNewInstance);
-			if (!isNewInstance)
+			mutex = new Mutex(true, "Sniffer Network Analyzer", out ownsMutex);
+			if (!ownsMutex)
 			{
 				MessageBox.Show("You have already a running instance", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
-				App.Current.Shutdown();
+				Shutdown();
+				return;
 			}
+
+			base.OnStartup(e);
+		}
+
+		protected override void OnExit(ExitEventArgs e)
+		{
+			if (ownsMutex)
+				mutex?.ReleaseMutex();
+			mutex?.Dispose();
+			base.OnExit(e);
 		}
 	}
 }

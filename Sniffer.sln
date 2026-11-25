@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sniffer", "Sniffer\Sniffer.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnifferLib", "SnifferLib\SnifferLib.csproj", "{A08632C0-80E7-4DF9-BC26-00FA8DA23EEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnifferLib.Tests", "SnifferLib.Tests\SnifferLib.Tests.csproj", "{6E1A754B-68A9-45AB-B189-7E43E37B0012}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A08632C0-80E7-4DF9-BC26-00FA8DA23EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A08632C0-80E7-4DF9-BC26-00FA8DA23EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A08632C0-80E7-4DF9-BC26-00FA8DA23EEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E1A754B-68A9-45AB-B189-7E43E37B0012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E1A754B-68A9-45AB-B189-7E43E37B0012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E1A754B-68A9-45AB-B189-7E43E37B0012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E1A754B-68A9-45AB-B189-7E43E37B0012}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
