@@ -1,0 +1,4169 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2026-11-25T02:50:34.4218315Z",
+  "analysisEndTime": "2026-11-25T02:50:37.2460793Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 2,
+      "issues": 8,
+      "incidents": 170,
+      "effort": 170
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 165,
+        "Optional": 0,
+        "Potential": 5,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 2,
+        "Project": 4,
+        "Api": 164
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "Sniffer\\Sniffer.csproj",
+      "startingProject": true,
+      "issues": 4,
+      "storyPoints": 166,
+      "properties": {
+        "appName": "Sniffer",
+        "projectKind": "ClassicWpf",
+        "frameworks": [
+          "net472"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": false,
+        "isTestProject": false,
+        "numberOfFiles": 8,
+        "numberOfCodeFiles": 7,
+        "linesTotal": 735,
+        "linesOfCode": 618,
+        "totalApiScanned": 527,
+        "minLinesOfCodeToChange": 164,
+        "maxLinesOfCodeToChange": 164
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "715a3153-212c-4952-891c-60976a0c9bd7",
+          "ruleId": "Project.0001",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "File",
+            "path": "Sniffer\\Sniffer.csproj"
+          }
+        },
+        {
+          "incidentId": "63d44bfc-6e74-4f11-a40f-09b8e963721e",
+          "ruleId": "Project.0002",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: .NETFramework,Version=v4.7.2\nRecommended target framework: net10.0-windows",
+              "protected": "Current target framework: .NETFramework,Version=v4.7.2\nRecommended target framework: net10.0-windows"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Sniffer.csproj",
+            "snippet": "Current target framework: .NETFramework,Version=v4.7.2\nRecommended target framework: net10.0-windows",
+            "protectedSnippet": "Current target framework: .NETFramework,Version=v4.7.2\nRecommended target framework: net10.0-windows",
+            "properties": {
+              "CurrentTargetFramework": ".NETFramework,Version=v4.7.2",
+              "RecommendedTargetFramework": "net10.0-windows"
+            }
+          }
+        },
+        {
+          "incidentId": "dc001460-e8af-4c35-9d3e-64a870d66f88",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Configuration.ConfigurationManager, 9.0.0-preview.6.24302.3. Add package reference to System.Configuration.ConfigurationManager, 9.0.0-preview.6.24302.3",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ApplicationSettingsBase",
+              "protected": "M:System.Configuration.ApplicationSettingsBase.#ctor"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Properties\\Settings.Designer.cs",
+            "snippet": "ApplicationSettingsBase",
+            "protectedSnippet": "M:System.Configuration.ApplicationSettingsBase.#ctor",
+            "label": "M:System.Configuration.ApplicationSettingsBase.#ctor",
+            "properties": {
+              "PackageId": "System.Configuration.ConfigurationManager",
+              "PackageNewVersion": "9.0.0-preview.6.24302.3",
+              "CharCount": "1013"
+            },
+            "line": 16,
+            "column": 71
+          }
+        },
+        {
+          "incidentId": "14df2937-c114-4066-b35f-5c51b736014e",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Configuration.ConfigurationManager, 9.0.0-preview.6.24302.3. Add package reference to System.Configuration.ConfigurationManager, 9.0.0-preview.6.24302.3",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ApplicationSettingsBase",
+              "protected": "T:System.Configuration.ApplicationSettingsBase"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Properties\\Settings.Designer.cs",
+            "snippet": "ApplicationSettingsBase",
+            "protectedSnippet": "T:System.Configuration.ApplicationSettingsBase",
+            "label": "T:System.Configuration.ApplicationSettingsBase",
+            "properties": {
+              "PackageId": "System.Configuration.ConfigurationManager",
+              "PackageNewVersion": "9.0.0-preview.6.24302.3",
+              "CharCount": "1013"
+            },
+            "line": 16,
+            "column": 71
+          }
+        },
+        {
+          "incidentId": "8536007e-ec4a-4bc5-89f6-a5136aeefd07",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void listInterface_KeyDown(object sender, KeyEventArgs e)",
+              "protected": "T:System.Windows.Input.KeyEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "private void listInterface_KeyDown(object sender, KeyEventArgs e)",
+            "protectedSnippet": "T:System.Windows.Input.KeyEventArgs",
+            "label": "T:System.Windows.Input.KeyEventArgs",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 60,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "057cb43c-2428-4c16-9809-342da8ff6ef8",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (e.Key == Key.Enter)\r\n\t\t\t{\r\n\t\t\t\tHandleSelection();\r\n\t\t\t}",
+              "protected": "T:System.Windows.Input.Key"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "if (e.Key == Key.Enter)\r\n\t\t\t{\r\n\t\t\t\tHandleSelection();\r\n\t\t\t}",
+            "protectedSnippet": "T:System.Windows.Input.Key",
+            "label": "T:System.Windows.Input.Key",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 62,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "eeb308f2-b3ff-456d-bb15-9dcd7bf18219",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (e.Key == Key.Enter)\r\n\t\t\t{\r\n\t\t\t\tHandleSelection();\r\n\t\t\t}",
+              "protected": "T:System.Windows.Input.Key"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "if (e.Key == Key.Enter)\r\n\t\t\t{\r\n\t\t\t\tHandleSelection();\r\n\t\t\t}",
+            "protectedSnippet": "T:System.Windows.Input.Key",
+            "label": "T:System.Windows.Input.Key",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 62,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "e257f16e-cd0e-470f-8433-102a886f2985",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (e.Key == Key.Enter)\r\n\t\t\t{\r\n\t\t\t\tHandleSelection();\r\n\t\t\t}",
+              "protected": "F:System.Windows.Input.Key.Enter"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "if (e.Key == Key.Enter)\r\n\t\t\t{\r\n\t\t\t\tHandleSelection();\r\n\t\t\t}",
+            "protectedSnippet": "F:System.Windows.Input.Key.Enter",
+            "label": "F:System.Windows.Input.Key.Enter",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 62,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "15f6ea4a-8e6f-45ef-a36e-dc97beb1c6ff",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (e.Key == Key.Enter)\r\n\t\t\t{\r\n\t\t\t\tHandleSelection();\r\n\t\t\t}",
+              "protected": "T:System.Windows.Input.Key"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "if (e.Key == Key.Enter)\r\n\t\t\t{\r\n\t\t\t\tHandleSelection();\r\n\t\t\t}",
+            "protectedSnippet": "T:System.Windows.Input.Key",
+            "label": "T:System.Windows.Input.Key",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 62,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "e10fbc9d-c877-4dac-afab-3265f6a2234d",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (e.Key == Key.Enter)\r\n\t\t\t{\r\n\t\t\t\tHandleSelection();\r\n\t\t\t}",
+              "protected": "P:System.Windows.Input.KeyEventArgs.Key"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "if (e.Key == Key.Enter)\r\n\t\t\t{\r\n\t\t\t\tHandleSelection();\r\n\t\t\t}",
+            "protectedSnippet": "P:System.Windows.Input.KeyEventArgs.Key",
+            "label": "P:System.Windows.Input.KeyEventArgs.Key",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 62,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "c51d9e89-f62f-4953-b79b-2452617118e8",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "mainWindow.Show();",
+              "protected": "M:System.Windows.Window.Show"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "mainWindow.Show();",
+            "protectedSnippet": "M:System.Windows.Window.Show",
+            "label": "M:System.Windows.Window.Show",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 56,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "d6fd3d5f-9d4f-4452-95fd-274c99a6d14b",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "mainWindow.Closed \u002B= (s, args) =\u003E this.Show();",
+              "protected": "M:System.Windows.Window.Show"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "mainWindow.Closed \u002B= (s, args) =\u003E this.Show();",
+            "protectedSnippet": "M:System.Windows.Window.Show",
+            "label": "M:System.Windows.Window.Show",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 55,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "33395a71-b859-40ff-a990-ff39f74ad477",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "mainWindow.Closed \u002B= (s, args) =\u003E this.Show();",
+              "protected": "E:System.Windows.Window.Closed"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "mainWindow.Closed \u002B= (s, args) =\u003E this.Show();",
+            "protectedSnippet": "E:System.Windows.Window.Closed",
+            "label": "E:System.Windows.Window.Closed",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 55,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "b5455cf9-5f4c-4010-bf26-47e1ba2676b8",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "this.Hide();",
+              "protected": "M:System.Windows.Window.Hide"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "this.Hide();",
+            "protectedSnippet": "M:System.Windows.Window.Hide",
+            "label": "M:System.Windows.Window.Hide",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 53,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "787ba42b-49f2-4b96-bd89-720a0911d942",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "T:System.Windows.MessageBoxImage"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "T:System.Windows.MessageBoxImage",
+            "label": "T:System.Windows.MessageBoxImage",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 50,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "c89b45fd-433f-4fe9-948c-fe7fe0c41ff6",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "T:System.Windows.MessageBoxImage"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "T:System.Windows.MessageBoxImage",
+            "label": "T:System.Windows.MessageBoxImage",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 50,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "fc3af60b-2c45-4963-9dd9-fe408d79cedc",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "F:System.Windows.MessageBoxImage.Error"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "F:System.Windows.MessageBoxImage.Error",
+            "label": "F:System.Windows.MessageBoxImage.Error",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 50,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "5e1a226f-48d0-4dbc-b3fa-a41b042cabab",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "T:System.Windows.MessageBoxButton"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "T:System.Windows.MessageBoxButton",
+            "label": "T:System.Windows.MessageBoxButton",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 50,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "2dd9643c-c997-4acf-a5f1-233afdb5d559",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "T:System.Windows.MessageBoxButton"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "T:System.Windows.MessageBoxButton",
+            "label": "T:System.Windows.MessageBoxButton",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 50,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "342a6e9a-c11e-4945-be6f-ca0607624d9b",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "F:System.Windows.MessageBoxButton.OK"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "F:System.Windows.MessageBoxButton.OK",
+            "label": "F:System.Windows.MessageBoxButton.OK",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 50,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "6128469d-a20a-48a0-a9b6-cced14c0246b",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "T:System.Windows.MessageBox"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "T:System.Windows.MessageBox",
+            "label": "T:System.Windows.MessageBox",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 50,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "6fb9966c-2ee1-4aea-8507-556cbfbc4ea9",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "T:System.Windows.MessageBoxResult"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "T:System.Windows.MessageBoxResult",
+            "label": "T:System.Windows.MessageBoxResult",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 50,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "9d1d9427-9c04-4b7b-a253-3f2e79bf2e5f",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022Error\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)",
+            "label": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 50,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "ea6347e1-b31b-408c-9c24-ce358b2f44d5",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void listInterface_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)",
+              "protected": "T:System.Windows.Input.MouseButtonEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "private void listInterface_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)",
+            "protectedSnippet": "T:System.Windows.Input.MouseButtonEventArgs",
+            "label": "T:System.Windows.Input.MouseButtonEventArgs",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 35,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "c13f52ca-8788-4fc4-9734-4260c409d8d3",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "this.Close();",
+              "protected": "M:System.Windows.Window.Close"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "this.Close();",
+            "protectedSnippet": "M:System.Windows.Window.Close",
+            "label": "M:System.Windows.Window.Close",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 30,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "9318b070-0526-4236-a2c3-300bed750ef5",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "T:System.Windows.MessageBoxImage"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "T:System.Windows.MessageBoxImage",
+            "label": "T:System.Windows.MessageBoxImage",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 29,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "099bfa5b-1d3d-4473-ac87-de4e2582338b",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "T:System.Windows.MessageBoxImage"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "T:System.Windows.MessageBoxImage",
+            "label": "T:System.Windows.MessageBoxImage",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 29,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "a77856af-4c78-4866-879f-dc2b6bf41bf7",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "F:System.Windows.MessageBoxImage.Error"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "F:System.Windows.MessageBoxImage.Error",
+            "label": "F:System.Windows.MessageBoxImage.Error",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 29,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "d83a3375-2463-42c0-bccd-25eb206f6d7c",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "T:System.Windows.MessageBoxButton"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "T:System.Windows.MessageBoxButton",
+            "label": "T:System.Windows.MessageBoxButton",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 29,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "81ad8fde-b9c4-4a5b-873f-756c7e64b354",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "T:System.Windows.MessageBoxButton"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "T:System.Windows.MessageBoxButton",
+            "label": "T:System.Windows.MessageBoxButton",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 29,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "c2361c52-5797-4d22-a418-091a73981a81",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "F:System.Windows.MessageBoxButton.OK"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "F:System.Windows.MessageBoxButton.OK",
+            "label": "F:System.Windows.MessageBoxButton.OK",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 29,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "772bb175-c9c6-4c6d-988b-b61c05791479",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "T:System.Windows.MessageBox"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "T:System.Windows.MessageBox",
+            "label": "T:System.Windows.MessageBox",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 29,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "69e900de-84b8-4d75-b33a-56fc700dc640",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "T:System.Windows.MessageBoxResult"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "T:System.Windows.MessageBoxResult",
+            "label": "T:System.Windows.MessageBoxResult",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 29,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "01c78028-01dd-4d2a-881f-83e2feee2357",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+              "protected": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "MessageBox.Show(e.Message, \u0022C\u00F3 l\u1ED7i x\u1EA3y ra!\u0022, MessageBoxButton.OK, MessageBoxImage.Error);",
+            "protectedSnippet": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)",
+            "label": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 29,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "b05e1633-049a-4ecd-852c-586b131b3f54",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public WelcomeWindow()\r\n\t\t{\r\n\t\t\tInitializeComponent();\r\n\t\t\tsnifferClass = SnifferClass.getInstance();\r\n\t\t\tShowInterfaces();\r\n\t\t}",
+              "protected": "M:System.Windows.Window.#ctor"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "public WelcomeWindow()\r\n\t\t{\r\n\t\t\tInitializeComponent();\r\n\t\t\tsnifferClass = SnifferClass.getInstance();\r\n\t\t\tShowInterfaces();\r\n\t\t}",
+            "protectedSnippet": "M:System.Windows.Window.#ctor",
+            "label": "M:System.Windows.Window.#ctor",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 14,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "ffe663d5-08bf-484a-abcc-d9c6b69e48e3",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public WelcomeWindow()\r\n\t\t{\r\n\t\t\tInitializeComponent();\r\n\t\t\tsnifferClass = SnifferClass.getInstance();\r\n\t\t\tShowInterfaces();\r\n\t\t}",
+              "protected": "M:System.Windows.Window.#ctor"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "public WelcomeWindow()\r\n\t\t{\r\n\t\t\tInitializeComponent();\r\n\t\t\tsnifferClass = SnifferClass.getInstance();\r\n\t\t\tShowInterfaces();\r\n\t\t}",
+            "protectedSnippet": "M:System.Windows.Window.#ctor",
+            "label": "M:System.Windows.Window.#ctor",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 14,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "727124f3-d4e4-4715-a629-0fcf9c11416f",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Window",
+              "protected": "T:System.Windows.Window"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\WelcomeWindow.xaml.cs",
+            "snippet": "Window",
+            "protectedSnippet": "T:System.Windows.Window",
+            "label": "T:System.Windows.Window",
+            "properties": {
+              "CharCount": "1489"
+            },
+            "line": 10,
+            "column": 38
+          }
+        },
+        {
+          "incidentId": "27b5bbd4-d1e7-4814-bb2e-66d072b15d2f",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnCancel_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\QuitWindow.xaml.cs",
+            "snippet": "private void btnCancel_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "617"
+            },
+            "line": 29,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "6918257e-3f5a-4c71-b45a-84d0f249c5e8",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "this.Close();",
+              "protected": "M:System.Windows.Window.Close"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\QuitWindow.xaml.cs",
+            "snippet": "this.Close();",
+            "protectedSnippet": "M:System.Windows.Window.Close",
+            "label": "M:System.Windows.Window.Close",
+            "properties": {
+              "CharCount": "617"
+            },
+            "line": 32,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "ba3f2102-00ea-459a-8bd3-a96460bcb84e",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnExit_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\QuitWindow.xaml.cs",
+            "snippet": "private void btnExit_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "617"
+            },
+            "line": 23,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "c838a18a-5f4a-43db-82b2-4495a995d096",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "this.Close();",
+              "protected": "M:System.Windows.Window.Close"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\QuitWindow.xaml.cs",
+            "snippet": "this.Close();",
+            "protectedSnippet": "M:System.Windows.Window.Close",
+            "label": "M:System.Windows.Window.Close",
+            "properties": {
+              "CharCount": "617"
+            },
+            "line": 26,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "b642518e-1660-41cb-a237-c4df9644fa91",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public QuitWindow()\r\n\t\t{\r\n\t\t\tInitializeComponent();\r\n\t\t}",
+              "protected": "M:System.Windows.Window.#ctor"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\QuitWindow.xaml.cs",
+            "snippet": "public QuitWindow()\r\n\t\t{\r\n\t\t\tInitializeComponent();\r\n\t\t}",
+            "protectedSnippet": "M:System.Windows.Window.#ctor",
+            "label": "M:System.Windows.Window.#ctor",
+            "properties": {
+              "CharCount": "617"
+            },
+            "line": 18,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "7f15b3ee-7e66-4a07-ae41-0988b85b883b",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public QuitWindow()\r\n\t\t{\r\n\t\t\tInitializeComponent();\r\n\t\t}",
+              "protected": "M:System.Windows.Window.#ctor"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\QuitWindow.xaml.cs",
+            "snippet": "public QuitWindow()\r\n\t\t{\r\n\t\t\tInitializeComponent();\r\n\t\t}",
+            "protectedSnippet": "M:System.Windows.Window.#ctor",
+            "label": "M:System.Windows.Window.#ctor",
+            "properties": {
+              "CharCount": "617"
+            },
+            "line": 18,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "10c30262-812e-4edd-8755-8f79273e883c",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Window",
+              "protected": "T:System.Windows.Window"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\QuitWindow.xaml.cs",
+            "snippet": "Window",
+            "protectedSnippet": "T:System.Windows.Window",
+            "label": "T:System.Windows.Window",
+            "properties": {
+              "CharCount": "617"
+            },
+            "line": 13,
+            "column": 35
+          }
+        },
+        {
+          "incidentId": "6d485e93-b94d-4642-8671-9c14866c9d3e",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void tbxFindWhat_TextChanged(object sender, TextChangedEventArgs e)",
+              "protected": "T:System.Windows.Controls.TextChangedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void tbxFindWhat_TextChanged(object sender, TextChangedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.Controls.TextChangedEventArgs",
+            "label": "T:System.Windows.Controls.TextChangedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 321,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "809632d0-f413-42d5-9bd1-a2cd26c9cfff",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnNextPacket_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnNextPacket_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 295,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "28947386-9cb1-4ecd-b783-46b6f4fab9f5",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnPreviousPacket_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnPreviousPacket_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 285,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "bafd6637-6657-4e04-a64f-2e5a7987e4c6",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void dgPackets_ScrollChanged(object sender, ScrollChangedEventArgs e)",
+              "protected": "T:System.Windows.Controls.ScrollChangedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void dgPackets_ScrollChanged(object sender, ScrollChangedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.Controls.ScrollChangedEventArgs",
+            "label": "T:System.Windows.Controls.ScrollChangedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 266,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "492e3165-789f-4cdb-99df-ef9755934081",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (e.ExtentHeightChange == 0.0 \u0026\u0026 e.ViewportHeightChange == 0.0)\r\n\t\t\t\t\treturn;",
+              "protected": "P:System.Windows.Controls.ScrollChangedEventArgs.ViewportHeightChange"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "if (e.ExtentHeightChange == 0.0 \u0026\u0026 e.ViewportHeightChange == 0.0)\r\n\t\t\t\t\treturn;",
+            "protectedSnippet": "P:System.Windows.Controls.ScrollChangedEventArgs.ViewportHeightChange",
+            "label": "P:System.Windows.Controls.ScrollChangedEventArgs.ViewportHeightChange",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 278,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "6c054fc2-98be-4b5b-b87b-eba8f7d666f0",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (e.ExtentHeightChange == 0.0 \u0026\u0026 e.ViewportHeightChange == 0.0)\r\n\t\t\t\t\treturn;",
+              "protected": "P:System.Windows.Controls.ScrollChangedEventArgs.ExtentHeightChange"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "if (e.ExtentHeightChange == 0.0 \u0026\u0026 e.ViewportHeightChange == 0.0)\r\n\t\t\t\t\treturn;",
+            "protectedSnippet": "P:System.Windows.Controls.ScrollChangedEventArgs.ExtentHeightChange",
+            "label": "P:System.Windows.Controls.ScrollChangedEventArgs.ExtentHeightChange",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 278,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "21e93cb9-dc76-4f55-9221-38d580b3ed87",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (e.ExtentHeight \u003C e.ViewportHeight)\r\n\t\t\t\t\treturn;",
+              "protected": "P:System.Windows.Controls.ScrollChangedEventArgs.ViewportHeight"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "if (e.ExtentHeight \u003C e.ViewportHeight)\r\n\t\t\t\t\treturn;",
+            "protectedSnippet": "P:System.Windows.Controls.ScrollChangedEventArgs.ViewportHeight",
+            "label": "P:System.Windows.Controls.ScrollChangedEventArgs.ViewportHeight",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 272,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "10d329b2-932b-4acf-9479-835f1d803529",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (e.ExtentHeight \u003C e.ViewportHeight)\r\n\t\t\t\t\treturn;",
+              "protected": "P:System.Windows.Controls.ScrollChangedEventArgs.ExtentHeight"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "if (e.ExtentHeight \u003C e.ViewportHeight)\r\n\t\t\t\t\treturn;",
+            "protectedSnippet": "P:System.Windows.Controls.ScrollChangedEventArgs.ExtentHeight",
+            "label": "P:System.Windows.Controls.ScrollChangedEventArgs.ExtentHeight",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 272,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "51b4ffc0-1ae4-4c61-9856-8718d99e4810",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isIcmp.Visibility = Visibility.Visible;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isIcmp.Visibility = Visibility.Visible;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 253,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "b0ea31f3-ddbd-4af7-851f-576b8751eab4",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isIcmp.Visibility = Visibility.Visible;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isIcmp.Visibility = Visibility.Visible;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 253,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "4885ff05-11f1-44ba-a6a1-8151d9c1b409",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isIcmp.Visibility = Visibility.Visible;",
+              "protected": "F:System.Windows.Visibility.Visible"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isIcmp.Visibility = Visibility.Visible;",
+            "protectedSnippet": "F:System.Windows.Visibility.Visible",
+            "label": "F:System.Windows.Visibility.Visible",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 253,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "f0c9f864-acab-41dc-9ef5-f23a348597e7",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isUdp.Visibility = Visibility.Visible;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isUdp.Visibility = Visibility.Visible;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 248,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "cd2c3475-7ac7-4211-b144-6fb1481429c8",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isUdp.Visibility = Visibility.Visible;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isUdp.Visibility = Visibility.Visible;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 248,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "f6d5c111-4e14-4679-b8f7-dcba6ed4f586",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isUdp.Visibility = Visibility.Visible;",
+              "protected": "F:System.Windows.Visibility.Visible"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isUdp.Visibility = Visibility.Visible;",
+            "protectedSnippet": "F:System.Windows.Visibility.Visible",
+            "label": "F:System.Windows.Visibility.Visible",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 248,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "8f1ff3c6-352d-437d-bf7d-dcc8943dc3dc",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isTcp.Visibility = Visibility.Visible;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isTcp.Visibility = Visibility.Visible;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 243,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "78c70c8d-a7a1-489c-8519-5b2e007ff166",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isTcp.Visibility = Visibility.Visible;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isTcp.Visibility = Visibility.Visible;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 243,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "b8d8d51a-4202-4d28-a2ca-3743c0275b05",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isTcp.Visibility = Visibility.Visible;",
+              "protected": "F:System.Windows.Visibility.Visible"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isTcp.Visibility = Visibility.Visible;",
+            "protectedSnippet": "F:System.Windows.Visibility.Visible",
+            "label": "F:System.Windows.Visibility.Visible",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 243,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "66e5a1af-6b0c-454b-9127-26ef97299573",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isHttp.Visibility = Visibility.Visible;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isHttp.Visibility = Visibility.Visible;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 238,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "bb5d3567-6839-4d30-9762-39585434344c",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isHttp.Visibility = Visibility.Visible;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isHttp.Visibility = Visibility.Visible;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 238,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "6f06e6e6-2c0d-4d5a-bab4-42756a8f55ea",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isHttp.Visibility = Visibility.Visible;",
+              "protected": "F:System.Windows.Visibility.Visible"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isHttp.Visibility = Visibility.Visible;",
+            "protectedSnippet": "F:System.Windows.Visibility.Visible",
+            "label": "F:System.Windows.Visibility.Visible",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 238,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "8c5c1a19-08cb-4b49-9572-3da15b97fb7e",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isUdp.Visibility = Visibility.Collapsed;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isUdp.Visibility = Visibility.Collapsed;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 228,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "0fd4ed61-e635-4b18-b85e-9f96c5bb3400",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isUdp.Visibility = Visibility.Collapsed;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isUdp.Visibility = Visibility.Collapsed;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 228,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "e503fa8e-440c-4087-b05d-8a8a9045f383",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isUdp.Visibility = Visibility.Collapsed;",
+              "protected": "F:System.Windows.Visibility.Collapsed"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isUdp.Visibility = Visibility.Collapsed;",
+            "protectedSnippet": "F:System.Windows.Visibility.Collapsed",
+            "label": "F:System.Windows.Visibility.Collapsed",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 228,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "c16bfff4-8e7d-4722-946d-7fa0c41c0698",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isTcp.Visibility = Visibility.Collapsed;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isTcp.Visibility = Visibility.Collapsed;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 227,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "40224c29-e286-41d0-a283-39ec9ea0d554",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isTcp.Visibility = Visibility.Collapsed;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isTcp.Visibility = Visibility.Collapsed;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 227,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "9ded1130-63ec-4eca-bb25-378fb771d5c3",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isTcp.Visibility = Visibility.Collapsed;",
+              "protected": "F:System.Windows.Visibility.Collapsed"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isTcp.Visibility = Visibility.Collapsed;",
+            "protectedSnippet": "F:System.Windows.Visibility.Collapsed",
+            "label": "F:System.Windows.Visibility.Collapsed",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 227,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "983accf8-5b2f-4e64-bcfe-919ffffc27f7",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isHttp.Visibility = Visibility.Collapsed;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isHttp.Visibility = Visibility.Collapsed;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 226,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "37f12e2f-d146-4d8e-81dd-6a9bf9bb4991",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isHttp.Visibility = Visibility.Collapsed;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isHttp.Visibility = Visibility.Collapsed;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 226,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "1c3f7761-3530-4ed5-b60c-d83dea80fabd",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isHttp.Visibility = Visibility.Collapsed;",
+              "protected": "F:System.Windows.Visibility.Collapsed"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isHttp.Visibility = Visibility.Collapsed;",
+            "protectedSnippet": "F:System.Windows.Visibility.Collapsed",
+            "label": "F:System.Windows.Visibility.Collapsed",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 226,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "8a2e2689-8e46-499a-9a38-d872a9fe4de9",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isIcmp.Visibility = Visibility.Collapsed;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isIcmp.Visibility = Visibility.Collapsed;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 225,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "86169b04-0ad9-4eb5-b0ec-fec281b2a96a",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isIcmp.Visibility = Visibility.Collapsed;",
+              "protected": "T:System.Windows.Visibility"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isIcmp.Visibility = Visibility.Collapsed;",
+            "protectedSnippet": "T:System.Windows.Visibility",
+            "label": "T:System.Windows.Visibility",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 225,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "00a3043b-98ed-433c-a2b7-bd5ada62938b",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "isIcmp.Visibility = Visibility.Collapsed;",
+              "protected": "F:System.Windows.Visibility.Collapsed"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "isIcmp.Visibility = Visibility.Collapsed;",
+            "protectedSnippet": "F:System.Windows.Visibility.Collapsed",
+            "label": "F:System.Windows.Visibility.Collapsed",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 225,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "46850f93-00c1-47c6-9db9-882a1df46385",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void dgPackets_SelectionChanged(object sender, SelectionChangedEventArgs e)",
+              "protected": "T:System.Windows.Controls.SelectionChangedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void dgPackets_SelectionChanged(object sender, SelectionChangedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.Controls.SelectionChangedEventArgs",
+            "label": "T:System.Windows.Controls.SelectionChangedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 211,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "b99ea186-db1c-4abf-996e-7e51761e3943",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnAutoScroll_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnAutoScroll_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 204,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "77aa0583-bdf5-4dd2-919c-fa13cae3bc7b",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnGoTo_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnGoTo_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 179,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "53b35ecf-b2c8-4e01-a91a-7a598fd7f182",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnGoToEnd_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnGoToEnd_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 173,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "1f0b4f3e-a4ee-467a-afe7-666b60a747a4",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnGoToFirst_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnGoToFirst_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 168,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "11f763d5-c4f3-4919-b9cb-3d7947c1fc47",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnClose_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnClose_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 159,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "a8ce9193-8bd6-45fa-9706-1b546a3e4d30",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnRestart_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnRestart_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 152,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "e2a41325-b563-4cab-85a8-344f2d5bd56e",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnStop_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnStop_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 144,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "b0f9d1fa-3775-475a-b89e-bae8b128ff9d",
+          "ruleId": "Api.0002",
+          "description": "Thread.Abort is not supported and throws PlatformNotSupportedException. ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "thread.Abort();",
+              "protected": "M:System.Threading.Thread.Abort"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "thread.Abort();",
+            "protectedSnippet": "M:System.Threading.Thread.Abort",
+            "label": "M:System.Threading.Thread.Abort",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://aka.ms/dotnet-warnings/SYSLIB0006",
+                "isCustom": false
+              }
+            ],
+            "line": 147,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "6b1647cd-8697-4e2a-95c9-efc110756c08",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnStart_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnStart_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 134,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "1154ac9d-d1c9-4518-89be-d983c2633cdb",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Application.Current.Shutdown();",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Application.Current.Shutdown();",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 120,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "9e0af604-ab89-44f8-a2fa-93b85d3e1d85",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Application.Current.Shutdown();",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Application.Current.Shutdown();",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 120,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "7ffc8c11-1d30-4526-a93f-9554b60c881c",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Application.Current.Shutdown();",
+              "protected": "P:System.Windows.Application.Current"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Application.Current.Shutdown();",
+            "protectedSnippet": "P:System.Windows.Application.Current",
+            "label": "P:System.Windows.Application.Current",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 120,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "b20af320-d7cc-4c13-8992-88a397eddd2a",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Application.Current.Shutdown();",
+              "protected": "M:System.Windows.Application.Shutdown"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Application.Current.Shutdown();",
+            "protectedSnippet": "M:System.Windows.Application.Shutdown",
+            "label": "M:System.Windows.Application.Shutdown",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 120,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "f7a8fd48-7ad7-492d-b782-97c7910fbded",
+          "ruleId": "Api.0002",
+          "description": "Thread.Abort is not supported and throws PlatformNotSupportedException. ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "thread.Abort();",
+              "protected": "M:System.Threading.Thread.Abort"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "thread.Abort();",
+            "protectedSnippet": "M:System.Threading.Thread.Abort",
+            "label": "M:System.Threading.Thread.Abort",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://aka.ms/dotnet-warnings/SYSLIB0006",
+                "isCustom": false
+              }
+            ],
+            "line": 119,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "80f9a969-f105-4003-9b81-16487901c0f2",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "quitWindow.ShowDialog();",
+              "protected": "M:System.Windows.Window.ShowDialog"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "quitWindow.ShowDialog();",
+            "protectedSnippet": "M:System.Windows.Window.ShowDialog",
+            "label": "M:System.Windows.Window.ShowDialog",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 113,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "d8c84a95-7e88-44f5-98c4-de3009cb2b11",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnDoc_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnDoc_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 102,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "6cc1acc7-4f2f-4a2d-b764-99f6ae891d4d",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "T:System.Windows.MessageBoxImage"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "T:System.Windows.MessageBoxImage",
+            "label": "T:System.Windows.MessageBoxImage",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 104,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "cc242047-3d4b-4465-abb6-d96cf86fb0e9",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "T:System.Windows.MessageBoxImage"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "T:System.Windows.MessageBoxImage",
+            "label": "T:System.Windows.MessageBoxImage",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 104,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "a55e3ab0-d96f-4888-86f5-357242e3a882",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "F:System.Windows.MessageBoxImage.Information"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "F:System.Windows.MessageBoxImage.Information",
+            "label": "F:System.Windows.MessageBoxImage.Information",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 104,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "aae5bbeb-c2fb-40a3-8b92-c70ce3005d44",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "T:System.Windows.MessageBoxButton"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "T:System.Windows.MessageBoxButton",
+            "label": "T:System.Windows.MessageBoxButton",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 104,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "3620374e-2ffe-49b5-a5bb-8f8b27ff3aa1",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "T:System.Windows.MessageBoxButton"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "T:System.Windows.MessageBoxButton",
+            "label": "T:System.Windows.MessageBoxButton",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 104,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "18770c89-372b-4f92-b0b6-490dbe97fb0e",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "F:System.Windows.MessageBoxButton.OK"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "F:System.Windows.MessageBoxButton.OK",
+            "label": "F:System.Windows.MessageBoxButton.OK",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 104,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "c76991a3-0168-4d94-be29-a089564edc95",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "T:System.Windows.MessageBox"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "T:System.Windows.MessageBox",
+            "label": "T:System.Windows.MessageBox",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 104,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "fc15af88-77a6-4775-94b4-0872385a9cd6",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "T:System.Windows.MessageBoxResult"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "T:System.Windows.MessageBoxResult",
+            "label": "T:System.Windows.MessageBoxResult",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 104,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "f7f547ae-0fb7-449d-a224-c6e8548c83c6",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022https://github.com/PcapDotNet/Pcap.Net/wiki/Pcap.Net-Tutorial\u0022,\r\n\t\t\t\t\u0022T\u00E0i li\u1EC7u tham kh\u1EA3o!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)",
+            "label": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 104,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "7733b52f-42f2-41f8-8544-fcd35383fafc",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnAbout_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnAbout_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 94,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "0ef38bad-b260-4b79-add3-1f9db0b67fad",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "T:System.Windows.MessageBoxImage"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "T:System.Windows.MessageBoxImage",
+            "label": "T:System.Windows.MessageBoxImage",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 96,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "8d852ea9-742a-4228-b384-b9291237ae4d",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "T:System.Windows.MessageBoxImage"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "T:System.Windows.MessageBoxImage",
+            "label": "T:System.Windows.MessageBoxImage",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 96,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "8fdda3d2-2352-4c12-a144-aab5648562c3",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "F:System.Windows.MessageBoxImage.Information"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "F:System.Windows.MessageBoxImage.Information",
+            "label": "F:System.Windows.MessageBoxImage.Information",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 96,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "5a01ef28-baca-4036-bafd-90c280db58e9",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "T:System.Windows.MessageBoxButton"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "T:System.Windows.MessageBoxButton",
+            "label": "T:System.Windows.MessageBoxButton",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 96,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "9667b085-41cb-4bab-941d-6321ccd81a42",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "T:System.Windows.MessageBoxButton"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "T:System.Windows.MessageBoxButton",
+            "label": "T:System.Windows.MessageBoxButton",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 96,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "cee0b7ed-c13e-4fca-a5c7-424343e82009",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "F:System.Windows.MessageBoxButton.OK"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "F:System.Windows.MessageBoxButton.OK",
+            "label": "F:System.Windows.MessageBoxButton.OK",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 96,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "478d39d5-f790-4f4f-8121-e234acb2bcb2",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "T:System.Windows.MessageBox"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "T:System.Windows.MessageBox",
+            "label": "T:System.Windows.MessageBox",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 96,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "688fe96a-ee83-44fc-a3d5-84ace68262f7",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "T:System.Windows.MessageBoxResult"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "T:System.Windows.MessageBoxResult",
+            "label": "T:System.Windows.MessageBoxResult",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 96,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "00bdbebd-1faf-4a20-82b0-2bb8e75a1a2b",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+              "protected": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022Th\u00E0nh vi\u00EAn trong nh\u00F3m: \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00221. La Qu\u1ED1c Th\u1EAFng 1610207 (Thi\u1EBFt k\u1EBF giao di\u1EC7n) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00222. Nguy\u1EC5n Th\u1ECB B\u00EDch Ng\u1ECDc 1610171 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng) \\r\\n \u0022 \u002B\r\n\t\t\t\t\u00223. Nguy\u1EC5n Th\u1ECB Linh 1610156 (Thi\u1EBFt k\u1EBF ch\u1EE9c n\u0103ng)\u0022, \u0022Gi\u1EDBi thi\u1EC7u!\u0022, MessageBoxButton.OK, MessageBoxImage.Information);",
+            "protectedSnippet": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)",
+            "label": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 96,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "0742a352-632d-4b1d-95b5-9bb5511eeffe",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnExit_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnExit_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 84,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "93205766-ee4c-426b-ad99-c4068619ed2f",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Application.Current.Shutdown();",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Application.Current.Shutdown();",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 91,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "f6f4bfa4-8b0e-44ee-a075-454e3a8bf19d",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Application.Current.Shutdown();",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Application.Current.Shutdown();",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 91,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "a4eb9355-8e2c-4365-b459-902bfc41edec",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Application.Current.Shutdown();",
+              "protected": "P:System.Windows.Application.Current"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Application.Current.Shutdown();",
+            "protectedSnippet": "P:System.Windows.Application.Current",
+            "label": "P:System.Windows.Application.Current",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 91,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "b8a1bfd8-b5c9-4f04-b062-cb3db5428c50",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Application.Current.Shutdown();",
+              "protected": "M:System.Windows.Application.Shutdown"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Application.Current.Shutdown();",
+            "protectedSnippet": "M:System.Windows.Application.Shutdown",
+            "label": "M:System.Windows.Application.Shutdown",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 91,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "20ce8581-2afa-49cf-8ffc-c4807a674b9d",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "quitWindow.ShowDialog();",
+              "protected": "M:System.Windows.Window.ShowDialog"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "quitWindow.ShowDialog();",
+            "protectedSnippet": "M:System.Windows.Window.ShowDialog",
+            "label": "M:System.Windows.Window.ShowDialog",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 89,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "da088ef1-57a8-406e-81d2-309966c788b5",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void btnBack_Click(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void btnBack_Click(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 68,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "53a0d637-c1fe-45e0-99d6-9d1c4acf7863",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "this.Close();",
+              "protected": "M:System.Windows.Window.Close"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "this.Close();",
+            "protectedSnippet": "M:System.Windows.Window.Close",
+            "label": "M:System.Windows.Window.Close",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 81,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "71a165ab-14f1-48ab-b874-e6f724f43416",
+          "ruleId": "Api.0002",
+          "description": "Thread.Abort is not supported and throws PlatformNotSupportedException. ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "thread.Abort();",
+              "protected": "M:System.Threading.Thread.Abort"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "thread.Abort();",
+            "protectedSnippet": "M:System.Threading.Thread.Abort",
+            "label": "M:System.Threading.Thread.Abort",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://aka.ms/dotnet-warnings/SYSLIB0006",
+                "isCustom": false
+              }
+            ],
+            "line": 76,
+            "column": 5
+          }
+        },
+        {
+          "incidentId": "afbc6361-0d24-4f3a-a098-849777895e2e",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (msgBox == MessageBoxResult.Yes)\r\n\t\t\t\t\tthread.Abort();\r\n\t\t\t\telse\r\n\t\t\t\t\treturn;",
+              "protected": "T:System.Windows.MessageBoxResult"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "if (msgBox == MessageBoxResult.Yes)\r\n\t\t\t\t\tthread.Abort();\r\n\t\t\t\telse\r\n\t\t\t\t\treturn;",
+            "protectedSnippet": "T:System.Windows.MessageBoxResult",
+            "label": "T:System.Windows.MessageBoxResult",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 75,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "ea32c97b-0041-4e94-a67a-4a79819d09fa",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (msgBox == MessageBoxResult.Yes)\r\n\t\t\t\t\tthread.Abort();\r\n\t\t\t\telse\r\n\t\t\t\t\treturn;",
+              "protected": "T:System.Windows.MessageBoxResult"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "if (msgBox == MessageBoxResult.Yes)\r\n\t\t\t\t\tthread.Abort();\r\n\t\t\t\telse\r\n\t\t\t\t\treturn;",
+            "protectedSnippet": "T:System.Windows.MessageBoxResult",
+            "label": "T:System.Windows.MessageBoxResult",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 75,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "b96a9fc4-d69e-4449-b1cc-6d64e711c2e2",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (msgBox == MessageBoxResult.Yes)\r\n\t\t\t\t\tthread.Abort();\r\n\t\t\t\telse\r\n\t\t\t\t\treturn;",
+              "protected": "F:System.Windows.MessageBoxResult.Yes"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "if (msgBox == MessageBoxResult.Yes)\r\n\t\t\t\t\tthread.Abort();\r\n\t\t\t\telse\r\n\t\t\t\t\treturn;",
+            "protectedSnippet": "F:System.Windows.MessageBoxResult.Yes",
+            "label": "F:System.Windows.MessageBoxResult.Yes",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 75,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "157d93b2-85fc-438a-b188-6f28669c5c6a",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+              "protected": "T:System.Windows.MessageBoxImage"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+            "protectedSnippet": "T:System.Windows.MessageBoxImage",
+            "label": "T:System.Windows.MessageBoxImage",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 72,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "ec529c58-b5d4-425a-a756-72f36021ae28",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+              "protected": "T:System.Windows.MessageBoxImage"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+            "protectedSnippet": "T:System.Windows.MessageBoxImage",
+            "label": "T:System.Windows.MessageBoxImage",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 72,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "45ac15b5-0761-4fb1-b987-47580ebef948",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+              "protected": "F:System.Windows.MessageBoxImage.Warning"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+            "protectedSnippet": "F:System.Windows.MessageBoxImage.Warning",
+            "label": "F:System.Windows.MessageBoxImage.Warning",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 72,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "4c246b5a-9528-4bae-889c-74876de410cf",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+              "protected": "T:System.Windows.MessageBoxButton"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+            "protectedSnippet": "T:System.Windows.MessageBoxButton",
+            "label": "T:System.Windows.MessageBoxButton",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 72,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "90791f82-ab79-4ae2-9e82-8ee677366f50",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+              "protected": "T:System.Windows.MessageBoxButton"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+            "protectedSnippet": "T:System.Windows.MessageBoxButton",
+            "label": "T:System.Windows.MessageBoxButton",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 72,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "fed72619-40f6-464f-bf43-6aa44132ec0b",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+              "protected": "F:System.Windows.MessageBoxButton.YesNo"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+            "protectedSnippet": "F:System.Windows.MessageBoxButton.YesNo",
+            "label": "F:System.Windows.MessageBoxButton.YesNo",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 72,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "95b0e513-2d46-4348-bf38-cdcc154c0dcd",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+              "protected": "T:System.Windows.MessageBox"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+            "protectedSnippet": "T:System.Windows.MessageBox",
+            "label": "T:System.Windows.MessageBox",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 72,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "db779d47-e930-40cf-955a-991b743b45e0",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+              "protected": "T:System.Windows.MessageBoxResult"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+            "protectedSnippet": "T:System.Windows.MessageBoxResult",
+            "label": "T:System.Windows.MessageBoxResult",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 72,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "6f318e1c-d7c3-4e45-90b6-4789ee1e7d5e",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+              "protected": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "var msgBox = MessageBox.Show(\u0022The current task is working! \u0022 \u002B\r\n\t\t\t\t\t\u0022Do you want to stop capturing packets and go back to the welcome window?\u0022, \u0022Warning\u0022,\r\n\t\t\t\t\tMessageBoxButton.YesNo, MessageBoxImage.Warning);",
+            "protectedSnippet": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)",
+            "label": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 72,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "e0295e46-7b95-40ad-885b-017221c21eef",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Dispatcher.Invoke(() =\u003E UpadateTotalPackets());",
+              "protected": "T:System.Windows.Threading.Dispatcher"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Dispatcher.Invoke(() =\u003E UpadateTotalPackets());",
+            "protectedSnippet": "T:System.Windows.Threading.Dispatcher",
+            "label": "T:System.Windows.Threading.Dispatcher",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 64,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "0842a529-1382-427e-acbd-8dc48a01d443",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Dispatcher.Invoke(() =\u003E UpadateTotalPackets());",
+              "protected": "P:System.Windows.Threading.DispatcherObject.Dispatcher"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Dispatcher.Invoke(() =\u003E UpadateTotalPackets());",
+            "protectedSnippet": "P:System.Windows.Threading.DispatcherObject.Dispatcher",
+            "label": "P:System.Windows.Threading.DispatcherObject.Dispatcher",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 64,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "c45a0a4f-1e62-4e22-b2b8-512ff868aeba",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Dispatcher.Invoke(() =\u003E UpadateTotalPackets());",
+              "protected": "M:System.Windows.Threading.Dispatcher.Invoke(System.Action)"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Dispatcher.Invoke(() =\u003E UpadateTotalPackets());",
+            "protectedSnippet": "M:System.Windows.Threading.Dispatcher.Invoke(System.Action)",
+            "label": "M:System.Windows.Threading.Dispatcher.Invoke(System.Action)",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 64,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "a7ce5a04-3cbc-4c7e-8766-37cc31135ab2",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Dispatcher.Invoke(() =\u003E UpdateDisplayedPackets());",
+              "protected": "T:System.Windows.Threading.Dispatcher"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Dispatcher.Invoke(() =\u003E UpdateDisplayedPackets());",
+            "protectedSnippet": "T:System.Windows.Threading.Dispatcher",
+            "label": "T:System.Windows.Threading.Dispatcher",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 63,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "07b14d24-c45e-4242-9832-c6ed88209965",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Dispatcher.Invoke(() =\u003E UpdateDisplayedPackets());",
+              "protected": "P:System.Windows.Threading.DispatcherObject.Dispatcher"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Dispatcher.Invoke(() =\u003E UpdateDisplayedPackets());",
+            "protectedSnippet": "P:System.Windows.Threading.DispatcherObject.Dispatcher",
+            "label": "P:System.Windows.Threading.DispatcherObject.Dispatcher",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 63,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "bfb287ca-176b-4baa-99d4-923f60551279",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Dispatcher.Invoke(() =\u003E UpdateDisplayedPackets());",
+              "protected": "M:System.Windows.Threading.Dispatcher.Invoke(System.Action)"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Dispatcher.Invoke(() =\u003E UpdateDisplayedPackets());",
+            "protectedSnippet": "M:System.Windows.Threading.Dispatcher.Invoke(System.Action)",
+            "label": "M:System.Windows.Threading.Dispatcher.Invoke(System.Action)",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 63,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "87cad587-6e88-422f-8ab3-025269ef0069",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Dispatcher.Invoke(() =\u003E\r\n\t\t\t\t{\r\n\t\t\t\t\ttbxFindWhat_TextChanged(null, null);\r\n\t\t\t\t});",
+              "protected": "T:System.Windows.Threading.Dispatcher"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Dispatcher.Invoke(() =\u003E\r\n\t\t\t\t{\r\n\t\t\t\t\ttbxFindWhat_TextChanged(null, null);\r\n\t\t\t\t});",
+            "protectedSnippet": "T:System.Windows.Threading.Dispatcher",
+            "label": "T:System.Windows.Threading.Dispatcher",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 59,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "4a08892c-7a1d-4bf4-bbd2-b925f4ee87bb",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Dispatcher.Invoke(() =\u003E\r\n\t\t\t\t{\r\n\t\t\t\t\ttbxFindWhat_TextChanged(null, null);\r\n\t\t\t\t});",
+              "protected": "P:System.Windows.Threading.DispatcherObject.Dispatcher"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Dispatcher.Invoke(() =\u003E\r\n\t\t\t\t{\r\n\t\t\t\t\ttbxFindWhat_TextChanged(null, null);\r\n\t\t\t\t});",
+            "protectedSnippet": "P:System.Windows.Threading.DispatcherObject.Dispatcher",
+            "label": "P:System.Windows.Threading.DispatcherObject.Dispatcher",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 59,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "01fa383d-189b-44d4-b7f2-c671a1c806f9",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Dispatcher.Invoke(() =\u003E\r\n\t\t\t\t{\r\n\t\t\t\t\ttbxFindWhat_TextChanged(null, null);\r\n\t\t\t\t});",
+              "protected": "M:System.Windows.Threading.Dispatcher.Invoke(System.Action)"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Dispatcher.Invoke(() =\u003E\r\n\t\t\t\t{\r\n\t\t\t\t\ttbxFindWhat_TextChanged(null, null);\r\n\t\t\t\t});",
+            "protectedSnippet": "M:System.Windows.Threading.Dispatcher.Invoke(System.Action)",
+            "label": "M:System.Windows.Threading.Dispatcher.Invoke(System.Action)",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 59,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "cf8d0a92-7e61-4bb8-a495-6a5b344f6bf8",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Dispatcher.Invoke(() =\u003E dgPackets.Items.Add(packet));",
+              "protected": "T:System.Windows.Threading.Dispatcher"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Dispatcher.Invoke(() =\u003E dgPackets.Items.Add(packet));",
+            "protectedSnippet": "T:System.Windows.Threading.Dispatcher",
+            "label": "T:System.Windows.Threading.Dispatcher",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 48,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "8e336756-3cd2-4d47-8134-841493f5f60b",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Dispatcher.Invoke(() =\u003E dgPackets.Items.Add(packet));",
+              "protected": "P:System.Windows.Threading.DispatcherObject.Dispatcher"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Dispatcher.Invoke(() =\u003E dgPackets.Items.Add(packet));",
+            "protectedSnippet": "P:System.Windows.Threading.DispatcherObject.Dispatcher",
+            "label": "P:System.Windows.Threading.DispatcherObject.Dispatcher",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 48,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "59a71f32-4e72-4112-b904-de04b6888106",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private void Window_Loaded(object sender, RoutedEventArgs e)",
+              "protected": "T:System.Windows.RoutedEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "private void Window_Loaded(object sender, RoutedEventArgs e)",
+            "protectedSnippet": "T:System.Windows.RoutedEventArgs",
+            "label": "T:System.Windows.RoutedEventArgs",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 30,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "d07fdb8e-b47b-4943-83c7-2778f15b4cf0",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public MainWindow(SnifferClass snifferClass)\r\n\t\t{\r\n\t\t\tthis.snifferClass = snifferClass;\r\n\t\t\tInitializeComponent();\r\n\t\t}",
+              "protected": "M:System.Windows.Window.#ctor"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "public MainWindow(SnifferClass snifferClass)\r\n\t\t{\r\n\t\t\tthis.snifferClass = snifferClass;\r\n\t\t\tInitializeComponent();\r\n\t\t}",
+            "protectedSnippet": "M:System.Windows.Window.#ctor",
+            "label": "M:System.Windows.Window.#ctor",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 24,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "7c1e28a1-2588-47ab-8c6e-3525f864e6fa",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public MainWindow()\r\n\t\t{\r\n\t\t\tInitializeComponent();\r\n\t\t}",
+              "protected": "M:System.Windows.Window.#ctor"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "public MainWindow()\r\n\t\t{\r\n\t\t\tInitializeComponent();\r\n\t\t}",
+            "protectedSnippet": "M:System.Windows.Window.#ctor",
+            "label": "M:System.Windows.Window.#ctor",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 19,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "e6834311-5afd-4010-88d9-4326c6f6d389",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public MainWindow(SnifferClass snifferClass)\r\n\t\t{\r\n\t\t\tthis.snifferClass = snifferClass;\r\n\t\t\tInitializeComponent();\r\n\t\t}",
+              "protected": "M:System.Windows.Window.#ctor"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "public MainWindow(SnifferClass snifferClass)\r\n\t\t{\r\n\t\t\tthis.snifferClass = snifferClass;\r\n\t\t\tInitializeComponent();\r\n\t\t}",
+            "protectedSnippet": "M:System.Windows.Window.#ctor",
+            "label": "M:System.Windows.Window.#ctor",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 24,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "4456d044-5afd-4a00-9a1d-946e068d38c6",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public MainWindow()\r\n\t\t{\r\n\t\t\tInitializeComponent();\r\n\t\t}",
+              "protected": "M:System.Windows.Window.#ctor"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "public MainWindow()\r\n\t\t{\r\n\t\t\tInitializeComponent();\r\n\t\t}",
+            "protectedSnippet": "M:System.Windows.Window.#ctor",
+            "label": "M:System.Windows.Window.#ctor",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 19,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "496784b1-e061-40b4-ad13-8f70c39c5f6d",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Window",
+              "protected": "T:System.Windows.Window"
+            },
+            "kind": "File",
+            "path": "Sniffer\\Forms\\MainWindow.xaml.cs",
+            "snippet": "Window",
+            "protectedSnippet": "T:System.Windows.Window",
+            "label": "T:System.Windows.Window",
+            "properties": {
+              "CharCount": "9553"
+            },
+            "line": 12,
+            "column": 35
+          }
+        },
+        {
+          "incidentId": "5ab8f8ea-7a7d-4dd0-a912-31ced5ce5c30",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "protected override void OnStartup(StartupEventArgs e)",
+              "protected": "T:System.Windows.StartupEventArgs"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "protected override void OnStartup(StartupEventArgs e)",
+            "protectedSnippet": "T:System.Windows.StartupEventArgs",
+            "label": "T:System.Windows.StartupEventArgs",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 12,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "9d5570c6-06ec-493f-8804-63b02e926b45",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "App.Current.Shutdown();",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "App.Current.Shutdown();",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 19,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "cd02cf37-db61-4561-827d-6a55c4cc93fa",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "App.Current.Shutdown();",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "App.Current.Shutdown();",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 19,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "7c3a0db7-034a-4259-b5eb-06f8221e16dc",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "App.Current.Shutdown();",
+              "protected": "P:System.Windows.Application.Current"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "App.Current.Shutdown();",
+            "protectedSnippet": "P:System.Windows.Application.Current",
+            "label": "P:System.Windows.Application.Current",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 19,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "1bdbc06b-b905-46e9-be79-60685edc774c",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "App.Current.Shutdown();",
+              "protected": "M:System.Windows.Application.Shutdown"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "App.Current.Shutdown();",
+            "protectedSnippet": "M:System.Windows.Application.Shutdown",
+            "label": "M:System.Windows.Application.Shutdown",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 19,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "15a4f4f8-16e0-44da-91c2-479954f180eb",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+              "protected": "T:System.Windows.MessageBoxImage"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+            "protectedSnippet": "T:System.Windows.MessageBoxImage",
+            "label": "T:System.Windows.MessageBoxImage",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 18,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "2e906656-43ee-43f5-9089-01bcff1dea01",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+              "protected": "T:System.Windows.MessageBoxImage"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+            "protectedSnippet": "T:System.Windows.MessageBoxImage",
+            "label": "T:System.Windows.MessageBoxImage",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 18,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "e113fbfc-baf9-48de-b282-6e9167120bb1",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+              "protected": "F:System.Windows.MessageBoxImage.Warning"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+            "protectedSnippet": "F:System.Windows.MessageBoxImage.Warning",
+            "label": "F:System.Windows.MessageBoxImage.Warning",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 18,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "fd2d8bea-78ce-4227-acd2-0a5d756f7536",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+              "protected": "T:System.Windows.MessageBoxButton"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+            "protectedSnippet": "T:System.Windows.MessageBoxButton",
+            "label": "T:System.Windows.MessageBoxButton",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 18,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "79a9e910-f4e8-4452-81e6-cdf2153d2298",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+              "protected": "T:System.Windows.MessageBoxButton"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+            "protectedSnippet": "T:System.Windows.MessageBoxButton",
+            "label": "T:System.Windows.MessageBoxButton",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 18,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "383457f3-058b-4dcd-9ad0-cf5e8f5f0589",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+              "protected": "F:System.Windows.MessageBoxButton.OK"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+            "protectedSnippet": "F:System.Windows.MessageBoxButton.OK",
+            "label": "F:System.Windows.MessageBoxButton.OK",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 18,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "e2a7b6ce-1cbd-4b11-a4d3-8e001acd6ed1",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+              "protected": "T:System.Windows.MessageBox"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+            "protectedSnippet": "T:System.Windows.MessageBox",
+            "label": "T:System.Windows.MessageBox",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 18,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "292c3293-0d40-45a9-a9d8-baa09268ca7e",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+              "protected": "T:System.Windows.MessageBoxResult"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+            "protectedSnippet": "T:System.Windows.MessageBoxResult",
+            "label": "T:System.Windows.MessageBoxResult",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 18,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "534b5786-06a4-4781-b581-8f6975c6083a",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+              "protected": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "MessageBox.Show(\u0022You have already a running instance\u0022, \u0022Warning!\u0022, MessageBoxButton.OK, MessageBoxImage.Warning);",
+            "protectedSnippet": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)",
+            "label": "M:System.Windows.MessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 18,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "20d4cc44-b7b0-480c-9ceb-aaaca191aa7c",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Application",
+              "protected": "M:System.Windows.Application.#ctor"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "Application",
+            "protectedSnippet": "M:System.Windows.Application.#ctor",
+            "label": "M:System.Windows.Application.#ctor",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 8,
+            "column": 28
+          }
+        },
+        {
+          "incidentId": "e282f464-809a-4c05-bf7b-0e396efd752d",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "Sniffer\\Sniffer.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Application",
+              "protected": "T:System.Windows.Application"
+            },
+            "kind": "File",
+            "path": "Sniffer\\App.xaml.cs",
+            "snippet": "Application",
+            "protectedSnippet": "T:System.Windows.Application",
+            "label": "T:System.Windows.Application",
+            "properties": {
+              "CharCount": "571"
+            },
+            "line": 8,
+            "column": 28
+          }
+        }
+      ],
+      "features": [
+        {
+          "featureId": "LegacyConfiguration",
+          "incidents": [
+            "14df2937-c114-4066-b35f-5c51b736014e",
+            "dc001460-e8af-4c35-9d3e-64a870d66f88"
+          ]
+        },
+        {
+          "featureId": "Wpf",
+          "incidents": [
+            "8e336756-3cd2-4d47-8134-841493f5f60b",
+            "cf8d0a92-7e61-4bb8-a495-6a5b344f6bf8",
+            "01fa383d-189b-44d4-b7f2-c671a1c806f9",
+            "4a08892c-7a1d-4bf4-bbd2-b925f4ee87bb",
+            "87cad587-6e88-422f-8ab3-025269ef0069",
+            "bfb287ca-176b-4baa-99d4-923f60551279",
+            "07b14d24-c45e-4242-9832-c6ed88209965",
+            "a7ce5a04-3cbc-4c7e-8766-37cc31135ab2",
+            "c45a0a4f-1e62-4e22-b2b8-512ff868aeba",
+            "0842a529-1382-427e-acbd-8dc48a01d443",
+            "e0295e46-7b95-40ad-885b-017221c21eef",
+            "46850f93-00c1-47c6-9db9-882a1df46385",
+            "10d329b2-932b-4acf-9479-835f1d803529",
+            "21e93cb9-dc76-4f55-9221-38d580b3ed87",
+            "6c054fc2-98be-4b5b-b87b-eba8f7d666f0",
+            "492e3165-789f-4cdb-99df-ef9755934081",
+            "bafd6637-6657-4e04-a64f-2e5a7987e4c6",
+            "6d485e93-b94d-4642-8671-9c14866c9d3e",
+            "ea6347e1-b31b-408c-9c24-ce358b2f44d5",
+            "e10fbc9d-c877-4dac-afab-3265f6a2234d",
+            "15f6ea4a-8e6f-45ef-a36e-dc97beb1c6ff",
+            "e257f16e-cd0e-470f-8433-102a886f2985",
+            "eeb308f2-b3ff-456d-bb15-9dcd7bf18219",
+            "057cb43c-2428-4c16-9809-342da8ff6ef8",
+            "8536007e-ec4a-4bc5-89f6-a5136aeefd07"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "SnifferLib\\SnifferLib.csproj",
+      "startingProject": true,
+      "issues": 4,
+      "storyPoints": 4,
+      "properties": {
+        "appName": "SnifferLib",
+        "projectKind": "ClassicClassLibrary",
+        "frameworks": [
+          "net472"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": false,
+        "isTestProject": false,
+        "numberOfFiles": 5,
+        "numberOfCodeFiles": 5,
+        "linesTotal": 456,
+        "linesOfCode": 456,
+        "totalApiScanned": 292,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "d995cfb0-a813-4933-a6fe-cf962ab68ba9",
+          "ruleId": "NuGet.0001",
+          "projectPath": "SnifferLib\\SnifferLib.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "PcapDotNet, 0.10.2\n\nRecommendation:\n\nNo supported version found",
+              "protected": "PcapDotNet, 0.10.2\n\nRecommendation:\n\nNo supported version found"
+            },
+            "kind": "File",
+            "path": "SnifferLib\\SnifferLib.csproj",
+            "snippet": "PcapDotNet, 0.10.2\n\nRecommendation:\n\nNo supported version found",
+            "protectedSnippet": "PcapDotNet, 0.10.2\n\nRecommendation:\n\nNo supported version found",
+            "label": "PcapDotNet 0.10.2",
+            "properties": {
+              "PackageId": "PcapDotNet",
+              "PackageVersion": "0.10.2",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "e2bbb805-e667-4370-90ea-349dbd9adedd",
+          "ruleId": "NuGet.0003",
+          "projectPath": "SnifferLib\\SnifferLib.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.IO.Compression, 4.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+              "protected": "System.IO.Compression, 4.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+            },
+            "kind": "File",
+            "path": "SnifferLib\\SnifferLib.csproj",
+            "snippet": "System.IO.Compression, 4.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+            "protectedSnippet": "System.IO.Compression, 4.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+            "label": "System.IO.Compression 4.3.0",
+            "properties": {
+              "PackageId": "System.IO.Compression",
+              "PackageVersion": "4.3.0",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "dc78ea4f-ee0f-47b8-9363-0b06885aba30",
+          "ruleId": "Project.0001",
+          "projectPath": "SnifferLib\\SnifferLib.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "File",
+            "path": "SnifferLib\\SnifferLib.csproj"
+          }
+        },
+        {
+          "incidentId": "d5971bde-a9e8-412c-b476-b6f6b71640c5",
+          "ruleId": "Project.0002",
+          "projectPath": "SnifferLib\\SnifferLib.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: .NETFramework,Version=v4.7.2\nRecommended target framework: net10.0",
+              "protected": "Current target framework: .NETFramework,Version=v4.7.2\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "SnifferLib\\SnifferLib.csproj",
+            "snippet": "Current target framework: .NETFramework,Version=v4.7.2\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: .NETFramework,Version=v4.7.2\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": ".NETFramework,Version=v4.7.2",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "NuGet.0001": {
+      "id": "NuGet.0001",
+      "isFeature": false,
+      "description": "NuGet package is incompatible with selected target framework.\n\nPackage needs to be upgraded to a version supporting selected project target framework. If there no new package versions supporting new target framework, different package needs to be used and all code needs to be upgraded to new API.",
+      "label": "NuGet package is incompatible",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262529",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0003": {
+      "id": "NuGet.0003",
+      "isFeature": false,
+      "description": "NuGet package functionality is included with framework reference.\n\nPackage needs to be removed.",
+      "label": "NuGet package functionality is included with framework reference",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262609",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0001": {
+      "id": "Project.0001",
+      "isFeature": false,
+      "description": "Project file needs to be converted to SDK-style. Modern .NET framework projects require a change in the project file format and use SDK corresponding to project flavor and functionality.",
+      "label": "Project file needs to be converted to SDK-style",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in modern .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0002": {
+      "id": "Api.0002",
+      "isFeature": false,
+      "description": "API is source incompatible for selected .NET version: requires code changes to compile successfully when targeting a new version, such as removing obsolete APIs or changing method signatures.",
+      "label": "Source incompatible for selected .NET version",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0001": {
+      "id": "Api.0001",
+      "isFeature": false,
+      "description": "API is binary incompatible for selected .NET version: affects existing binaries, often requiring recompilation, because the API has changed in a way that prevents older binaries from loading or executing.",
+      "label": "Binary incompatible for selected .NET version",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    },
+    "LegacyConfiguration": {
+      "id": "LegacyConfiguration",
+      "isFeature": false,
+      "description": "Legacy XML-based configuration system (app.config/web.config) that has been replaced by a more flexible configuration model in .NET Core. The old system was rigid and XML-based. Migrate to Microsoft.Extensions.Configuration with JSON/environment variables; use System.Configuration.ConfigurationManager NuGet package as interim bridge if needed.",
+      "label": "Legacy Configuration System",
+      "severity": "Mandatory",
+      "effort": 2,
+      "links": [
+        {
+          "title": "Configuration in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2341702",
+          "isCustom": false
+        }
+      ]
+    },
+    "Wpf": {
+      "id": "Wpf",
+      "isFeature": false,
+      "description": "WPF APIs for building Windows desktop applications with XAML-based UI that are available in .NET on Windows. WPF provides rich desktop UI capabilities with data binding and styling. Enable Windows Desktop support: Option 1 (Recommended): Target net9.0-windows; Option 2: Add \u003CUseWindowsDesktop\u003Etrue\u003C/UseWindowsDesktop\u003E.",
+      "label": "WPF (Windows Presentation Foundation)",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "WPF on .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2342008",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}

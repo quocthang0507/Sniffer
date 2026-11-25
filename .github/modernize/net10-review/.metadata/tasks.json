@@ -1,0 +1,54 @@
+{
+  "$schema": "file:///C:/Users/quoct/AppData/Roaming/Code/agentPlugins/vscode-synced-customization-agent-host-copilotcli-1730950421/1496065636/skills/create-modernization-plan/tasks-schema.json",
+  "description": "Dependency-ordered modernization tasks for Sniffer.",
+  "tasks": [
+    {
+      "id": "001-upgrade-dotnet-10",
+      "type": "upgrade",
+      "description": "Upgrade .NET to version 10",
+      "reason": "Both the WPF application and its library target .NET Framework 4.7.2.",
+      "requirements": "Before changes, record baseline build, existing tests and environment prerequisites. Upgrade both Sniffer and SnifferLib to .NET 10, using a Windows WPF target for the application and compatible targets for its references; convert legacy projects to SDK style and retain resources, assembly metadata and project references as needed. Resolve source and API incompatibilities, including safe capture stop/restart/back/shutdown in place of Thread.Abort, while preserving behavior. Verify PcapDotNet net40/x86 binaries and capture driver compatibility; do not assume they work. If a replacement entails a major technology or behavior decision, stop and ask the user. Build the solution, run available tests and focused regression checks, and report blocked or unavailable runtime checks.",
+      "skills": [],
+      "dependencies": [],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "id": "002-transform-review-and-fix",
+      "type": "transform",
+      "description": "Review source code, improve functionality and fix bugs",
+      "reason": "The user requested an evidence-backed, bounded source review and quality improvements.",
+      "requirements": "Review capture, packet parsing, UI lifecycle and navigation in the two projects for reproducible defects and small improvements to existing behavior. Investigate IPv4 access before Ethernet-type dispatch in SnifferLib/SnifferClass.cs and Go To/Next index boundaries in Sniffer/Forms/MainWindow.xaml.cs. Establish evidence before changing code, prioritize confirmed issues, and add focused regression tests for changed behavior including relevant empty, boundary, ARP, IPv6 and malformed-frame cases where applicable. Preserve existing behavior otherwise; ask the user before major behavior/design changes or new features. Build and run existing and new tests; perform authorized Windows capture/UI smoke checks if the environment supports them and report any limitations.",
+      "skills": [],
+      "dependencies": ["001-upgrade-dotnet-10"],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "id": "003-security-dependencies",
+      "type": "security",
+      "description": "Review and remediate known dependency vulnerabilities",
+      "reason": "Validate the dependency security of the modernized application.",
+      "requirements": "Scan project dependencies for known CVEs after the upgrade and review. For confirmed findings, apply the smallest compatible patched versions and verify build and tests. Document advisories and unresolved risks; seek user approval if remediation requires a major version upgrade or a material design change. Report unavailable advisory sources or unscanned dependencies instead of claiming a clean result.",
+      "dependencies": ["002-transform-review-and-fix"],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    }
+  ],
+  "metadata": {
+    "language": "dotnet",
+    "planName": "net10-review",
+    "projectName": "Sniffer",
+    "createdAt": "2026-11-25T09:44:56+07:00",
+    "version": "1.0"
+  }
+}

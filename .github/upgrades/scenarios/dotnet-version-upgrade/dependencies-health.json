@@ -1,0 +1,400 @@
+{
+  "packageGovernance": {
+    "totalDistinctPackages": 2,
+    "totalVersionDriftInstances": 0,
+    "targetFramework": "net10.0",
+    "packages": [
+      {
+        "name": "PcapDotNet",
+        "totalProjectCount": 1,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "0.10.2",
+        "isCompatible": false,
+        "description": "NuGet package is incompatible",
+        "versions": [
+          {
+            "version": "0.10.2",
+            "projects": [
+              "SnifferLib"
+            ],
+            "isRecommended": true
+          }
+        ]
+      },
+      {
+        "name": "System.IO.Compression",
+        "totalProjectCount": 1,
+        "distinctVersionCount": 1,
+        "recommendedVersion": "4.3.0",
+        "isCompatible": true,
+        "description": "NuGet package functionality is included with framework reference",
+        "versions": [
+          {
+            "version": "4.3.0",
+            "projects": [
+              "SnifferLib"
+            ],
+            "isRecommended": true
+          }
+        ]
+      }
+    ]
+  },
+  "projects": [
+    {
+      "name": "Sniffer",
+      "path": "Sniffer\\Sniffer.csproj",
+      "isSdk": false,
+      "currentFrameworks": [
+        "net472"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [],
+        "assemblies": [
+          {
+            "name": "System",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "Sniffer\\Sniffer.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.Data",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "Sniffer\\Sniffer.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.Xml",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "Sniffer\\Sniffer.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "Microsoft.CSharp",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "Sniffer\\Sniffer.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.Core",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "Sniffer\\Sniffer.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.Xml.Linq",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "Sniffer\\Sniffer.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.Data.DataSetExtensions",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "Sniffer\\Sniffer.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.Net.Http",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "Sniffer\\Sniffer.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.Xaml",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "Sniffer\\Sniffer.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "WindowsBase",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "Sniffer\\Sniffer.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "PresentationCore",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "Sniffer\\Sniffer.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "PresentationFramework",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "Sniffer\\Sniffer.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          }
+        ],
+        "projectReferences": [
+          {
+            "name": "SnifferLib",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "Sniffer\\Sniffer.csproj"
+              }
+            ],
+            "referencedProjectPath": "SnifferLib\\SnifferLib.csproj",
+            "compatibility": "valid"
+          }
+        ],
+        "frameworkReferences": []
+      }
+    },
+    {
+      "name": "SnifferLib",
+      "path": "SnifferLib\\SnifferLib.csproj",
+      "isSdk": false,
+      "currentFrameworks": [
+        "net472"
+      ],
+      "targetFramework": "net10.0",
+      "dependencies": {
+        "packages": [
+          {
+            "name": "PcapDotNet",
+            "version": "0.10.2",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\packages.config"
+              }
+            ],
+            "description": "NuGet package is incompatible",
+            "compatibility": "newVersionNeeded",
+            "recommendedVersion": ""
+          },
+          {
+            "name": "System.IO.Compression",
+            "version": "4.3.0",
+            "isTransitive": false,
+            "isGlobal": false,
+            "isImplicit": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\packages.config"
+              }
+            ],
+            "description": "NuGet package functionality is included with framework reference",
+            "compatibility": "valid",
+            "recommendedVersion": ""
+          }
+        ],
+        "assemblies": [
+          {
+            "name": "PcapDotNet.Base",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\SnifferLib.csproj"
+              }
+            ],
+            "physicalPath": "packages\\PcapDotNet.0.10.2\\lib\\net40\\PcapDotNet.Base.dll",
+            "compatibility": "valid"
+          },
+          {
+            "name": "PcapDotNet.Core",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\SnifferLib.csproj"
+              }
+            ],
+            "physicalPath": "packages\\PcapDotNet.0.10.2\\lib\\net40\\PcapDotNet.Core.dll",
+            "compatibility": "valid"
+          },
+          {
+            "name": "PcapDotNet.Core.Extensions",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\SnifferLib.csproj"
+              }
+            ],
+            "physicalPath": "packages\\PcapDotNet.0.10.2\\lib\\net40\\PcapDotNet.Core.Extensions.dll",
+            "compatibility": "valid"
+          },
+          {
+            "name": "PcapDotNet.Packets",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\SnifferLib.csproj"
+              }
+            ],
+            "physicalPath": "packages\\PcapDotNet.0.10.2\\lib\\net40\\PcapDotNet.Packets.dll",
+            "compatibility": "valid"
+          },
+          {
+            "name": "System",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\SnifferLib.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.Core",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\SnifferLib.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.IO.Compression",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\SnifferLib.csproj"
+              }
+            ],
+            "physicalPath": "packages\\System.IO.Compression.4.3.0\\lib\\net46\\System.IO.Compression.dll",
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.Xml.Linq",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\SnifferLib.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.Data.DataSetExtensions",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\SnifferLib.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "Microsoft.CSharp",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\SnifferLib.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.Data",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\SnifferLib.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.Net.Http",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\SnifferLib.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          },
+          {
+            "name": "System.Xml",
+            "version": "",
+            "isTransitive": false,
+            "definedIn": [
+              {
+                "path": "SnifferLib\\SnifferLib.csproj"
+              }
+            ],
+            "compatibility": "valid"
+          }
+        ],
+        "projectReferences": [],
+        "frameworkReferences": []
+      }
+    }
+  ]
+}
