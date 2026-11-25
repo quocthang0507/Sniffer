@@ -1,5 +1,5 @@
 #define AppName "Sniffer Network Analyzer"
-#define AppVersion "1.0.0"
+#define AppVersion "2.0.0"
 #define AppExeName "Sniffer Network Analyzer.exe"
 
 [Setup]

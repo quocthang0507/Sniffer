@@ -103,15 +103,35 @@
             <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch"/>
             <TreeView x:Name="tvDetails" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
             <GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch"/>
-            <Grid Grid.Row="4">
-                <Grid.ColumnDefinitions><ColumnDefinition Width="3*"/><ColumnDefinition Width="2*"/></Grid.ColumnDefinitions>
-                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <TextBlock x:Name="tbxBuffer" FontFamily="Consolas" TextWrapping="NoWrap"/>
-                </ScrollViewer>
-                <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <TextBlock x:Name="tbxDecode" FontFamily="Consolas" TextWrapping="NoWrap"/>
-                </ScrollViewer>
-            </Grid>
+            <ScrollViewer Grid.Row="4" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Grid.Resources>
+                        <Style x:Key="PacketBytesTextBoxStyle" TargetType="TextBox">
+                            <Setter Property="FontFamily" Value="Consolas"/>
+                            <Setter Property="IsReadOnly" Value="True"/>
+                            <Setter Property="AcceptsReturn" Value="True"/>
+                            <Setter Property="TextWrapping" Value="NoWrap"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="SelectionBrush" Value="#F6B84A"/>
+                            <Setter Property="SelectionOpacity" Value="0.8"/>
+                            <Setter Property="IsInactiveSelectionHighlightEnabled" Value="True"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                    <TextBlock Text="Hexadecimal" FontWeight="SemiBold" Margin="0,2,16,4"/>
+                    <TextBlock Grid.Column="1" Text="ASCII (non-printable bytes: .)" FontWeight="SemiBold" Margin="0,2,0,4"/>
+                    <TextBox x:Name="tbxBuffer" Grid.Row="1" Margin="0,0,16,0"
+                             Style="{StaticResource PacketBytesTextBoxStyle}"
+                             ToolTip="Click a hexadecimal byte to highlight its ASCII character"
+                             SelectionChanged="HexBytes_SelectionChanged"
+                             PreviewMouseLeftButtonDown="HexBytes_MouseLeftButtonDown"/>
+                    <TextBlock x:Name="tbxDecode" Grid.Row="1" Grid.Column="1"
+                               FontFamily="Consolas" TextWrapping="NoWrap"/>
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </DockPanel>
 </Window>

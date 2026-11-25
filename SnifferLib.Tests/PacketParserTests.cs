@@ -9,6 +9,17 @@ namespace SnifferLib.Tests;
 public class PacketParserTests
 {
 	[Fact]
+	public void PacketBytes_AsciiKeepsOneCharacterPerByteAcrossLines()
+	{
+		byte[] bytes = [0x00, 0x20, 0x41, 0x7e, 0x7f, 0xff, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x42];
+
+		var buffer = new PacketBuff(bytes);
+
+		Assert.Equal(". A~............\nB", buffer.Content);
+		Assert.Contains("\n0010  42  ", buffer.Buffer);
+	}
+
+	[Fact]
 	public void Parse_UnknownEtherType_PreservesEthernetAddresses()
 	{
 		byte[] frame =

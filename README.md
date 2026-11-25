@@ -1,4 +1,4 @@
-# Sniffer
+# Sniffer 2.0
 
 Ứng dụng Windows để bắt và phân tích gói tin mạng, hoặc mở tệp capture có sẵn.
 
@@ -17,23 +17,15 @@ PCAPNG hỗ trợ các khối packet có timestamp và nhiều loại link-layer
 
 Danh sách hiển thị số thứ tự, thời gian tương đối, địa chỉ, giao thức, độ dài và thông tin gói. Chọn một gói để xem các tầng và dữ liệu hex/ASCII. Giao diện phân tích Ethernet, ARP, IPv4/IPv6, TCP, UDP, ICMP, DNS và HTTP cơ bản; DNS/HTTP được nhận diện trên dữ liệu từng gói, không ghép lại luồng TCP hay giải mã lưu lượng mã hóa.
 
+Trong vùng dữ liệu, nhấn một byte hexadecimal để tô sáng byte và ký tự ASCII tương ứng. Mỗi dòng chứa tối đa 16 byte; các byte ngoài vùng ASCII in được hiển thị bằng dấu chấm, không phải văn bản đã giải mã từ lưu lượng mã hóa.
+
 Bộ lọc hiển thị hỗ trợ các tên `ip`, `ipv6`, `arp`, `tcp`, `udp`, `icmp`, `icmpv6`, `dns`, `http`, cùng `ip.addr == <địa chỉ>`, `tcp.port == <cổng>`, `udp.port == <cổng>`, toán tử `&&`, `||` và dấu ngoặc. Ví dụ: `udp.port == 53 && ip.addr == 192.0.2.1`. Đây là tập con cú pháp Wireshark; lỗi cú pháp được hiển thị cạnh bộ lọc.
 
-## Hình ảnh phiên bản trước
+## Giao diện
 
-Các ảnh dưới đây chưa phản ánh giao diện hiện tại.
+![Danh sách gói tin, chi tiết giao thức và dữ liệu hex/ASCII](screenshot.png)
 
-![Form đầu tiên cho phép ta chọn interface mạng từ danh sách](1.png?raw=true "Form đầu tiên cho phép ta chọn interface mạng từ danh sách")
-*Form đầu tiên cho phép ta chọn interface mạng từ danh sách*
-
-![Form thứ hai là form chính của chương trình](2.png?raw=true "Form thứ hai là form chính của chương trình")
-*Form thứ hai là form chính của chương trình*
-
-![Danh sách các gói tin đã bắt được](3.png?raw=true "Danh sách các gói tin đã bắt được")
-*Danh sách các gói tin đã bắt được*
-
-![Nội dung của gói tin đó](4.png?raw=true "Nội dung của gói tin đó")
-*Nội dung của gói tin đó*
+*Giao diện phân tích với dữ liệu gói tin giả lập; thanh trạng thái được cắt khỏi ảnh.*
 
 ## Yêu cầu
 

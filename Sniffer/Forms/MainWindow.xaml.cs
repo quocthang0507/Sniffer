@@ -9,6 +9,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -266,6 +268,45 @@ namespace Sniffer
 		private void btnPreviousPacket_Click(object sender, RoutedEventArgs e) => GoTo(dgPackets.SelectedIndex - 1);
 		private void btnNextPacket_Click(object sender, RoutedEventArgs e) => GoTo(dgPackets.SelectedIndex + 1);
 		private void btnAutoScroll_Click(object sender, RoutedEventArgs e) => autoScroll = !autoScroll;
+
+		private void HexBytes_SelectionChanged(object sender, RoutedEventArgs e)
+		{
+			if (dgPackets?.SelectedItem is PacketInfo packet)
+				tbxDecode.Text = packet.Buffer.Content;
+		}
+
+		private void HexBytes_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			int characterIndex = tbxBuffer.GetCharacterIndexFromPoint(e.GetPosition(tbxBuffer), false);
+			if (characterIndex < 0)
+				return;
+
+			int lineIndex = tbxBuffer.GetLineIndexFromCharacterIndex(characterIndex);
+			int lineStart = tbxBuffer.GetCharacterIndexFromLineIndex(lineIndex);
+			string line = tbxBuffer.GetLineText(lineIndex);
+			int offsetEnd = line.IndexOf("  ", StringComparison.Ordinal);
+			int byteStart = offsetEnd + 2;
+			int relativeIndex = characterIndex - lineStart - byteStart;
+			if (offsetEnd < 0 || relativeIndex < 0 || relativeIndex % 4 >= 2)
+				return;
+
+			int byteColumn = relativeIndex / 4;
+			if (byteColumn >= 16 || dgPackets.SelectedItem is not PacketInfo packet)
+				return;
+			string ascii = packet.Buffer.Content;
+			int asciiIndex = lineIndex * 17 + byteColumn;
+			if (asciiIndex >= ascii.Length || ascii[asciiIndex] == '\n')
+				return;
+
+			tbxBuffer.Focus();
+			tbxBuffer.Select(lineStart + byteStart + byteColumn * 4, 2);
+			tbxDecode.Inlines.Clear();
+			tbxDecode.Inlines.Add(new Run(ascii[..asciiIndex]));
+			tbxDecode.Inlines.Add(new Run(ascii.Substring(asciiIndex, 1)) { Background = Brushes.Orange });
+			tbxDecode.Inlines.Add(new Run(ascii[(asciiIndex + 1)..]));
+			e.Handled = true;
+		}
+
 		private void dgPackets_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			ClearDetails();
