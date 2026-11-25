@@ -5,8 +5,9 @@
 			"name": "Sniffer (.NET 10)",
 			"type": "coreclr",
 			"request": "launch",
-			"program": "${workspaceFolder}/Sniffer/bin/Debug/net10.0-windows/Sniffer Network Analyzer.dll",
-			"cwd": "${workspaceFolder}/Sniffer",
+			"preLaunchTask": "build Sniffer Debug",
+			"program": "${workspaceFolder}\\Sniffer\\bin\\Debug\\net10.0-windows\\Sniffer Network Analyzer.dll",
+			"cwd": "${workspaceFolder}\\Sniffer",
 			"console": "internalConsole",
 			"stopAtEntry": false,
 			"justMyCode": true

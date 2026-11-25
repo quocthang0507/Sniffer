@@ -108,8 +108,9 @@ namespace SnifferLib
 		/// <summary>
 		/// Bắt đầu quá trình bắt gói tin
 		/// </summary>
-		public void Start()
+		public void Start(string captureFilter = "")
 		{
+			ArgumentNullException.ThrowIfNull(captureFilter);
 			if (selectedCaptureDevice is null)
 			{
 				throw new InvalidOperationException("Select a capture-capable network interface before starting.");
@@ -120,12 +121,6 @@ namespace SnifferLib
 				throw new InvalidOperationException("Packet capture is already running.");
 			}
 
-			lock (packetsLock)
-			{
-				ListCapturedPackets = new BindingList<PacketInfo>();
-				firstCapturedAt = null;
-			}
-
 			ILiveDevice device = selectedCaptureDevice;
 			bool opened = false;
 			device.OnPacketArrival += PacketHandler;
@@ -133,6 +128,13 @@ namespace SnifferLib
 			{
 				device.Open(DeviceModes.Promiscuous, 1000);
 				opened = true;
+				if (!string.IsNullOrWhiteSpace(captureFilter))
+					device.Filter = captureFilter;
+				lock (packetsLock)
+				{
+					ListCapturedPackets = new BindingList<PacketInfo>();
+					firstCapturedAt = null;
+				}
 				device.StartCapture();
 				activeCaptureDevice = device;
 			}
@@ -158,7 +160,7 @@ namespace SnifferLib
 					}
 				}
 				throw new InvalidOperationException(
-					"Could not start packet capture. Verify that Npcap is installed and the selected adapter supports capture.",
+					$"Could not start packet capture. Check the adapter, Npcap and capture filter.\n{exception.Message}",
 					cause);
 			}
 		}

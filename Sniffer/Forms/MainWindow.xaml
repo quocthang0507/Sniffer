@@ -3,15 +3,42 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Sniffer Network Analyzer" Icon="/Images/icon.ico"
         MinHeight="500" MinWidth="750" Width="1200" Height="750"
-        Closing="Window_Closing" Loaded="Window_Loaded">
+        Closing="Window_Closing" Loaded="Window_Loaded" PreviewKeyDown="Window_PreviewKeyDown">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
                 <MenuItem Header="_Open capture..." Click="btnOpen_Click"/>
                 <MenuItem Header="_Save capture..." Click="btnSave_Click"/>
+                <MenuItem Header="Save _displayed packets..." Click="btnSaveDisplayed_Click"/>
+                <MenuItem Header="Export selected packet bytes..." Click="btnExportBytes_Click"/>
                 <Separator/>
                 <MenuItem Header="_Back" Click="btnBack_Click"/>
                 <MenuItem Header="E_xit" Click="btnExit_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Find..." InputGestureText="Ctrl+F" Click="btnShowSearch_Click"/>
+                <MenuItem Header="Find _next" InputGestureText="F3" Click="btnFind_Click"/>
+                <MenuItem Header="Copy packet summary" Click="btnCopySummary_Click"/>
+                <MenuItem Header="Copy packet hex" Click="btnCopyHex_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Go">
+                <MenuItem Header="First packet" Click="btnGoToFirst_Click"/>
+                <MenuItem Header="Previous packet" Click="btnPreviousPacket_Click"/>
+                <MenuItem Header="Next packet" Click="btnNextPacket_Click"/>
+                <MenuItem Header="Last packet" Click="btnGoToEnd_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Capture">
+                <MenuItem Header="_Start" IsEnabled="{Binding IsEnabled, ElementName=btnStart}" Click="btnStart_Click"/>
+                <MenuItem Header="S_top" IsEnabled="{Binding IsEnabled, ElementName=btnStop}" Click="btnStop_Click"/>
+                <MenuItem Header="_Restart" IsEnabled="{Binding IsEnabled, ElementName=btnRestart}" Click="btnRestart_Click"/>
+                <Separator/>
+                <MenuItem Header="Capture filter..." Click="btnShowCaptureFilter_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Analyze">
+                <MenuItem Header="Follow TCP/UDP conversation" Click="btnFollow_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Statistics">
+                <MenuItem Header="Displayed packets" Click="btnStatistics_Click"/>
             </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem Header="_Documentation" Click="btnDoc_Click"/>
@@ -29,18 +56,54 @@
                         </Trigger>
                     </Style.Triggers>
                 </Style>
+                <Style TargetType="Path">
+                    <Setter Property="Width" Value="18"/>
+                    <Setter Property="Height" Value="18"/>
+                    <Setter Property="Stretch" Value="Uniform"/>
+                    <Setter Property="Fill" Value="#287B9B"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.35"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
             </ToolBar.Resources>
-            <Button x:Name="btnStart" ToolTip="Start capturing" AutomationProperties.Name="Start capturing" Click="btnStart_Click">
-                <StackPanel Orientation="Horizontal"><Image Source="/Images/play.png"/><TextBlock Text="Start" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
+            <Button x:Name="btnStart" ToolTip="Start capturing" AutomationProperties.Name="Start capturing" Click="btnStart_Click"><Image Source="/Images/play.png"/></Button>
+            <Button x:Name="btnStop" ToolTip="Stop capturing" AutomationProperties.Name="Stop capturing" Click="btnStop_Click" IsEnabled="False"><Image Source="/Images/stop.png"/></Button>
+            <Button x:Name="btnRestart" ToolTip="Restart capture" AutomationProperties.Name="Restart capture" Click="btnRestart_Click"><Image Source="/Images/restart.png"/></Button>
+            <Button ToolTip="Back to welcome screen" AutomationProperties.Name="Back to welcome screen" Click="btnClose_Click"><Image Source="/Images/left.png"/></Button>
+            <Button ToolTip="Show capture filter; BPF* indicates a filter is configured" AutomationProperties.Name="Show capture filter" Click="btnShowCaptureFilter_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Path Data="M 2,3 L 22,3 14,12 14,21 10,19 10,12 Z"/>
+                    <TextBlock Margin="5,0,0,0" VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Text" Value="BPF*"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=tbxCaptureFilter}" Value="">
+                                        <Setter Property="Text" Value="BPF"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </StackPanel>
             </Button>
-            <Button x:Name="btnStop" ToolTip="Stop capturing" AutomationProperties.Name="Stop capturing" Click="btnStop_Click" IsEnabled="False">
-                <StackPanel Orientation="Horizontal"><Image Source="/Images/stop.png"/><TextBlock Text="Stop" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
+            <Separator/>
+            <Button ToolTip="Open capture (Ctrl+O)" AutomationProperties.Name="Open capture" Click="btnOpen_Click"><Image Source="/Images/open.png"/></Button>
+            <Button ToolTip="Save capture (Ctrl+S)" AutomationProperties.Name="Save capture" Click="btnSave_Click"><Image Source="/Images/save.png"/></Button>
+            <Button ToolTip="Save displayed packets" AutomationProperties.Name="Export displayed packets" Click="btnSaveDisplayed_Click">
+                <StackPanel Orientation="Horizontal"><Path Data="M 3,3 L 13,3 13,5 5,5 5,19 19,19 19,13 21,13 21,21 3,21 Z M 13,2 L 22,2 22,11 19,11 19,7 12,14 10,12 17,5 13,5 Z"/><TextBlock Text="Export" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
             </Button>
-            <Button x:Name="btnRestart" ToolTip="Restart capture" AutomationProperties.Name="Restart capture" Click="btnRestart_Click">
-                <StackPanel Orientation="Horizontal"><Image Source="/Images/restart.png"/><TextBlock Text="Restart" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
+            <Button ToolTip="Find packets (Ctrl+F)" AutomationProperties.Name="Find packets" Click="btnShowSearch_Click"><Image Source="/Images/find.png"/></Button>
+            <Button ToolTip="Statistics for displayed packets" AutomationProperties.Name="Packet statistics" Click="btnStatistics_Click">
+                <StackPanel Orientation="Horizontal"><Path Data="M 2,21 L 22,21 22,23 2,23 Z M 4,13 L 8,13 8,20 4,20 Z M 10,8 L 14,8 14,20 10,20 Z M 16,2 L 20,2 20,20 16,20 Z"/><TextBlock Text="Stats" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
             </Button>
-            <Button ToolTip="Back to welcome screen" AutomationProperties.Name="Back to welcome screen" Click="btnClose_Click">
-                <StackPanel Orientation="Horizontal"><Image Source="/Images/left.png"/><TextBlock Text="Back" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
+            <Button ToolTip="Follow selected TCP/UDP conversation" AutomationProperties.Name="Follow conversation" Click="btnFollow_Click">
+                <StackPanel Orientation="Horizontal"><Path Data="M 2,5 L 16,5 16,2 22,7 16,12 16,9 2,9 Z M 22,15 L 8,15 8,12 2,17 8,22 8,19 22,19 Z"/><TextBlock Text="Follow" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
+            </Button>
+            <Button ToolTip="Copy selected packet summary" AutomationProperties.Name="Copy packet summary" Click="btnCopySummary_Click">
+                <StackPanel Orientation="Horizontal"><Path Data="F0 M 3,2 L 15,2 15,5 5,5 5,17 3,17 Z M 8,7 L 21,7 21,22 8,22 Z M 10,9 L 10,20 19,20 19,9 Z"/><TextBlock Text="Copy" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
             </Button>
             <Separator/>
             <Button ToolTip="First packet" AutomationProperties.Name="First packet" Click="btnGoToFirst_Click"><Image Source="/Images/first.png"/></Button>
@@ -55,11 +118,21 @@
                 <StackPanel Orientation="Horizontal"><Image Source="/Images/scroll.png"/><TextBlock Text="Auto-scroll" Margin="5,0,0,0" VerticalAlignment="Center"/></StackPanel>
             </ToggleButton>
         </ToolBar>
+        <DockPanel x:Name="captureFilterPanel" DockPanel.Dock="Top" Margin="6,3" Visibility="Collapsed">
+            <TextBlock Text="Capture filter (BPF):" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <TextBox x:Name="tbxCaptureFilter" MinWidth="300" ToolTip="Applied at the next capture start; for example: tcp port 443"/>
+        </DockPanel>
         <DockPanel DockPanel.Dock="Top" Margin="6,3">
             <TextBlock Text="Display filter:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <TextBlock x:Name="filterError" DockPanel.Dock="Right" Foreground="DarkRed" Margin="8,0,0,0" VerticalAlignment="Center"/>
             <TextBox x:Name="tbxFindWhat" MinWidth="300" TextChanged="tbxFindWhat_TextChanged"
                      ToolTip="Examples: tcp, ip.addr == 192.0.2.1, tcp.port == 443 &amp;&amp; ip"/>
-            <TextBlock x:Name="filterError" Foreground="DarkRed" Margin="8,0,0,0" VerticalAlignment="Center"/>
+        </DockPanel>
+        <DockPanel x:Name="searchPanel" DockPanel.Dock="Top" Margin="6,3" Visibility="Collapsed">
+            <TextBlock Text="Find:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <Button DockPanel.Dock="Right" Content="×" Click="btnHideSearch_Click" Margin="6,0,0,0" ToolTip="Close find bar" AutomationProperties.Name="Close find bar"/>
+            <Button DockPanel.Dock="Right" Content="Next" Click="btnFind_Click" Margin="6,0,0,0" ToolTip="Find next matching displayed packet (F3)"/>
+            <TextBox x:Name="tbxSearch" MinWidth="200" ToolTip="Search summary or ASCII bytes in displayed packets"/>
         </DockPanel>
         <StatusBar DockPanel.Dock="Bottom">
             <TextBlock Text="Adapter: "/><TextBlock x:Name="tbxAdapter" Margin="0,0,12,0"/>
@@ -75,15 +148,15 @@
                 <RowDefinition Height="5"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="dgPackets" Grid.Row="0" AutoGenerateColumns="False" SelectionMode="Single"
+            <DataGrid x:Name="dgPackets" Grid.Row="0" AutoGenerateColumns="False" SelectionMode="Single" FontFamily="Consolas" FontSize="12"
                       CanUserAddRows="False" IsReadOnly="True" EnableRowVirtualization="True"
                       SelectionChanged="dgPackets_SelectionChanged">
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Protocol}" Value="TCP"><Setter Property="Background" Value="#E8F0FF"/></DataTrigger>
+                            <DataTrigger Binding="{Binding Protocol}" Value="TCP"><Setter Property="Background" Value="#E4FFC7"/></DataTrigger>
                             <DataTrigger Binding="{Binding Protocol}" Value="UDP"><Setter Property="Background" Value="#E8F8FF"/></DataTrigger>
-                            <DataTrigger Binding="{Binding Protocol}" Value="DNS"><Setter Property="Background" Value="#E8E4FF"/></DataTrigger>
+                            <DataTrigger Binding="{Binding Protocol}" Value="DNS"><Setter Property="Background" Value="#DAE8F7"/></DataTrigger>
                             <DataTrigger Binding="{Binding Protocol}" Value="HTTP"><Setter Property="Background" Value="#DDF5DD"/></DataTrigger>
                             <DataTrigger Binding="{Binding Protocol}" Value="ARP"><Setter Property="Background" Value="#FFF2CC"/></DataTrigger>
                             <DataTrigger Binding="{Binding Protocol}" Value="ICMP"><Setter Property="Background" Value="#FCE4E4"/></DataTrigger>
@@ -101,7 +174,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch"/>
-            <TreeView x:Name="tvDetails" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+            <TreeView x:Name="tvDetails" Grid.Row="2" FontFamily="Consolas" FontSize="12" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
             <GridSplitter Grid.Row="3" Height="5" HorizontalAlignment="Stretch"/>
             <ScrollViewer Grid.Row="4" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <Grid>

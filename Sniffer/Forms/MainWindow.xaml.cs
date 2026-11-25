@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -66,9 +67,10 @@ namespace Sniffer
 				DrainPackets();
 		}
 
-		private void ClearPackets()
+		private void ClearPackets(bool clearPending = true)
 		{
-			while (pendingPackets.TryDequeue(out _)) { }
+			if (clearPending)
+				while (pendingPackets.TryDequeue(out _)) { }
 			packets.Clear();
 			dgPackets.Items.Clear();
 			ClearDetails();
@@ -79,8 +81,9 @@ namespace Sniffer
 		{
 			try
 			{
-				ClearPackets();
-				snifferClass.Start();
+				DrainAllPackets();
+				snifferClass.Start(tbxCaptureFilter.Text);
+				ClearPackets(clearPending: false);
 				Title = "Sniffer Network Analyzer";
 				UpdateCaptureButtons();
 			}
@@ -122,6 +125,7 @@ namespace Sniffer
 			btnStart.IsEnabled = !fileOperation && !snifferClass.IsCapturing && snifferClass.SelectedNameDevice is not null;
 			btnStop.IsEnabled = !fileOperation && snifferClass.IsCapturing;
 			btnRestart.IsEnabled = !fileOperation && snifferClass.SelectedNameDevice is not null;
+			tbxCaptureFilter.IsEnabled = !fileOperation && !snifferClass.IsCapturing;
 		}
 
 		private async void btnOpen_Click(object sender, RoutedEventArgs e) => await OpenCaptureAsync();
@@ -175,7 +179,10 @@ namespace Sniffer
 			}
 		}
 
-		private async void btnSave_Click(object sender, RoutedEventArgs e)
+		private async void btnSave_Click(object sender, RoutedEventArgs e) => await SaveCaptureAsync(false);
+		private async void btnSaveDisplayed_Click(object sender, RoutedEventArgs e) => await SaveCaptureAsync(true);
+
+		private async Task SaveCaptureAsync(bool displayedOnly)
 		{
 			if (fileOperation)
 				return;
@@ -187,7 +194,8 @@ namespace Sniffer
 			UpdateCaptureButtons();
 			try
 			{
-				var source = snifferClass.IsCapturing ? snifferClass.GetCapturedPacketsSnapshot() : packets.ToArray();
+				var source = displayedOnly ? dgPackets.Items.Cast<PacketInfo>().ToArray() :
+					snifferClass.IsCapturing ? snifferClass.GetCapturedPacketsSnapshot() : packets.ToArray();
 				var records = source.Select(packet => packet.Capture ?? throw new InvalidOperationException("Packet data is unavailable.")).ToArray();
 				await Task.Run(() => CaptureFile.Write(dialog.FileName, records));
 			}
@@ -200,6 +208,157 @@ namespace Sniffer
 				fileOperation = false;
 				UpdateCaptureButtons();
 			}
+		}
+
+		private async void btnExportBytes_Click(object sender, RoutedEventArgs e)
+		{
+			if (fileOperation)
+				return;
+			if (dgPackets.SelectedItem is not PacketInfo packet || packet.Capture is null)
+			{
+				MessageBox.Show("Select a packet with captured bytes.", "Export bytes", MessageBoxButton.OK, MessageBoxImage.Information);
+				return;
+			}
+			var dialog = new SaveFileDialog { Filter = "Binary file (*.bin)|*.bin|All files (*.*)|*.*", DefaultExt = ".bin" };
+			if (dialog.ShowDialog(this) != true)
+				return;
+			fileOperation = true;
+			UpdateCaptureButtons();
+			try
+			{
+				await File.WriteAllBytesAsync(dialog.FileName, packet.Capture.Data);
+			}
+			catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
+			{
+				MessageBox.Show(exception.Message, "Export bytes", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+			finally
+			{
+				fileOperation = false;
+				UpdateCaptureButtons();
+			}
+		}
+
+		private void CopySelected(bool hex)
+		{
+			if (dgPackets.SelectedItem is not PacketInfo packet)
+			{
+				MessageBox.Show("Select a packet first.", "Copy", MessageBoxButton.OK, MessageBoxImage.Information);
+				return;
+			}
+			string text = hex ? packet.Buffer.Buffer :
+				$"{packet.ID}\t{packet.Time:F6}\t{packet.Source}\t{packet.Destination}\t{packet.Protocol}\t{packet.Length}\t{packet.Info}";
+			if (text.Length == 0)
+			{
+				MessageBox.Show("The selected packet has no captured bytes.", "Copy", MessageBoxButton.OK, MessageBoxImage.Information);
+				return;
+			}
+			try
+			{
+				Clipboard.SetText(text);
+			}
+			catch (ExternalException exception)
+			{
+				MessageBox.Show(exception.Message, "Copy", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+		}
+
+		private void btnCopySummary_Click(object sender, RoutedEventArgs e) => CopySelected(false);
+		private void btnCopyHex_Click(object sender, RoutedEventArgs e) => CopySelected(true);
+
+		private void btnShowCaptureFilter_Click(object sender, RoutedEventArgs e)
+		{
+			captureFilterPanel.Visibility = captureFilterPanel.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+			if (captureFilterPanel.Visibility == Visibility.Visible && tbxCaptureFilter.IsEnabled)
+				tbxCaptureFilter.Focus();
+		}
+
+		private void ShowSearch()
+		{
+			searchPanel.Visibility = Visibility.Visible;
+			tbxSearch.Focus();
+		}
+
+		private void btnShowSearch_Click(object sender, RoutedEventArgs e) => ShowSearch();
+		private void btnHideSearch_Click(object sender, RoutedEventArgs e) => searchPanel.Visibility = Visibility.Collapsed;
+
+		private async void btnFind_Click(object sender, RoutedEventArgs e)
+		{
+			string query = tbxSearch.Text.Trim();
+			if (query.Length == 0)
+			{
+				ShowSearch();
+				return;
+			}
+			var displayed = dgPackets.Items.Cast<PacketInfo>().ToArray();
+			int start = dgPackets.SelectedIndex + 1;
+			PacketInfo? match = await Task.Run(() =>
+			{
+				for (int i = 0; i < displayed.Length; i++)
+				{
+					PacketInfo candidate = displayed[(start + i) % displayed.Length];
+					if (PacketAnalysis.MatchesSearch(candidate, query))
+						return candidate;
+				}
+				return null;
+			});
+			if (!IsLoaded)
+				return;
+			int index = match is null ? -1 : dgPackets.Items.IndexOf(match);
+			if (index < 0)
+				MessageBox.Show("No matching displayed packet was found.", "Find", MessageBoxButton.OK, MessageBoxImage.Information);
+			else
+				GoTo(index);
+		}
+
+		private async void btnStatistics_Click(object sender, RoutedEventArgs e)
+		{
+			var displayed = dgPackets.Items.Cast<PacketInfo>().ToArray();
+			string result = await Task.Run(() => PacketAnalysis.Statistics(displayed));
+			if (IsLoaded)
+				ShowAnalysis("Displayed packet statistics", result);
+		}
+
+		private async void btnFollow_Click(object sender, RoutedEventArgs e)
+		{
+			if (dgPackets.SelectedItem is not PacketInfo selected)
+			{
+				MessageBox.Show("Select a TCP or UDP packet first.", "Follow", MessageBoxButton.OK, MessageBoxImage.Information);
+				return;
+			}
+			var snapshot = snifferClass.IsCapturing ? snifferClass.GetCapturedPacketsSnapshot() : packets.ToArray();
+			try
+			{
+				string result = await Task.Run(() => PacketAnalysis.FollowConversation(snapshot, selected));
+				if (IsLoaded)
+					ShowAnalysis("TCP/UDP conversation", result);
+			}
+			catch (InvalidOperationException exception)
+			{
+				MessageBox.Show(exception.Message, "Follow", MessageBoxButton.OK, MessageBoxImage.Information);
+			}
+		}
+
+		private void ShowAnalysis(string title, string text)
+		{
+			var viewer = new TextBox
+			{
+				Text = text, IsReadOnly = true, AcceptsReturn = true, TextWrapping = TextWrapping.NoWrap,
+				FontFamily = new FontFamily("Consolas"),
+				HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+				VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+			};
+			new Window { Title = title, Owner = this, Width = 850, Height = 550, Content = viewer }.Show();
+		}
+
+		private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+		{
+			if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.O) btnOpen_Click(sender, e);
+			else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S) btnSave_Click(sender, e);
+			else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.F) ShowSearch();
+			else if (Keyboard.Modifiers == ModifierKeys.None && e.Key == Key.F3) btnFind_Click(sender, e);
+			else return;
+			e.Handled = true;
 		}
 
 		private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -352,18 +511,17 @@ namespace Sniffer
 		{
 			if (dgPackets is null || filterError is null)
 				return;
-			try
+			if (DisplayFilter.TryParse(tbxFindWhat.Text, out var filter, out var error))
 			{
-				var filter = DisplayFilter.Parse(tbxFindWhat.Text);
 				dgPackets.Items.Filter = item => item is PacketInfo packet && filter(packet);
 				tbxFindWhat.Background = Brushes.Honeydew;
 				filterError.Text = string.Empty;
 				UpdateCounts();
 			}
-			catch (FormatException exception)
+			else
 			{
 				tbxFindWhat.Background = Brushes.MistyRose;
-				filterError.Text = exception.Message;
+				filterError.Text = error;
 			}
 		}
 	}
